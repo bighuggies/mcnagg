@@ -2,3 +2,5 @@ Flask==0.8
 Jinja2==2.6
 Werkzeug==0.8.3
 distribute==0.6.24
+gdata==2.0.17
+iso8601==0.1.4
