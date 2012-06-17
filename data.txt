@@ -28,6 +28,6 @@ mindcrack_feeds = [
 
 mindcrackers = ['adlingtont', 'ImAnderZEL', 'ArkasMc', 'W92Baj', 'BdoubleO100',
                 'docm77', 'EthosLab', 'GuudeBoulderfist', 'JSano19', 'JustD3fy',
-                'kurtjmac', 'SuperMCGamer', 'Mhykol', 'nebris88', 'pakratt13',
+                'kurtjmac', 'SuperMCGamer', 'MillBeeful', 'Mhykol', 'nebris88', 'pakratt13',
                 'PauseUnpause', 'Pyropuncher', 'ShreeyamNET', 'thejims',
                 'VintageBeef', 'Zisteau']
