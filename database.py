@@ -37,23 +37,23 @@ def _youtube_feed(feed_id, number_videos=1, offset=1, orderby='published', feed_
         raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <upload>, <playlist> or <show>.')
 
     feed = json.loads(requests.get(feed_url).text)
-    print feed
-    print feed_url
-    for item in feed['data']['items']:
-        if type == 'playlist':
-            item = item['video']
 
-        video = dict(
-            video_id=item['id'],
-            title=item['title'],
-            duration=item['duration'],
-            uploader=item['uploader'],
-            uploaded=datetime.datetime.strptime(item['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ"),
-            description=item['description'],
-            thumbnail=item['thumbnail']['hqDefault']
-        )
+    if feed['data']['totalItems'] > 0:
+        for item in feed['data']['items']:
+            if type == 'playlist':
+                item = item['video']
 
-        yield video
+            video = dict(
+                video_id=item['id'],
+                title=item['title'],
+                duration=item['duration'],
+                uploader=item['uploader'],
+                uploaded=datetime.datetime.strptime(item['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ"),
+                description=item['description'],
+                thumbnail=item['thumbnail']['hqDefault']
+            )
+
+            yield video
 
 
 def add_mindcracker(username, url):
@@ -82,8 +82,9 @@ def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_vide
 
 def main():
     for m in mindcrackers():
-        for v in _youtube_feed(m, number_videos=50):
-            add_video(**v)
+        for v in _youtube_feed(m['username'], number_videos=50):
+            # add_video(**v)
+            pass
 
     conn.commit()
     cur.close()
