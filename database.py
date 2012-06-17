@@ -7,7 +7,7 @@ from psycopg2 import extras
 
 
 def _get_db():
-    db_url = os.getenv('HEROKU_POSTGRESQL_RED_URL')
+    db_url = os.getenv('HEROKU_POSTGRESQL_IVORY_URL')
     conn = None
 
     if db_url:
