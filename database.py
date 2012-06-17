@@ -79,9 +79,16 @@ def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_vide
     return [v for v in cur]
 
 
+usernames = ['adlingtont', 'ImAnderZEL', 'ArkasMc', 'W92Baj', 'BdoubleO100',
+                'docm77', 'EthosLab', 'GuudeBoulderfist', 'JSano19', 'JustD3fy',
+                'kurtjmac', 'SuperMCGamer', 'Mhykol', 'nebris88', 'pakratt13',
+                'PauseUnpause', 'Pyropuncher', 'ShreeyamNET', 'thejims',
+                'VintageBeef', 'Zisteau']
+
+
 if __name__ == '__main__':
-    for video in videos(mindcrackers=('guudeboulderfist',)):
-        print video['title']
+    for m in usernames:
+        add_mindcracker(m, 'http://www.youtube.com/' + m)
 
     conn.commit()
     cur.close()
