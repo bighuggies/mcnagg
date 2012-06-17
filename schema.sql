@@ -8,7 +8,7 @@ CREATE TABLE videos (
 	title			text,
 	duration		integer,
 	uploader		text		REFERENCES mindcrackers(username) ON DELETE CASCADE,
-	uploaded		date,
+	uploaded		timestamp,
 	description		text,
 	thumbnail		text
 );
