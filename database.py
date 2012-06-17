@@ -83,8 +83,7 @@ def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_vide
 def main():
     for m in mindcrackers():
         for v in _youtube_feed(m['username'], number_videos=50):
-            # add_video(**v)
-            pass
+            add_video(**v)
 
     conn.commit()
     cur.close()
