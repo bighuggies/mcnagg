@@ -7,11 +7,11 @@ from psycopg2 import extras
 
 
 def _get_db():
-    db_url = os.getenv('HEROKU_POSTGRESQL_IVORY_URL')
+    db_url = os.getenv('DATABASE_URL')
     conn = None
 
     if db_url:
-        conn = psycopg2.connect(db_url)
+        conn = psycopg2.connect('dbname=ddprh9d8b2m6av host=ec2-23-23-234-207.compute-1.amazonaws.com port=5432 user=mrkjurgyjpbrwt password=bRRcEKwPR7noC5yO0xMot1J7cL sslmode=require')
     else:
         conn = psycopg2.connect(database='mindcrackfeed', user='mindcrackfeedapp', password='lol')
 
