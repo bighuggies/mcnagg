@@ -38,6 +38,7 @@ def _youtube_feed(feed_id, number_videos=1, offset=1, orderby='published', feed_
 
     feed = json.loads(requests.get(feed_url).text)
     print feed
+    print feed_url
     for item in feed['data']['items']:
         if type == 'playlist':
             item = item['video']
