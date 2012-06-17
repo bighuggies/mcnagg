@@ -79,7 +79,7 @@ def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_vide
     return [v for v in cur]
 
 
-if __name__ == '__main__':
+def main():
     for m in mindcrackers():
         for v in _youtube_feed(m, number_videos=50):
             add_video(**v)
@@ -87,3 +87,7 @@ if __name__ == '__main__':
     conn.commit()
     cur.close()
     conn.close()
+
+
+if __name__ == '__main__':
+    main()
