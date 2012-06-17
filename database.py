@@ -66,7 +66,7 @@ def add_video(video_id, title, duration, uploader, uploaded, description, thumbn
     if cur.fetchone() == None:
         cur.execute('INSERT INTO videos VALUES (%s, %s, %s, %s, %s, %s, %s);', (video_id, title, duration, uploader.lower(), uploaded, description, thumbnail))
     else:
-        cur.execute('UPDATE videos SET uploaded=%s WHERE videos_id=%s', (uploaded, video_id))
+        cur.execute('UPDATE videos SET uploaded=%s WHERE video_id=%s', (uploaded, video_id))
 
     conn.commit()
 
