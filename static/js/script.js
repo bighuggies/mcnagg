@@ -37,7 +37,7 @@ $('#filter-submit').on('click', function (e) {
 
         $('.video.row').remove();
 
-        var video_template = '{{#videos}}<div class="video row"><div class="video-thumbnail span2"><a href="http://www.youtube.com/watch?v={{ video_id }}"><img src="{{thumbnail}}" alt="{{ title }} thumbnail"></a></div><div class="video-info span10"><h2 class="video-title"><a href="http://www.youtube.com/watch?v={{ video_id }}">{{ title }}</a></h2><h3 class="video-uploader"><a href="http://www.youtube.com/{{ uploader }}">{{ uploader }}</a></h3><p>{{#truncate}}{{ description }}{{/truncate}}<a href="#">...</a></p><span>{{ duration }}</span><p>{{ uploaded }}</p></div></div>{{/videos}}';
+        var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span2"><a href="http://www.youtube.com/watch?v={{ video_id }}"><img src="{{thumbnail}}" alt="{{ title }} thumbnail"></a></div><div class="video-info span10"><h2 class="video-title"><a href="http://www.youtube.com/watch?v={{ video_id }}">{{ title }}</a></h2><h3 class="video-uploader"><a href="http://www.youtube.com/{{ uploader }}">{{ uploader }}</a></h3><p>{{#truncate}}{{ description }}{{/truncate}}<a class="expand-description" href="#">...</a></p><span>{{ duration }}</span><p>{{ uploaded }}</p></div></div>{{/videos}}';
 
         var video_view = {
             videos: videos,
@@ -49,18 +49,26 @@ $('#filter-submit').on('click', function (e) {
         };
 
         $('.tab-pane.active').append($.mustache(video_template, video_view));
+        
+        bind_event_handlers();
     });
 });
 
-$(".expand-description").on('click', function(e) {
+var expand_description = function(e) {
+    console.log('expanding');
     e.preventDefault();
 
     video_id = $(e.target).parents('.video.row').attr('data-video-id');
-    console.log(video_id);
     yt_api_url = 'https://gdata.youtube.com/feeds/api/videos/' + video_id + '?v=2&alt=jsonc';
 
     $.getJSON(yt_api_url, function(data, textStatus) {
-        console.log(data.data.description + ' ' + textStatus);
-        $(e.target).parent().replaceWith(data.data.description);
+        $(e.target).parent().replaceWith('<p class="video-description">' + data.data.description + '</p>');
     });
-});
+
+};
+
+var bind_event_handlers = function() {
+    $(".expand-description").on('click', expand_description);
+};
+
+bind_event_handlers();
