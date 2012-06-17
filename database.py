@@ -37,7 +37,7 @@ def _youtube_feed(feed_id, number_videos=1, offset=1, orderby='published', feed_
         raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <upload>, <playlist> or <show>.')
 
     feed = json.loads(requests.get(feed_url).text)
-
+    print feed
     for item in feed['data']['items']:
         if type == 'playlist':
             item = item['video']
