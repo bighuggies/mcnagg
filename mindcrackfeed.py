@@ -55,8 +55,7 @@ class HomeHandler(BaseHandler):
 class FilterHandler(BaseHandler):
     def get(self):
         mindcrackers = self.get_argument('mindcrackers', strip=True).split(',')
-        videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=5)
-        print videos[videos_per_page]['uploaded'].isoformat()
+        videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=videos_per_page)
 
         dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
 
