@@ -1,5 +1,35 @@
-.container-fluid {
-	width: 80%;
-	padding-left: 10%;
-	padding-right: 10%;
+.header {
+	padding-top:5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.nav-tabs {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.video {
+	padding-top:5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.video-thumbnail {
+	padding-top:5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.options h2 {
+	padding-right: 5px;
+	margin-right: 5px;
+	line-height: 18px;
+}
+
+i {
+	font-size: 15pt;
 }

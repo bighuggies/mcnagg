@@ -1,53 +1,80 @@
-import os
-from gdata.youtube.service import YouTubeService
-import iso8601
+#!/usr/bin/env python
+
+import database
+
+import os.path
+import json
 import datetime
-from flask import Flask
-from flask import render_template
 
-mindcrackers = ['adlingtont', 'ImAnderZEL', 'ArkasMc', 'W92Baj', 'BdoubleO100',
-                'docm77', 'EthosLab', 'GuudeBoulderfist', 'JSano19', 'JustD3fy',
-                'kurtjmac', 'SuperMCGamer', 'Mhykol', 'nebris88', 'pakratt13',
-                'PauseUnpause', 'Pyropuncher', 'ShreeyamNET', 'thejims',
-                'VintageBeef', 'Zisteau']
+import tornado.auth
+import tornado.database
+import tornado.httpserver
+import tornado.ioloop
+import tornado.options
+import tornado.web
 
-
-app = Flask(__name__)
+from tornado.options import define, options
 
 
-# mindcrackers = ['docm77']
-# videos = [{'author_uri': 'https://www.youtube.com/user/docm77', 'view_count': '192', 'thumbnails': ['http://i.ytimg.com/vi/Gb66dn9NcPY/0.jpg'], 'author': 'docm77', 'url': 'https://www.youtube.com/watch?v=-IgWKcX8h7Y&feature=youtube_gdata_player', 'title': u'Docm77s Gametime - Saints Row: The Third [HD] #33', 'published': datetime.datetime(2012, 6, 7), 'duration': '1434', 'description': 'This is a playthrough of Saints Row: The Third on PC ;-)\n'}]
+define("postgres_host", default="localhost:5432", help="database host")
+define("postgres_database", default="mindcrackfeed", help="database name")
+define("postgres_user", default="mindcrackfeedapp", help="database user")
+define("postgres_password", default="lol", help="database password")
 
 
-@app.route('/')
-def hello():
-    yt_service = YouTubeService()
-    videos = []
-
-    for user in mindcrackers:
-        uri = 'http://gdata.youtube.com/feeds/api/users/%s/uploads?max-results=1' % user
-        feed = yt_service.GetYouTubeVideoFeed(uri)
-        entry = feed.entry[0]
-
-        video = dict(
-            title=unicode(entry.media.title.text, errors='ignore'),
-            author=entry.author[0].name.text,
-            author_uri='https://www.youtube.com/user/{0}'.format(entry.author[0].name.text),
-            published=iso8601.parse_date(entry.published.text),
-            description=unicode(entry.media.description.text, errors='ignore'),
-            url=entry.media.player.url,
-            duration=entry.media.duration.seconds,
-            view_count=entry.statistics.view_count,
-            thumbnail=entry.media.thumbnail[0].url
+class Application(tornado.web.Application):
+    def __init__(self):
+        handlers = [
+            (r"/", HomeHandler),
+            (r"/filter", FilterHandler),
+        ]
+        settings = dict(
+            template_path=os.path.join(os.path.dirname(__file__), "templates"),
+            static_path=os.path.join(os.path.dirname(__file__), "static"),
+            ui_modules={},
+            # xsrf_cookies=True,
+            # cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
+            # login_url="/auth/login",
+            autoescape=None,
+            debug=True
         )
+        tornado.web.Application.__init__(self, handlers, **settings)
 
-        videos.append(video)
-
-    return render_template('index.html', videos=videos)
+        self.db = database
 
 
-if __name__ == '__main__':
-    # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5000))
-    app.debug = True
-    app.run(host='0.0.0.0', port=port)
+class BaseHandler(tornado.web.RequestHandler):
+    @property
+    def db(self):
+        return self.application.db
+
+
+class HomeHandler(BaseHandler):
+    def get(self):
+        videos = self.db.videos(num_videos=30)
+        mindcrackers = self.db.mindcrackers()
+
+        self.render("index.html", videos=videos, mindcrackers=mindcrackers)
+
+
+class FilterHandler(BaseHandler):
+    def get(self):
+        mindcrackers = self.get_argument('mindcrackers', strip=True).split(',')
+        videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=5)
+        print videos[0]['uploaded'].isoformat()
+
+        dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+
+        self.write(json.dumps(videos, default=dthandler))
+        self.finish()
+
+
+def main():
+    tornado.options.parse_command_line()
+    http_server = tornado.httpserver.HTTPServer(Application())
+    http_server.listen(os.environ.get('PORT', 5000))
+    tornado.ioloop.IOLoop.instance().start()
+
+
+if __name__ == "__main__":
+    main()
