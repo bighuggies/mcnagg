@@ -13,13 +13,8 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 
-from tornado.options import define, options
 
-
-define("postgres_host", default="localhost:5432", help="database host")
-define("postgres_database", default="mindcrackfeed", help="database name")
-define("postgres_user", default="mindcrackfeedapp", help="database user")
-define("postgres_password", default="lol", help="database password")
+videos_per_page = 30
 
 
 class Application(tornado.web.Application):
@@ -51,7 +46,7 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
-        videos = self.db.videos(num_videos=30)
+        videos = self.db.videos(num_videos=videos_per_page)
         mindcrackers = self.db.mindcrackers()
 
         self.render("index.html", videos=videos, mindcrackers=mindcrackers)
@@ -61,7 +56,7 @@ class FilterHandler(BaseHandler):
     def get(self):
         mindcrackers = self.get_argument('mindcrackers', strip=True).split(',')
         videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=5)
-        print videos[0]['uploaded'].isoformat()
+        print videos[videos_per_page]['uploaded'].isoformat()
 
         dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
 
