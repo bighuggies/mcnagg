@@ -99,9 +99,9 @@ function append_videos(videos) {
 
 function fetch_videos(query_data, callback) {
     $('.tab-pane.active').append('<div class="loading row"><div class="span12" style="text-align:center;padding-top:10px"><img class="loading-gif" src="static/img/loading.gif" /></div></div>');
-    $('#show-more').hide();
-
-    $.getJSON('/videos', query_data, callback);
+    $('#show-more').hide('fast', function() {
+            $.getJSON('/videos', query_data, callback);
+    });
 }
 
 
