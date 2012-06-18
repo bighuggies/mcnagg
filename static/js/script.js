@@ -1,5 +1,3 @@
-var videos_per_page = 30;
-
 $('#feed-options').on('shown', function () {
     $("#feed-options-icon").removeClass("icon-chevron-down");
     $("#feed-options-icon").addClass("icon-chevron-up");
@@ -17,13 +15,14 @@ $('#options-cancel').on('click', function() {
 });
 
 
-function replace_videos(videos) {
+function remove_videos() {
     $('.video.row').remove();
-    append_videos(videos);
 }
 
 
 function append_videos(videos) {
+    $('.loading-gif').remove();
+
     var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span3"><a href="http://www.youtube.com/watch?v={{ video_id }}"><img src="{{thumbnail}}" alt="{{ title }} thumbnail"></a></div><div class="video-info span9"><div class="well"><h2 class="video-title"><a href="http://www.youtube.com/watch?v={{ video_id }}">{{ title }}</a></h2><h3 class="video-uploader"><a href="http://www.youtube.com/{{ uploader }}">{{ uploader }}</a></h3><p>{{#truncate}}{{ description }}{{/truncate}}<a class="expand-description" href="#">...</a></p><span>{{ duration }}</span><p>{{ uploaded }}</p></div></div></div>{{/videos}}';
 
     var video_view = {
@@ -40,6 +39,8 @@ function append_videos(videos) {
 
 
 function fetch_videos(query_data, callback) {
+    $('.tab-pane.active').append('<div class="loading row"><div class="span12" style="text-align:center;padding-top:10px"><img class="loading-gif" src="static/img/loading.gif" /></div></div>');
+
     $.getJSON('/videos', query_data, callback);
 }
 
@@ -55,7 +56,9 @@ function options_submit(e) {
         'mindcrackers[]': get_mindcrackers()
     };
     
-    fetch_videos(query, replace_videos);
+    remove_videos();
+
+    fetch_videos(query, append_videos);
 }
 
 
