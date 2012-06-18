@@ -21,12 +21,12 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", HomeHandler),
-            (r"/filter", FilterHandler),
+            (r"/videos", VideosHandler),
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            ui_modules={},
+            ui_modules={"Video": VideoModule, "Options": OptionsModule},
             # xsrf_cookies=True,
             # cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             # login_url="/auth/login",
@@ -49,18 +49,31 @@ class HomeHandler(BaseHandler):
         videos = self.db.videos(num_videos=videos_per_page)
         mindcrackers = self.db.mindcrackers()
 
-        self.render("index.html", videos=videos, mindcrackers=mindcrackers)
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers)
 
 
-class FilterHandler(BaseHandler):
+class VideosHandler(BaseHandler):
     def get(self):
-        mindcrackers = self.get_argument('mindcrackers', strip=True).split(',')
-        videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=videos_per_page)
+        mindcrackers = self.get_arguments('mindcrackers[]')
+        num_videos = self.get_argument('num-videos')
+        offset = self.get_argument('offset')
+
+        videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=num_videos, offset=offset)
 
         dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
 
         self.write(json.dumps(videos, default=dthandler))
         self.finish()
+
+
+class VideoModule(tornado.web.UIModule):
+    def render(self, video):
+        return self.render_string("modules/video.html", video=video)
+
+
+class OptionsModule(tornado.web.UIModule):
+    def render(self, mindcrackers):
+        return self.render_string("modules/options.html", mindcrackers=mindcrackers)
 
 
 def main():

@@ -10,14 +10,7 @@
 	margin-bottom: 0;
 }
 
-.video {
-	padding-top:5px;
-	padding-bottom: 5px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.video-thumbnail {
+.video-info, .video-thumbnail {
 	padding-top:5px;
 	padding-bottom: 5px;
 	margin-top: 5px;
@@ -32,4 +25,8 @@
 
 i {
 	font-size: 15pt;
+}
+
+.show-more {
+	text-align: center;
 }

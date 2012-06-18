@@ -1,0 +1,22 @@
+<div class="video row" data-video-id="{{ video['video_id'] }}">
+    <div class="video-thumbnail span3">
+        <a href="http://www.youtube.com/watch?v={{ video['video_id'] }}">
+            <img src="{{ video['thumbnail'] }}" alt="{{ video['title'] }} thumbnail"></a>
+    </div>
+    <div class="video-info span9">
+        <div class="well">
+            <h2 class="video-title">
+                <a href="http://www.youtube.com/watch?v={{ video['video_id'] }}">{{ video['title'] }}</a>
+            </h2>
+            <h3 class="video-uploader">
+                <a href="http://www.youtube.com/{{ video['uploader'] }}">{{ video['uploader'] }}</a>
+            </h3>
+            <p class="video-description">
+                {{ video['description'][0:300] }}
+                <a class="expand-description" href="#">...</a>
+            </p>
+            <span>{{ video['duration'] }}</span>
+            <p>{{ video['uploaded'] }}</p>
+        </div>
+    </div>
+</div>

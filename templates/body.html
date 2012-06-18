@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="span12 header">
+        <span class="pull-left">
+            <h1>Video Feed</h1>
+        </span>
+        <span class="options pull-right">
+            <a href="#" data-toggle="collapse" data-target="#feed-options">
+                <span class="pull-left">
+                    <h2>Options</h2>
+                </span>
+                <span class="pull-right"> <i id="feed-options-icon" class="icon-chevron-down pull-right"></i>
+                </span>
+            </a>
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <div id="feed-options" class=" collapse">
+            <div class="accordion-inner">{{ modules.Options(mindcrackers) }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#all" data-toggle="tab">All</a>
+                </li>
+                <li>
+                    <a href="#mindcrack" data-toggle="tab">Mindcrack</a>
+                </li>
+                <li>
+                    <a href="#ultrahardcore" data-toggle="tab">UHC</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="all">
+                    {% for video in videos %}
+                        {{ modules.Video(video) }}
+                    {% end %}
+                </div>
+                <div class="tab-pane" id="mindcrack">lol</div>
+                <div class="tab-pane" id="ultrahardcore">asdsad</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="show-more span12">
+        <a href="#">
+            <h2>Show more</h2> <i id="show-more-icon" class="icon-chevron-down"></i>
+        </a>
+    </div>
+</div>
+{% end %}
