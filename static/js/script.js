@@ -156,25 +156,25 @@ function expand_description(e) {
 
     $.getJSON(yt_api_url, function(data, textStatus) {
         $(e.target).parent().replaceWith('<p class="video-description">' + data.data.description + ' <a href="#" class="truncate-description">(read less)</a></p>');
-        bind_event_handlers();
+        $('.truncate-description').on('click', truncate_description);
     });
 
 }
 
 function truncate_description(e) {
     e.preventDefault();
-    console.log('truncating ' + $(e.target).parent().val());
+
     $(e.target).parent().replaceWith('<p class="video-description">' + $(e.target).parent().text().substring(0, 300) + '<a class="expand-description" href="#">... (read more)</a></p>');
-    bind_event_handlers();
+
+    $('.expand-description').on('click', expand_description);
 }
 
 
 function bind_event_handlers() {
-    $('#options-submit').on('click', options_submit);
-    $('.show-more').on('click', show_more_videos);
     $('.expand-description').on('click', expand_description);
     $('.truncate-description').on('click', truncate_description);
 }
 
-
+$('#options-submit').on('click', options_submit);
+$('#show-more').on('click', show_more_videos);
 bind_event_handlers();
