@@ -91,6 +91,8 @@ function append_videos(videos) {
     };
 
     $('.tab-pane.active').append($.mustache(video_template, video_view));
+
+    bind_event_handlers();
 }
 
 
