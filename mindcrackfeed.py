@@ -4,10 +4,9 @@ import database
 
 import os.path
 import json
-import datetime
 
-import tornado.auth
-import tornado.database
+from datetime import datetime
+
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
@@ -21,6 +20,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", HomeHandler),
+            (r"/about", AboutHandler),
             (r"/videos", VideosHandler),
         ]
         settings = dict(
@@ -52,6 +52,11 @@ class HomeHandler(BaseHandler):
         self.render("body.html", videos=videos, mindcrackers=mindcrackers)
 
 
+class AboutHandler(BaseHandler):
+    def get(self):
+        self.render("about.html")
+
+
 class VideosHandler(BaseHandler):
     def get(self):
         mindcrackers = self.get_arguments('mindcrackers[]')
@@ -60,7 +65,7 @@ class VideosHandler(BaseHandler):
 
         videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=num_videos, offset=offset)
 
-        dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+        dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
 
         self.write(json.dumps(videos, default=dthandler))
         self.finish()

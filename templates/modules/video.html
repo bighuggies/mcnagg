@@ -1,3 +1,5 @@
+{% import util %}
+
 <div class="video row" data-video-id="{{ video['video_id'] }}">
     <div class="video-thumbnail span3">
         <a href="http://www.youtube.com/watch?v={{ video['video_id'] }}">
@@ -13,10 +15,10 @@
             </h3>
             <p class="video-description">
                 {{ video['description'][0:300] }}
-                <a class="expand-description" href="#">...</a>
+                <a class="expand-description" href="#">... (read more)</a>
             </p>
-            <span>{{ video['duration'] }}</span>
-            <p>{{ video['uploaded'] }}</p>
+            <span>{{ util.get_HMS(video['duration']) }}</span>
+            <p>Uploaded {{ util.get_fancy_time(video['uploaded']) }}</p>
         </div>
     </div>
 </div>

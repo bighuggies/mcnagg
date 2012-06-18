@@ -30,3 +30,13 @@ i {
 .show-more {
 	text-align: center;
 }
+
+.footer-list {
+    text-align: center;
+}
+
+.footer-list li {
+    display: inline-block;
+    list-style: none;
+    padding: 10px;
+}
