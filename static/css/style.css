@@ -10,7 +10,7 @@
 	margin-bottom: 0;
 }
 
-.video{
+.video {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
@@ -31,6 +31,21 @@
 .video-uploader {
 	font-size: 18px;
 	font-weight: bold;
+}
+
+.video-controls i {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.video-controls a:hover {
+	text-decoration: none;
+}
+
+.video hr {
+	margin: 0;
+	padding: 0;
+	padding-top: 11px;
 }
 
 .options h2 {
@@ -55,13 +70,4 @@ i {
     display: inline-block;
     list-style: none;
     padding: 10px;
-}
-
-.video-controls i {
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-.video-controls a:hover {
-	text-decoration: none;
 }
