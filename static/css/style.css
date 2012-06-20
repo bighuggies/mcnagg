@@ -10,11 +10,27 @@
 	margin-bottom: 0;
 }
 
-.video-info, .video-thumbnail {
-	padding-top:5px;
-	padding-bottom: 5px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+.video{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.video-thumbnail {
+	padding-top: 9px;
+}
+
+.video-controls {
+	padding-top: 7px;
+}
+
+.video-duration {
+	font-size: 13px;
+	font-weight: normal;
+}
+
+.video-uploader {
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .options h2 {
@@ -39,4 +55,13 @@ i {
     display: inline-block;
     list-style: none;
     padding: 10px;
+}
+
+.video-controls i {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.video-controls a:hover {
+	text-decoration: none;
 }

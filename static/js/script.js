@@ -65,19 +65,21 @@ function remove_videos() {
 }
 
 
+function remove_video(e) {
+    e.preventDefault();
+    $(e.target).parents('.video.row').hide(100);
+}
+
+
+
 function append_videos(videos) {
     $('.loading.row').remove();
     $('#show-more').show();
 
-    var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span3"><a href="http://www.youtube.com/watch?v={{ video_id }}"><img src="{{thumbnail}}" alt="{{ title }} thumbnail"></a></div><div class="video-info span9"><div class="well"><h2 class="video-title"><a href="http://www.youtube.com/watch?v={{ video_id }}">{{ title }}</a></h2><h3 class="video-uploader"><a href="http://www.youtube.com/{{ uploader }}">{{ uploader }}</a></h3><p>{{#truncate}}{{ description }}{{/truncate}}<a class="expand-description" href="#">... (read more)</a></p><span>{{#hms}}{{ duration }}{{/hms}}</span><p>Uploaded {{#fancy_time}}{{ uploaded }}{{/fancy_time}}</p></div></div></div>{{/videos}}';
+    var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span1"><a href="http://www.youtube.com/watch?v={{video_id}}"><img src="{{thumbnail}}" alt="{{title}} thumbnail"></a></div><div class="video-title-duration span9"><h2 class="video-title"><span class="video-title"><a href="http://www.youtube.com/watch?v={{video_id}}">{{title}}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{ uploader }}">{{ uploader }}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls span2"><div class="pull-right"><a href="#"><i class="icon-remove video-remove-control"></i></a></div></div></div>{{/videos}}';
 
     var video_view = {
         videos: videos,
-        truncate: function() {
-            return function(text, render) {
-                return render(text).substring(0, 300);
-            };
-        },
         fancy_time: function() {
             return function(text, render) {
                 return get_fancy_time(render(text));
@@ -93,7 +95,7 @@ function append_videos(videos) {
 
     $('.tab-pane.active').append($.mustache(video_template, video_view));
 
-    bind_event_handlers();
+    $('.video-remove-control').on('click', remove_video);
 }
 
 
@@ -138,6 +140,8 @@ function show_more_videos(e) {
 }
 
 
+
+
 function get_mindcrackers() {
     var checkboxes = $('.mindcrackers-select input:checked');
     var mindcrackers = [];
@@ -150,33 +154,6 @@ function get_mindcrackers() {
 }
 
 
-function expand_description(e) {
-    e.preventDefault();
-
-    video_id = $(e.target).parents('.video.row').attr('data-video-id');
-    yt_api_url = 'https://gdata.youtube.com/feeds/api/videos/' + video_id + '?v=2&alt=jsonc';
-
-    $.getJSON(yt_api_url, function(data, textStatus) {
-        $(e.target).parent().replaceWith('<p class="video-description">' + data.data.description + ' <a href="#" class="truncate-description">(read less)</a></p>');
-        $('.truncate-description').on('click', truncate_description);
-    });
-
-}
-
-function truncate_description(e) {
-    e.preventDefault();
-
-    $(e.target).parent().replaceWith('<p class="video-description">' + $(e.target).parent().text().substring(0, 300) + '<a class="expand-description" href="#">... (read more)</a></p>');
-
-    $('.expand-description').on('click', expand_description);
-}
-
-
-function bind_event_handlers() {
-    $('.expand-description').on('click', expand_description);
-    $('.truncate-description').on('click', truncate_description);
-}
-
+$('.video-remove-control').on('click', remove_video);
 $('#options-submit').on('click', options_submit);
 $('#show-more').on('click', show_more_videos);
-bind_event_handlers();
