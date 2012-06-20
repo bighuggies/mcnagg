@@ -51,8 +51,8 @@ h1, h2, h3 {
 	margin: 0;
 	padding: 0;
 	padding-top: 11px;
-	border-top: 0;
-	border-color: gray;
+	border-top: none;
+	border-bottom: 1px solid whiteSmoke;
 }
 
 .options h2 {
