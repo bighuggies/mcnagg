@@ -1,18 +1,17 @@
-import os
+# import os
 import psycopg2
-import util
 from psycopg2 import extras
 
 
 def _get_db():
-    db_url = os.getenv('DATABASE_URL')
-    conn = None
+    # db_url = os.getenv('DATABASE_URL')
+    # conn = None
 
-    if db_url:
-        conn = psycopg2.connect('dbname=ddprh9d8b2m6av host=ec2-23-23-234-207.compute-1.amazonaws.com port=5432 user=mrkjurgyjpbrwt password=bRRcEKwPR7noC5yO0xMot1J7cL sslmode=require')
-    else:
-        conn = psycopg2.connect(database='mindcrackfeed', user='mindcrackfeedapp', password='lol')
-
+    # if db_url:
+    #     conn = psycopg2.connect('dbname=ddprh9d8b2m6av host=ec2-23-23-234-207.compute-1.amazonaws.com port=5432 user=mrkjurgyjpbrwt password=bRRcEKwPR7noC5yO0xMot1J7cL sslmode=require')
+    # else:
+    #     conn = psycopg2.connect(database='mindcrackfeed', user='mindcrackfeedapp', password='lol')
+    conn = psycopg2.connect('dbname=ddprh9d8b2m6av host=ec2-23-23-234-207.compute-1.amazonaws.com port=5432 user=mrkjurgyjpbrwt password=bRRcEKwPR7noC5yO0xMot1J7cL sslmode=require')
     return conn
 
 
@@ -51,14 +50,7 @@ def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_vide
 
 
 def main():
-    for m in mindcrackers():
-        for v in util.youtube_feed(m['username'], number_videos=50):
-            add_video(**v)
-
-    conn.commit()
-    cur.close()
-    conn.close()
-
+    add_mindcracker('MindCrackNetwork', 'www.youtube.com/MindCrackNetwork')
 
 if __name__ == '__main__':
     main()

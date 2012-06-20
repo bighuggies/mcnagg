@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import database
+import util
 
 import os.path
 import json
@@ -22,6 +23,7 @@ class Application(tornado.web.Application):
             (r"/", HomeHandler),
             (r"/about", AboutHandler),
             (r"/videos", VideosHandler),
+            (r"/fetch", FetchVideos)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -46,10 +48,7 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
-        videos = self.db.videos(num_videos=videos_per_page)
-        mindcrackers = self.db.mindcrackers()
-
-        self.render("body.html", videos=videos, mindcrackers=mindcrackers)
+        self.render("index.html")
 
 
 class AboutHandler(BaseHandler):
@@ -69,6 +68,39 @@ class VideosHandler(BaseHandler):
 
         self.write(json.dumps(videos, default=dthandler))
         self.finish()
+
+
+class FetchVideos(BaseHandler):
+    def get(self):
+        try:
+            self.get_argument('auth')
+        except:
+            self.write_error(401)
+
+        if self.get_argument('auth') == 'm1ndcr4ckf33d4pp':
+            self.write('fetching new videos ')
+            self.flush()
+
+            for m in self.db.mindcrackers():
+                self.write('fetching ' + m['username'] + '\'s videos ')
+                self.flush()
+
+                for v in util.youtube_feed(m['username'], number_videos=3):
+                    self.db.add_video(**v)
+
+            self.write('rendering template ')
+            self.flush()
+
+            videos = self.db.videos(num_videos=videos_per_page)
+            mindcrackers = self.db.mindcrackers()
+
+            with open('templates/index.html', 'w') as f:
+                f.write(self.render_string("body.html", videos=videos, mindcrackers=mindcrackers))
+
+            self.write('done')
+            self.finish()
+        else:
+            self.write_error(401)
 
 
 class VideoModule(tornado.web.UIModule):
