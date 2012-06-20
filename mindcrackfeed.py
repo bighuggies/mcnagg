@@ -78,7 +78,8 @@ class FetchVideos(BaseHandler):
             self.write_error(401)
 
         if self.get_argument('auth') == 'm1ndcr4ckf33d4pp':
-            self.write('fetching new videos ')
+            self.write('[' + str(datetime.utcnow()) + ']')
+            self.write(' fetching new videos ')
             self.flush()
 
             for m in self.db.mindcrackers():
@@ -97,7 +98,9 @@ class FetchVideos(BaseHandler):
             with open('templates/index.html', 'w') as f:
                 f.write(self.render_string("body.html", videos=videos, mindcrackers=mindcrackers))
 
-            self.write('done')
+            self.write('done ')
+            self.write('[' + str(datetime.utcnow()) + ']')
+
             self.finish()
         else:
             self.write_error(401)
