@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mindcrack Feed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Le styles -->
+<link href="/static/css/bootstrap.css?v=2f264" rel="stylesheet">
+<link href="/static/css/font-awesome.css?v=06a2e" rel="stylesheet" >
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link href="/static/css/style.css?v=9a35d" rel="stylesheet">
+<style>
+body {
+padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+<link href="/static/css/bootstrap-responsive.css?v=702e8" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- Le fav and touch icons -->
+<!-- <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/">Mindcrack feed</a>
+<div class="nav-collapse">
+<ul class="nav pull-right">
+<li>
+<a href="http://www.mindcrack.reddit.com">Reddit</a>
+</li>
+<li>
+<a href="http://www.guudelp.com">GuudeLP</a>
+</li>
+<li>
+<a href="/about">About</a>
+</li>
+</ul>
+</div>
+<!--/.nav-collapse --> </div>
+</div>
+</div>
+<div class="container">
+
+<div class="row">
+<div class="header span12">
+<h1>
+<span class="heading">Video Feed</span>
+<span class="options">
+<a href="#" data-toggle="collapse" data-target="#feed-options">
+<span class="options pull-right">
+Options<i id="feed-options-icon" class="icon-chevron-down pull-right"></i>
+</span>
+</a>
+</span>
+</h1>
+</div>
+</div>
+<div class="row">
+<div class="span12">
+<div id="feed-options" class=" collapse">
+<div class="accordion-inner"><form class="form-horizontal">
+<fieldset>
+<div class="control-group">
+<label class="control-label" for="inlineCheckboxes">Mindcrackers</label>
+<div class="controls mindcrackers-select">
+
+<label class="inline checkbox">
+<input type="checkbox" id="adlingtont-checkbox" value="adlingtont" checked="true">adlingtont</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="imanderzel-checkbox" value="imanderzel" checked="true">imanderzel</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="arkasmc-checkbox" value="arkasmc" checked="true">arkasmc</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="w92baj-checkbox" value="w92baj" checked="true">w92baj</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="bdoubleo100-checkbox" value="bdoubleo100" checked="true">bdoubleo100</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="docm77-checkbox" value="docm77" checked="true">docm77</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="ethoslab-checkbox" value="ethoslab" checked="true">ethoslab</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="guudeboulderfist-checkbox" value="guudeboulderfist" checked="true">guudeboulderfist</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="jsano19-checkbox" value="jsano19" checked="true">jsano19</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="justd3fy-checkbox" value="justd3fy" checked="true">justd3fy</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="kurtjmac-checkbox" value="kurtjmac" checked="true">kurtjmac</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="supermcgamer-checkbox" value="supermcgamer" checked="true">supermcgamer</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="mhykol-checkbox" value="mhykol" checked="true">mhykol</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="nebris88-checkbox" value="nebris88" checked="true">nebris88</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="pakratt13-checkbox" value="pakratt13" checked="true">pakratt13</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="pauseunpause-checkbox" value="pauseunpause" checked="true">pauseunpause</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="pyropuncher-checkbox" value="pyropuncher" checked="true">pyropuncher</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="shreeyamnet-checkbox" value="shreeyamnet" checked="true">shreeyamnet</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="thejims-checkbox" value="thejims" checked="true">thejims</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="vintagebeef-checkbox" value="vintagebeef" checked="true">vintagebeef</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="zisteau-checkbox" value="zisteau" checked="true">zisteau</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="millbeeful-checkbox" value="millbeeful" checked="true">millbeeful</label>
+
+<label class="inline checkbox">
+<input type="checkbox" id="mindcracknetwork-checkbox" value="mindcracknetwork" checked="true">mindcracknetwork</label>
+
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="number-videos">Videos per page</label>
+<div class="controls">
+<select id="number-videos">
+<option>5</option>
+<option>15</option>
+<option selected="selected">30</option>
+<option>50</option>
+<option>100</option>
+</select>
+</div>
+</div>
+<div class="form-actions">
+<a data-toggle="collapse" data-target="#feed-options" id="options-submit" class="btn btn-primary">Done</a>
+</div>
+</fieldset>
+</form></div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="span12">
+<div class="tabbable">
+<ul class="nav nav-tabs">
+<li class="active">
+<a href="#all" data-toggle="tab">All</a>
+</li>
+<li>
+<a style="color:grey;">Mindcrack</a>
+<!-- <a href="#mindcrack" data-toggle="tab">Mindcrack</a>
+-->
+</li>
+<li>
+<a style="color:grey;">UHC</a>
+<!-- <a href="#ultrahardcore" data-toggle="tab">UHC</a>
+-->
+</li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="all">
+
+
+<div class="video row" data-video-id="dNDBrrbqdI0">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=dNDBrrbqdI0">
+<img src="http://i.ytimg.com/vi/dNDBrrbqdI0/hqdefault.jpg" alt="Docm77´s NEW Minecraft World Tour - Episode 98: Zombie Insider thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=dNDBrrbqdI0">Docm77´s NEW Minecraft World Tour - Episode 98: Zombie Insider</a>
+</span>
+<span class="video-duration">(30:03)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/docm77">docm77</a>
+</span>
+<span class="video-uploaded">uploaded 13 minutes ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="m54fQQA8gJk">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=m54fQQA8gJk">
+<img src="http://i.ytimg.com/vi/m54fQQA8gJk/hqdefault.jpg" alt="Minecraft Mindcrack - Episode 123 - You're Watching GuudeBuildAFace thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=m54fQQA8gJk">Minecraft Mindcrack - Episode 123 - You're Watching GuudeBuildAFace</a>
+</span>
+<span class="video-duration">(18:06)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/pauseunpause">pauseunpause</a>
+</span>
+<span class="video-uploaded">uploaded 2 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="ZQYo2tJjIfk">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=ZQYo2tJjIfk">
+<img src="http://i.ytimg.com/vi/ZQYo2tJjIfk/hqdefault.jpg" alt="Live Streaming Super Mario Bros Wii thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=ZQYo2tJjIfk">Live Streaming Super Mario Bros Wii</a>
+</span>
+<span class="video-duration">(00:10)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/millbeeful">millbeeful</a>
+</span>
+<span class="video-uploaded">uploaded 3 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="LOSbjGY46_E">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=LOSbjGY46_E">
+<img src="http://i.ytimg.com/vi/LOSbjGY46_E/hqdefault.jpg" alt="Good Morning Mindcrack - 6/20/12 - More Power! thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=LOSbjGY46_E">Good Morning Mindcrack - 6/20/12 - More Power!</a>
+</span>
+<span class="video-duration">(11:28)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/supermcgamer">supermcgamer</a>
+</span>
+<span class="video-uploaded">uploaded 3 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="dwoduPJzW2g">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=dwoduPJzW2g">
+<img src="http://i.ytimg.com/vi/dwoduPJzW2g/hqdefault.jpg" alt="Mhykol Mines - Episode 190 - Micro World thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=dwoduPJzW2g">Mhykol Mines - Episode 190 - Micro World</a>
+</span>
+<span class="video-duration">(14:08)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/mhykol">mhykol</a>
+</span>
+<span class="video-uploaded">uploaded 8 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="O_bGupUJdUA">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=O_bGupUJdUA">
+<img src="http://i.ytimg.com/vi/O_bGupUJdUA/hqdefault.jpg" alt="Mindcrack 053 - UHC Thoughts thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=O_bGupUJdUA">Mindcrack 053 - UHC Thoughts</a>
+</span>
+<span class="video-duration">(1:47:58)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/nebris88">nebris88</a>
+</span>
+<span class="video-uploaded">uploaded 10 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="qArohBF-deQ">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=qArohBF-deQ">
+<img src="http://i.ytimg.com/vi/qArohBF-deQ/hqdefault.jpg" alt="S2 E10 - vs. Miami Heat thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=qArohBF-deQ">S2 E10 - vs. Miami Heat</a>
+</span>
+<span class="video-duration">(40:45)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/bdoubleo100">bdoubleo100</a>
+</span>
+<span class="video-uploaded">uploaded 10 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="UMAWBSeOcPg">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=UMAWBSeOcPg">
+<img src="http://i.ytimg.com/vi/UMAWBSeOcPg/hqdefault.jpg" alt="Mindcrack Number 35 - "Second Stage Farm" (Z451) thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=UMAWBSeOcPg">Mindcrack Number 35 - "Second Stage Farm" (Z451)</a>
+</span>
+<span class="video-duration">(30:43)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/zisteau">zisteau</a>
+</span>
+<span class="video-uploaded">uploaded 12 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="Gub7YEAGWo4">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=Gub7YEAGWo4">
+<img src="http://i.ytimg.com/vi/Gub7YEAGWo4/hqdefault.jpg" alt="Mindcrack Podcast - Episode 1 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=Gub7YEAGWo4">Mindcrack Podcast - Episode 1</a>
+</span>
+<span class="video-duration">(37:45)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/mindcracknetwork">mindcracknetwork</a>
+</span>
+<span class="video-uploaded">uploaded 12 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="PAjnTxOgwW8">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=PAjnTxOgwW8">
+<img src="http://i.ytimg.com/vi/PAjnTxOgwW8/hqdefault.jpg" alt="Minecraft Far Lands or Bust - #160 - The Amazing Introvert-Man! thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=PAjnTxOgwW8">Minecraft Far Lands or Bust - #160 - The Amazing Introvert-Man!</a>
+</span>
+<span class="video-duration">(23:44)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/kurtjmac">kurtjmac</a>
+</span>
+<span class="video-uploaded">uploaded 14 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="_wlj1K0xgdA">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=_wlj1K0xgdA">
+<img src="http://i.ytimg.com/vi/_wlj1K0xgdA/hqdefault.jpg" alt="OOGE - Kaizo Caverns: Episode 19 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=_wlj1K0xgdA">OOGE - Kaizo Caverns: Episode 19</a>
+</span>
+<span class="video-duration">(28:58)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/ethoslab">ethoslab</a>
+</span>
+<span class="video-uploaded">uploaded 14 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="DEwz8B_vH_M">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=DEwz8B_vH_M">
+<img src="http://i.ytimg.com/vi/DEwz8B_vH_M/hqdefault.jpg" alt="OOGE - Kaizo Caverns - Episode 19 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=DEwz8B_vH_M">OOGE - Kaizo Caverns - Episode 19</a>
+</span>
+<span class="video-duration">(28:47)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/bdoubleo100">bdoubleo100</a>
+</span>
+<span class="video-uploaded">uploaded 14 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="32zo6mq1oPY">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=32zo6mq1oPY">
+<img src="http://i.ytimg.com/vi/32zo6mq1oPY/hqdefault.jpg" alt="OOGE - Kaizo Caverns - E19 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=32zo6mq1oPY">OOGE - Kaizo Caverns - E19</a>
+</span>
+<span class="video-duration">(28:40)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/guudeboulderfist">guudeboulderfist</a>
+</span>
+<span class="video-uploaded">uploaded 14 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="BX103DPPEjo">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=BX103DPPEjo">
+<img src="http://i.ytimg.com/vi/BX103DPPEjo/hqdefault.jpg" alt="Beef Plays Rayman Origins - EP12 - Swimming With Stars thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=BX103DPPEjo">Beef Plays Rayman Origins - EP12 - Swimming With Stars</a>
+</span>
+<span class="video-duration">(18:56)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/vintagebeef">vintagebeef</a>
+</span>
+<span class="video-uploaded">uploaded 14 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="hel6FdJeTPY">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=hel6FdJeTPY">
+<img src="http://i.ytimg.com/vi/hel6FdJeTPY/hqdefault.jpg" alt="Bunch of Heroes With Team Nancy Drew - E01 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=hel6FdJeTPY">Bunch of Heroes With Team Nancy Drew - E01</a>
+</span>
+<span class="video-duration">(20:34)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/mindcracknetwork">mindcracknetwork</a>
+</span>
+<span class="video-uploaded">uploaded 16 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="Kpdsb6P2UDM">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=Kpdsb6P2UDM">
+<img src="http://i.ytimg.com/vi/Kpdsb6P2UDM/hqdefault.jpg" alt="CobbleHATERz s3e1: Us vs. Them thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=Kpdsb6P2UDM">CobbleHATERz s3e1: Us vs. Them</a>
+</span>
+<span class="video-duration">(31:16)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/pakratt13">pakratt13</a>
+</span>
+<span class="video-uploaded">uploaded 16 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="Zz46Vao3rRA">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=Zz46Vao3rRA">
+<img src="http://i.ytimg.com/vi/Zz46Vao3rRA/hqdefault.jpg" alt="Docm77´s Gametime - Saints Row: The Third [HD] #39 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=Zz46Vao3rRA">Docm77´s Gametime - Saints Row: The Third [HD] #39</a>
+</span>
+<span class="video-duration">(20:54)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/docm77">docm77</a>
+</span>
+<span class="video-uploaded">uploaded 17 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="Am0iID37VQc">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=Am0iID37VQc">
+<img src="http://i.ytimg.com/vi/Am0iID37VQc/hqdefault.jpg" alt="OOG - Saints Row The Third - E49 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=Am0iID37VQc">OOG - Saints Row The Third - E49</a>
+</span>
+<span class="video-duration">(17:31)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/guudeboulderfist">guudeboulderfist</a>
+</span>
+<span class="video-uploaded">uploaded 18 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="I_7Rb2Ko9g4">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=I_7Rb2Ko9g4">
+<img src="http://i.ytimg.com/vi/I_7Rb2Ko9g4/hqdefault.jpg" alt="Deathly Trails with Beef - Episode 22 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=I_7Rb2Ko9g4">Deathly Trails with Beef - Episode 22</a>
+</span>
+<span class="video-duration">(24:25)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/pauseunpause">pauseunpause</a>
+</span>
+<span class="video-uploaded">uploaded 18 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="4kyyt3Mzp1I">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=4kyyt3Mzp1I">
+<img src="http://i.ytimg.com/vi/4kyyt3Mzp1I/hqdefault.jpg" alt="Mindcrack Prank Wars - A Slice of Nether thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=4kyyt3Mzp1I">Mindcrack Prank Wars - A Slice of Nether</a>
+</span>
+<span class="video-duration">(46:25)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/supermcgamer">supermcgamer</a>
+</span>
+<span class="video-uploaded">uploaded 18 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="LHKd0OGX7R4">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=LHKd0OGX7R4">
+<img src="http://i.ytimg.com/vi/LHKd0OGX7R4/hqdefault.jpg" alt="Deathly Trails - EP22 - Oh The Irony thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=LHKd0OGX7R4">Deathly Trails - EP22 - Oh The Irony</a>
+</span>
+<span class="video-duration">(23:50)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/vintagebeef">vintagebeef</a>
+</span>
+<span class="video-uploaded">uploaded 18 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="dYpA2BCxVrE">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=dYpA2BCxVrE">
+<img src="http://i.ytimg.com/vi/dYpA2BCxVrE/hqdefault.jpg" alt="Etho MindCrack SMP - Episode 24: G-All Nether Mod Prank thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=dYpA2BCxVrE">Etho MindCrack SMP - Episode 24: G-All Nether Mod Prank</a>
+</span>
+<span class="video-duration">(31:24)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/ethoslab">ethoslab</a>
+</span>
+<span class="video-uploaded">uploaded 20 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="vKOaK19bpws">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=vKOaK19bpws">
+<img src="http://i.ytimg.com/vi/vKOaK19bpws/hqdefault.jpg" alt="Minecraft MindCrack - SMP #009 - And Then Suddenly, Boobs! thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=vKOaK19bpws">Minecraft MindCrack - SMP #009 - And Then Suddenly, Boobs!</a>
+</span>
+<span class="video-duration">(50:21)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/kurtjmac">kurtjmac</a>
+</span>
+<span class="video-uploaded">uploaded 20 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="JzE7hjdY6Es">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=JzE7hjdY6Es">
+<img src="http://i.ytimg.com/vi/JzE7hjdY6Es/hqdefault.jpg" alt="Minecraft: Mindcrack E008 - Return thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=JzE7hjdY6Es">Minecraft: Mindcrack E008 - Return</a>
+</span>
+<span class="video-duration">(17:48)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/pyropuncher">pyropuncher</a>
+</span>
+<span class="video-uploaded">uploaded 20 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="UD5m5r1Dewg">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=UD5m5r1Dewg">
+<img src="http://i.ytimg.com/vi/UD5m5r1Dewg/hqdefault.jpg" alt="Trial of the Minemasons - EP01 - Trust Issues thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=UD5m5r1Dewg">Trial of the Minemasons - EP01 - Trust Issues</a>
+</span>
+<span class="video-duration">(19:56)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/vintagebeef">vintagebeef</a>
+</span>
+<span class="video-uploaded">uploaded 20 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="XPImPnbWwzs">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=XPImPnbWwzs">
+<img src="http://i.ytimg.com/vi/XPImPnbWwzs/hqdefault.jpg" alt="Minecraft Building with BdoubleO - Episode 38 - 3x3 Piston Door thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=XPImPnbWwzs">Minecraft Building with BdoubleO - Episode 38 - 3x3 Piston Door</a>
+</span>
+<span class="video-duration">(42:47)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/bdoubleo100">bdoubleo100</a>
+</span>
+<span class="video-uploaded">uploaded 21 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="WitSIFQMsvM">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=WitSIFQMsvM">
+<img src="http://i.ytimg.com/vi/WitSIFQMsvM/hqdefault.jpg" alt="Diablo 3 - Official Release | Lets Play #24 | Docm77 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=WitSIFQMsvM">Diablo 3 - Official Release | Lets Play #24 | Docm77</a>
+</span>
+<span class="video-duration">(25:03)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/docm77">docm77</a>
+</span>
+<span class="video-uploaded">uploaded 22 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="lhvUsGyVXGQ">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=lhvUsGyVXGQ">
+<img src="http://i.ytimg.com/vi/lhvUsGyVXGQ/hqdefault.jpg" alt="Guude Games - Psychonauts - E06 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=lhvUsGyVXGQ">Guude Games - Psychonauts - E06</a>
+</span>
+<span class="video-duration">(24:22)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/guudeboulderfist">guudeboulderfist</a>
+</span>
+<span class="video-uploaded">uploaded 22 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="dOHo8UvkZEM">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=dOHo8UvkZEM">
+<img src="http://i.ytimg.com/vi/dOHo8UvkZEM/hqdefault.jpg" alt="Super Meat Boy - Episode 3 - Sodium Overload thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=dOHo8UvkZEM">Super Meat Boy - Episode 3 - Sodium Overload</a>
+</span>
+<span class="video-duration">(25:33)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/pauseunpause">pauseunpause</a>
+</span>
+<span class="video-uploaded">uploaded 22 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+
+<div class="video row" data-video-id="bm20VwKzItA">
+<div class="video-thumbnail span1">
+<a href="http://www.youtube.com/watch?v=bm20VwKzItA">
+<img src="http://i.ytimg.com/vi/bm20VwKzItA/hqdefault.jpg" alt="Beef and Baj and the Trial of the Minemasons - Episode 1 thumbnail"></a>
+</div>
+<div class="video-title-duration span9">
+<h2 class="video-title">
+<span class="video-title">
+<a href="http://www.youtube.com/watch?v=bm20VwKzItA">Beef and Baj and the Trial of the Minemasons - Episode 1</a>
+</span>
+<span class="video-duration">(20:14)</span>
+</h2>
+<p class="video-uploader-uploaded">
+<span class="video-uploader">
+<a href="http://www.youtube.com/w92baj">w92baj</a>
+</span>
+<span class="video-uploaded">uploaded 22 hours ago</span>
+</p>
+</div>
+<div class="video-controls span2">
+<div class="pull-right">
+<a href="#">
+<i class="icon-remove video-remove-control"></i>
+</a>
+</div>
+</div>
+<div class="span12"><hr></div>
+</div>
+
+
+</div>
+<div class="tab-pane" id="mindcrack">
+<p>Coming soon</p>
+</div>
+<div class="tab-pane" id="ultrahardcore">
+<p>Coming soon</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div id="show-more" class="show-more span12">
+<a href="#">
+<h2>Show more</h2> <i id="show-more-icon" class="icon-chevron-down"></i>
+</a>
+</div>
+</div>
+
+<footer class="navbar">
+<hr class="footer-line">
+<ul class="footer-list">
+<li>
+<a href="/about">About</a>
+</li>
+<li>
+<a href="mailto:andrew@atshughson.me">Send feedback</a>
+</li>
+<li>
+<a href="#">Top</a>
+</li>
+</ul>
+</footer>
+</div>
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/jquery.js?v=af693"></script>
+<script src="/static/js/jquery.mustache.js?v=31635"></script>
+<script src="/static/js/bootstrap.js?v=ee78d"></script>
+<script src="/static/js/script.js?v=50716"></script>
+</body>
+</html>
