@@ -42,16 +42,16 @@ def get_HMS(time):
         return hms
 
 
-def youtube_feed(feed_id, number_videos=1, offset=1, orderby='published', feed_type='upload'):
+def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
     if feed_type == 'show':
-        feed_url = 'https://gdata.youtube.com/feeds/api/seasons/{feed_id}/episodes?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}&orderby={orderby}'.format(
-            feed_id=feed_id, offset=offset, number_videos=number_videos, orderby=orderby)
+        feed_url = 'https://gdata.youtube.com/feeds/api/seasons/{feed_id}/episodes?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}'.format(
+            feed_id=feed_id, offset=offset, number_videos=number_videos)
     elif feed_type == 'playlist':
-        feed_url = 'http://gdata.youtube.com/feeds/api/playlists/{feed_id}?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}&orderby={orderby}'.format(
-            feed_id=feed_id, offset=offset, number_videos=number_videos, orderby=orderby)
+        feed_url = 'http://gdata.youtube.com/feeds/api/playlists/{feed_id}?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}'.format(
+            feed_id=feed_id, offset=offset, number_videos=number_videos)
     elif feed_type == 'upload':
-        feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}&orderby={orderby}'.format(
-            username=feed_id, offset=offset, number_videos=number_videos, orderby=orderby)
+        feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}'.format(
+            username=feed_id, offset=offset, number_videos=number_videos)
     else:
         raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <upload>, <playlist> or <show>.')
 
