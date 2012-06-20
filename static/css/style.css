@@ -52,6 +52,7 @@ h1, h2, h3 {
 	padding: 0;
 	padding-top: 11px;
 	border-top: 0;
+	border-color: gray;
 }
 
 .options h2 {
