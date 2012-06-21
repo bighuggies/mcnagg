@@ -1,4 +1,3 @@
-# import os
 import psycopg2
 from psycopg2 import extras
 
@@ -35,13 +34,20 @@ def add_video(video_id, title, duration, uploader, uploaded, description, thumbn
     conn.commit()
 
 
+def remove_video(video_id=None):
+    if video_id:
+        cur.execute('DELETE FROM videos WHERE video_id=%s', (video_id, ))
+
+    conn.commit()
+
+
 def mindcrackers():
     cur.execute('SELECT * FROM mindcrackers')
 
     return [m for m in cur]
 
 
-def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_videos=15, offset=0):
+def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_videos=30, offset=0):
     if mindcrackers:
         cur.execute('SELECT * FROM videos WHERE videos.uploader IN %s ORDER BY uploaded DESC LIMIT %s OFFSET %s', (mindcrackers, num_videos, offset))
         return [v for v in cur]
@@ -50,7 +56,8 @@ def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_vide
 
 
 def main():
-    add_mindcracker('MindCrackNetwork', 'www.youtube.com/MindCrackNetwork')
+    pass
+
 
 if __name__ == '__main__':
     main()

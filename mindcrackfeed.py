@@ -24,7 +24,8 @@ class Application(tornado.web.Application):
             (r"/", HomeHandler),
             (r"/about", AboutHandler),
             (r"/videos", VideosHandler),
-            (r"/fetch", FetchVideos)
+            (r"/fetch", FetchVideos),
+            (r"/cull", CullVideos)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -104,10 +105,40 @@ class FetchVideos(BaseHandler):
             global index
             index = self.render_string("body.html", videos=videos, mindcrackers=mindcrackers)
 
-            self.write('done ')
+            self.write('done fetching ')
             self.write('[' + str(datetime.utcnow()) + ']')
 
             self.finish()
+        else:
+            self.write_error(401)
+
+
+class CullVideos(BaseHandler):
+    def get(self):
+        try:
+            self.get_argument('auth')
+        except:
+            self.write_error(401)
+
+        if self.get_argument('auth') == 'm1ndcr4ckf33d4pp':
+            self.write('[' + str(datetime.utcnow()) + ']')
+            self.write(' culling deleted videos ')
+            self.flush()
+
+            for video in self.db.videos(num_videos=100):
+                video_data = util.youtube_video_data(video['video_id'])
+
+                if 'error' in video_data:
+                    if video_data['error']['code'] == 404:
+                        self.write('culling ' + video['title'])
+                        self.flush()
+                        self.db.remove_video(video['video_id'])
+
+            self.write('done culling ')
+            self.write('[' + str(datetime.utcnow()) + ']')
+
+            self.finish()
+
         else:
             self.write_error(401)
 
