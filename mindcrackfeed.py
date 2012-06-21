@@ -15,6 +15,7 @@ import tornado.web
 
 
 videos_per_page = 30
+index = ''
 
 
 class Application(tornado.web.Application):
@@ -33,7 +34,7 @@ class Application(tornado.web.Application):
             # cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             # login_url="/auth/login",
             autoescape=None,
-            debug=False
+            debug=True
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
@@ -48,7 +49,12 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
-        self.render("index.html")
+        if index == "":
+            self.write('Down for maintenance, please check back in 5 minutes')
+            self.finish()
+        else:
+            self.write(index)
+            self.finish()
 
 
 class AboutHandler(BaseHandler):
@@ -95,8 +101,8 @@ class FetchVideos(BaseHandler):
             videos = self.db.videos(num_videos=videos_per_page)
             mindcrackers = self.db.mindcrackers()
 
-            with open('templates/index.html', 'w') as f:
-                f.write(self.render_string("body.html", videos=videos, mindcrackers=mindcrackers))
+            global index
+            index = self.render_string("body.html", videos=videos, mindcrackers=mindcrackers)
 
             self.write('done ')
             self.write('[' + str(datetime.utcnow()) + ']')
