@@ -55,18 +55,17 @@ class BaseHandler(tornado.web.RequestHandler):
 class HomeHandler(BaseHandler):
     def get(self):
 
-        videos = self.db.videos(num_videos=videos_per_page)
-        mindcrackers = self.db.mindcrackers()
+        # videos = self.db.videos(num_videos=videos_per_page)
+        # mindcrackers = self.db.mindcrackers()
 
-        self.render("body.html", videos=videos, mindcrackers=mindcrackers)
+        # self.render("body.html", videos=videos, mindcrackers=mindcrackers)
 
-
-        # if index == "":
-        #     self.write('Down for maintenance, please check back in 5 minutes')
-        #     self.finish()
-        # else:
-        #     self.write(index)
-        #     self.finish()
+        if index == "":
+            self.write('Down for maintenance, please check back in 5 minutes')
+            self.finish()
+        else:
+            self.write(index)
+            self.finish()
 
 
 class AboutHandler(BaseHandler):
@@ -137,13 +136,15 @@ class CullVideos(BaseHandler):
             self.flush()
 
             for video in self.db.videos(num_videos=100):
-                video_data = util.youtube_video_data(video['video_id'])
-
-                if 'error' in video_data:
-                    if video_data['error']['code'] == 404:
-                        self.write('culling ' + video['title'])
-                        self.flush()
-                        self.db.remove_video(video['video_id'])
+                try:
+                    video = util.youtube_video_data(video['video_id'])
+                    self.write('updating ' + video['title'])
+                    self.flush()
+                    self.db.update_video(**video)
+                except:
+                    self.write('culling ' + video['title'])
+                    self.flush()
+                    self.db.remove_video(video['video_id'])
 
             self.write('done culling ')
             self.write('[' + str(datetime.utcnow()) + ']')

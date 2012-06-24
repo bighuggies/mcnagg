@@ -1,26 +1,7 @@
-$('#feed-options').on('shown', function () {
-    $("#feed-options-icon").removeClass("icon-chevron-down");
-    $("#feed-options-icon").addClass("icon-chevron-up");
-});
-
-
-$('#feed-options').on('hidden', function () {
-    $("#feed-options-icon").removeClass("icon-chevron-up");
-    $("#feed-options-icon").addClass("icon-chevron-down");
-});
-
-
-$('#options-cancel').on('click', function() {
-    $('#feed-options').trigger('hidden');
-});
-
-
 function get_HMS(time) {
     hours = Math.floor(time / 3600);
     minutes = Math.floor(time / 60) - hours * 60;
     seconds = time - (hours * 3600) - (minutes * 60);
-
-    console.log((hours > 0 ? hours + ':' : '') + minutes + ':' + (seconds > 10 ? seconds : '0' + seconds));
 
     return((hours > 0 ? hours + ':' : '') + (minutes > 10 ? minutes + ':' : '0' + minutes + ':') + (seconds > 10 ? seconds : '0' + seconds));
 }
@@ -77,7 +58,7 @@ function remove_video(e) {
 function append_videos(videos) {
     $('.loading.row').remove();
 
-    var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span1"><a href="http://www.youtube.com/watch?v={{video_id}}"><img src="{{thumbnail}}" alt="{{title}} thumbnail"></a></div><div class="span7"><h2 class="video-title-duration"><span class="video-title"><a href="http://www.youtube.com/watch?v={{video_id}}">{{title}}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{uploader}}">{{uploader}}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls span1"><div class="pull-right"><a href="#"> <i data-video-id="{{video_id}}" class="icon-remove video-remove-control"></i></a></div></div></div><div class="divider row" data-video-id="{{video_id}}"><div class="span9"><hr class="video-divider"></div></div>{{/videos}}';
+    var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span1"><a href="http://www.youtube.com/watch?v={{video_id}}"><img src="{{thumbnail}}" alt="{{title}} thumbnail"></a></div><div class="span7"><h2 class="video-title-duration"><span class="video-title"><a href="http://www.youtube.com/watch?v={{video_id}}">{{title}}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{uploader}}">{{name}}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls span1"><div class="pull-right"><a href="#"> <i data-video-id="{{video_id}}" class="icon-remove video-remove-control"></i></a></div></div></div><div class="divider row" data-video-id="{{video_id}}"><div class="span9"><hr class="video-divider"></div></div>{{/videos}}';
 
     var video_view = {
         videos: videos,
@@ -88,15 +69,14 @@ function append_videos(videos) {
         },
         hms: function() {
             return function(text, render) {
-                console.log(text + ' ' + render(text));
                 return get_HMS(render(text));
             };
         }
     };
 
     $('#show-more').before($.mustache(video_template, video_view));
-
     $('#show-more').show();
+
     $('.video-remove-control').on('click', remove_video);
 }
 
@@ -143,7 +123,8 @@ function show_more_videos(e) {
 
 
 function get_mindcrackers() {
-    var checkboxes = $('.mindcrackers-select input:checked');
+    var checkboxes = $('input[name="mindcrackers-select"]:checked');
+
     var mindcrackers = [];
 
     checkboxes.each(function(index, checkbox) {
@@ -154,6 +135,39 @@ function get_mindcrackers() {
 }
 
 
-$('.video-remove-control').on('click', remove_video);
-$('#options-submit').on('click', options_submit);
-$('#show-more').on('click', show_more_videos);
+function select_all_mindcrackers(e) {
+    e.preventDefault();
+
+    $('input[name="mindcrackers-select"]').each(function(index, element) {
+        $(element).attr('checked', true);
+    });
+}
+
+
+function deselect_all_mindcrackers(e) {
+    e.preventDefault();
+
+    $('input[name="mindcrackers-select"]:checked').each(function(index, element) {
+        $(element).attr('checked', false);
+    });
+}
+
+
+$(document).ready(function() {
+    $('.video-remove-control').on('click', remove_video);
+    $('#options-submit').on('click', options_submit);
+    $('#show-more').on('click', show_more_videos);
+    $('#select-all').on('click', select_all_mindcrackers);
+    $('#deselect-all').on('click', deselect_all_mindcrackers);
+
+    $('#feed-options').on('shown', function () {
+        $("#feed-options-icon").removeClass("icon-chevron-down");
+        $("#feed-options-icon").addClass("icon-chevron-up");
+    });
+
+
+    $('#feed-options').on('hidden', function () {
+        $("#feed-options-icon").removeClass("icon-chevron-up");
+        $("#feed-options-icon").addClass("icon-chevron-down");
+    });
+});

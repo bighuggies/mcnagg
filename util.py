@@ -53,7 +53,7 @@ def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
         feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}'.format(
             username=feed_id, offset=offset, number_videos=number_videos)
     else:
-        raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <upload>, <playlist> or <show>.')
+        raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <"upload">, <"playlist"> or <"show">.')
 
     feed = json.loads(requests.get(feed_url).text)
 
@@ -62,18 +62,28 @@ def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
             if type == 'playlist':
                 item = item['video']
 
-            video = dict(
-                video_id=item['id'],
-                title=item['title'],
-                duration=item['duration'],
-                uploader=item['uploader'],
-                uploaded=datetime.strptime(item['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ"),
-                description=item['description'],
-                thumbnail=item['thumbnail']['hqDefault']
-            )
-
-            yield video
+            yield _process_video_data(item)
 
 
-def youtube_video_data(video_id):
-    return json.loads(requests.get('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).text)
+def youtube_video_data(video_id, raw=False):
+    raw = json.loads(requests.get('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).text)
+
+    if 'error' in raw:
+        raise IOError('No such video')
+
+    if raw:
+        return raw
+    else:
+        return _process_video_data(raw['data'])
+
+
+def _process_video_data(video_data):
+    return dict(
+        video_id=video_data['id'],
+        title=video_data['title'],
+        duration=video_data['duration'],
+        uploader=video_data['uploader'],
+        uploaded=datetime.strptime(video_data['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ"),
+        description=video_data['description'],
+        thumbnail=video_data['thumbnail']['hqDefault']
+    )

@@ -1,16 +1,16 @@
 CREATE TABLE mindcrackers (
 	username		text		PRIMARY KEY,
-	url				text
+	name			text		UNIQUE NOT NULL,
 );
 
 CREATE TABLE videos (
 	video_id		text		PRIMARY KEY,
-	title			text,
-	duration		integer,
+	title			text		NOT NULL,
+	duration		integer		NOT NULL,
 	uploader		text		REFERENCES mindcrackers(username) ON DELETE CASCADE,
-	uploaded		timestamp,
+	uploaded		timestamp	NOT NULL,
 	description		text,
-	thumbnail		text
+	thumbnail		text		NOT NULL
 );
 
 CREATE INDEX upload_date ON videos(uploaded);

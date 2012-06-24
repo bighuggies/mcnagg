@@ -1,26 +1,45 @@
 <form class="form-horizontal">
     <fieldset>
         <div class="control-group">
-            <label class="control-label" for="inlineCheckboxes">Mindcrackers</label>
-            <div class="controls mindcrackers-select">
+            <label class="control-label" for="inlineCheckboxes">MindCrackers</label>
+            <div class="controls">
                 {% for m in mindcrackers %}
                 <label class="inline checkbox">
-                    <input type="checkbox" id="{{ m['username'] }}-checkbox" value="{{ m['username'] }}" checked="true">{{ m['username'] }}</label>
+                    <input type="checkbox" name="mindcrackers-select" id="{{ m['username'] }}-checkbox" value="{{ m['username'] }}" checked="true">{{ m['name'] }}</label>
                 {% end %}
             </div>
         </div>
         <div class="control-group">
+            <div class="controls">
+                <button id="select-all" class="btn">Select all</button>
+                <button id="deselect-all" class="btn">Deselect all</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="select-show">Show</label>
+            <div class="controls">
+                <select disabled="True" id="select-show">
+                    <option>All uploads</option>
+                    <option>UHC</option>
+                    <option>OOGE</option>
+                    <option>FLOB</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="control-group">
             <label class="control-label" for="number-videos">Videos per page</label>
             <div class="controls">
-              <select id="number-videos">
-                <option>5</option>
-                <option>15</option>
-                <option selected="selected">30</option>
-                <option>50</option>
-                <option>100</option>
-              </select>
+                <select id="number-videos">
+                    <option>5</option>
+                    <option>15</option>
+                    <option selected="selected">30</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
             </div>
-          </div>
+        </div>
+
         <div class="form-actions">
             <a data-toggle="collapse" data-target="#feed-options" id="options-submit" class="btn btn-primary">Done</a>
         </div>
