@@ -4,8 +4,8 @@
         <a href="http://www.youtube.com/watch?v={{ video['video_id'] }}">
             <img src="{{ video['thumbnail'] }}" alt="{{ video['title'] }} thumbnail"></a>
     </div>
-    <div class="video-title-duration span9">
-        <h2 class="video-title">
+    <div class="span7">
+        <h2 class="video-title-duration">
             <span class="video-title">
                 <a href="http://www.youtube.com/watch?v={{ video['video_id'] }}">{{ video['title'] }}</a>
             </span>
@@ -18,13 +18,10 @@
             <span class="video-uploaded">uploaded {{ util.get_fancy_time(video['uploaded']) }}</span>
         </p>
     </div>
-    <div class="video-controls span2">
+    <div class="video-controls span1">
         <div class="pull-right">
-            <a href="#">
-                <i class="icon-remove video-remove-control"></i>
+            <a href="#"> <i data-video-id="{{ video['video_id'] }}" class="icon-remove video-remove-control"></i>
             </a>
         </div>
     </div>
-    <div class="span12"><hr></div>
 </div>
-

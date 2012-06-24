@@ -4,12 +4,10 @@
 <div class="row">
     <div class="header span12">
         <h1>
-            <span class="heading">Video Feed</span>
-            <span class="options">
+            <span class="heading">Mindcrack Video Feed</span>
+            <span class="options pull-right">
                 <a href="#" data-toggle="collapse" data-target="#feed-options">
-                    <span class="options pull-right">
-                        Options<i id="feed-options-icon" class="icon-chevron-down pull-right"></i>
-                    </span>
+                    Options <i id="feed-options-icon" class="icon-chevron-down"></i>
                 </a>
             </span>
         </h1>
@@ -25,45 +23,25 @@
 </div>
 
 <div class="row">
-    <div class="span12">
-        <div class="tabbable">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#all" data-toggle="tab">All</a>
-                </li>
-                <li>
-                    <a style="color:grey;">Mindcrack</a>
-                    <!-- <a href="#mindcrack" data-toggle="tab">Mindcrack</a>
-                -->
-            </li>
-            <li>
-                <a style="color:grey;">UHC</a>
-                <!-- <a href="#ultrahardcore" data-toggle="tab">UHC</a>
-            -->
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane active" id="all">
-            {% for video in videos %}
-                        {{ modules.Video(video) }}
-                    {% end %}
+    <div class="video-list span9">
+        {% for video in videos %}
+        {{ modules.Video(video) }}
+        <div class="divider row" data-video-id="{{ video['video_id'] }}">
+            <div class="span9">
+                <hr class="video-divider"></div>
         </div>
-        <div class="tab-pane" id="mindcrack">
-            <p>Coming soon</p>
-        </div>
-        <div class="tab-pane" id="ultrahardcore">
-            <p>Coming soon</p>
+        {% end %}
+        <div id="show-more" class="row">
+            <div class="span9">
+                <a href="#">
+                    <h2>Show more</h2> <i id="show-more-icon" class="icon-chevron-down"></i>
+                </a>
+            </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-
-<div class="row">
-<div id="show-more" class="show-more span12">
-<a href="#">
-    <h2>Show more</h2> <i id="show-more-icon" class="icon-chevron-down"></i>
-</a>
-</div>
+    <div class="span3">
+        <div class="twitter">{{modules.Twitter()}}</div>
+        <div class="reddit">{{modules.Reddit()}}</div>
+    </div>
 </div>
 {% end %}

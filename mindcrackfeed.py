@@ -30,13 +30,17 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            ui_modules={"Video": VideoModule, "Options": OptionsModule},
+            ui_modules={"Video": VideoModule, "Options": OptionsModule, "Twitter": TwitterModule, "Reddit": RedditModule},
             # xsrf_cookies=True,
             # cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             # login_url="/auth/login",
             autoescape=None,
-            debug=False
+            debug=True
         )
+
+        if os.environ.get('ENVIRONMENT') == 'heroku':
+            settings['debug'] = False
+
         tornado.web.Application.__init__(self, handlers, **settings)
 
         self.db = database
@@ -50,12 +54,19 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
-        if index == "":
-            self.write('Down for maintenance, please check back in 5 minutes')
-            self.finish()
-        else:
-            self.write(index)
-            self.finish()
+
+        videos = self.db.videos(num_videos=videos_per_page)
+        mindcrackers = self.db.mindcrackers()
+
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers)
+
+
+        # if index == "":
+        #     self.write('Down for maintenance, please check back in 5 minutes')
+        #     self.finish()
+        # else:
+        #     self.write(index)
+        #     self.finish()
 
 
 class AboutHandler(BaseHandler):
@@ -151,6 +162,16 @@ class VideoModule(tornado.web.UIModule):
 class OptionsModule(tornado.web.UIModule):
     def render(self, mindcrackers):
         return self.render_string("modules/options.html", mindcrackers=mindcrackers)
+
+
+class TwitterModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string("modules/twitter.html")
+
+
+class RedditModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string("modules/reddit.html")
 
 
 def main():

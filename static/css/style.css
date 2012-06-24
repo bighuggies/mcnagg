@@ -15,9 +15,15 @@ h1, h2, h3 {
 	font-size: 18px;
 }
 
-.nav-tabs {
-	padding-bottom: 0;
-	margin-bottom: 0;
+.options a:hover {
+	text-decoration: none;
+}
+
+i {
+	font-size: 16pt;
+	margin-left: 5px;
+	margin-right: 5px;
+
 }
 
 .video {
@@ -27,6 +33,10 @@ h1, h2, h3 {
 
 .video-thumbnail {
 	padding-top: 9px;
+}
+
+.video-title {
+	font-size: 16pt;
 }
 
 .video-controls {
@@ -39,7 +49,7 @@ h1, h2, h3 {
 }
 
 .video-uploader {
-	font-size: 18px;
+	font-size: 12pt;
 	font-weight: bold;
 }
 
@@ -47,28 +57,17 @@ h1, h2, h3 {
 	text-decoration: none;
 }
 
-.video hr {
-	margin: 0;
-	padding: 0;
-	padding-top: 11px;
-	border-top: none;
-	border-bottom: 1px solid whiteSmoke;
+.video-divider {
+	margin: 1px;
+	padding: 1px;
 }
 
-.options h2 {
-	padding-right: 5px;
-	margin-right: 5px;
-	line-height: 18px;
+.twitter, .reddit {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
-i {
-	font-size: 15pt;
-	margin-left: 5px;
-	margin-right: 5px;
-
-}
-
-.show-more {
+#show-more {
 	text-align: center;
 }
 
