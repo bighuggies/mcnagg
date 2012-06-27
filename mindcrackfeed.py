@@ -103,7 +103,7 @@ class FetchVideos(BaseHandler):
                 self.write('fetching ' + m['username'] + '\'s videos ')
                 self.flush()
 
-                for v in util.youtube_feed(m['username'], number_videos=30):
+                for v in util.youtube_feed(m['username'], number_videos=3):
                     self.db.add_video(**v)
 
             self.write('rendering template ')
