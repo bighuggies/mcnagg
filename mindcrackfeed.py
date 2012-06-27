@@ -25,7 +25,7 @@ class Application(tornado.web.Application):
             (r"/about", AboutHandler),
             (r"/videos", VideosHandler),
             (r"/fetch", FetchVideos),
-            (r"/cull", CullVideos)
+            (r"/update", UpdateVideos)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -54,18 +54,18 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
+        if self.settings['debug'] == True:
+            videos = self.db.videos(num_videos=videos_per_page)
+            mindcrackers = self.db.mindcrackers()
 
-        # videos = self.db.videos(num_videos=videos_per_page)
-        # mindcrackers = self.db.mindcrackers()
-
-        # self.render("body.html", videos=videos, mindcrackers=mindcrackers)
-
-        if index == "":
-            self.write('Down for maintenance, please check back in 5 minutes')
-            self.finish()
+            self.render("body.html", videos=videos, mindcrackers=mindcrackers)
         else:
-            self.write(index)
-            self.finish()
+            if index == "":
+                self.write('Down for maintenance, please check back in 5 minutes')
+                self.finish()
+            else:
+                self.write(index)
+                self.finish()
 
 
 class AboutHandler(BaseHandler):
@@ -103,7 +103,7 @@ class FetchVideos(BaseHandler):
                 self.write('fetching ' + m['username'] + '\'s videos ')
                 self.flush()
 
-                for v in util.youtube_feed(m['username'], number_videos=3):
+                for v in util.youtube_feed(m['username'], number_videos=30):
                     self.db.add_video(**v)
 
             self.write('rendering template ')
@@ -123,7 +123,7 @@ class FetchVideos(BaseHandler):
             self.write_error(401)
 
 
-class CullVideos(BaseHandler):
+class UpdateVideos(BaseHandler):
     def get(self):
         try:
             self.get_argument('auth')
@@ -132,21 +132,21 @@ class CullVideos(BaseHandler):
 
         if self.get_argument('auth') == 'm1ndcr4ckf33d4pp':
             self.write('[' + str(datetime.utcnow()) + ']')
-            self.write(' culling deleted videos ')
+            self.write(' updating videos')
             self.flush()
 
             for video in self.db.videos(num_videos=100):
                 try:
                     video = util.youtube_video_data(video['video_id'])
-                    self.write('updating ' + video['title'])
+                    self.write(' updating ' + video['title'])
                     self.flush()
                     self.db.update_video(**video)
                 except:
-                    self.write('culling ' + video['title'])
+                    self.write(' culling ' + video['title'])
                     self.flush()
                     self.db.remove_video(video['video_id'])
 
-            self.write('done culling ')
+            self.write(' done updating ')
             self.write('[' + str(datetime.utcnow()) + ']')
 
             self.finish()

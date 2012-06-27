@@ -79,7 +79,9 @@ def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_vide
 
 
 def main():
-    pass
+    with open('m.txt', 'w') as f:
+        for m in mindcrackers():
+            f.write(m['username'] + ',' + m['name'] + '\n')
 
 
 if __name__ == '__main__':

@@ -66,15 +66,16 @@ def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
 
 
 def youtube_video_data(video_id, raw=False):
-    raw = json.loads(requests.get('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).text)
+    raw_video = json.loads(requests.get('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).text)
+    print raw_video
 
-    if 'error' in raw:
+    if 'error' in raw_video:
         raise IOError('No such video')
 
     if raw:
-        return raw
+        return raw_video
     else:
-        return _process_video_data(raw['data'])
+        return _process_video_data(raw_video['data'])
 
 
 def _process_video_data(video_data):
