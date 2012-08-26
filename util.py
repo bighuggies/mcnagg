@@ -1,8 +1,11 @@
 from datetime import datetime, timedelta
 
+import pylibmc
 import requests
 import json
 import math
+
+CACHE_SLICE_SIZE = 30
 
 
 def get_fancy_time(date):
@@ -40,6 +43,30 @@ def get_HMS(time):
         return ':'.join(parts[1:])
     else:
         return hms
+
+
+def get_uploads(feed_id, number_videos=1, offset=0):
+    mc = pylibmc.Client(['127.0.0.1'])
+
+    keys = [str(x) for x in xrange(0, number_videos, CACHE_SLICE_SIZE) if x < number_videos]
+    cached = mc.get_multi(keys, key_prefix=feed_id)
+
+
+    videos = []
+
+    for i in keys:
+        try:
+            videos = videos + cached[i]
+        except KeyError:
+            vs = []
+            for v in youtube_feed(feed_id, CACHE_SLICE_SIZE, int(i) + 1):
+                vs.append(v)
+
+            videos = videos + vs
+
+            mc.set(feed_id + i, vs, time=300)
+    
+    return len(videos[offset:number_videos])
 
 
 def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
