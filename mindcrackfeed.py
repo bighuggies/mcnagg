@@ -76,8 +76,8 @@ class AboutHandler(BaseHandler):
 class VideosHandler(BaseHandler):
     def get(self):
         mindcrackers = self.get_arguments('mindcrackers[]')
-        num_videos = self.get_argument('num-videos')
-        offset = self.get_argument('offset')
+        num_videos = int(self.get_argument('num-videos'))
+        offset = int(self.get_argument('offset'))
 
         videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=num_videos, offset=offset)
 
