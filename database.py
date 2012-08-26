@@ -14,7 +14,7 @@ def cached_videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), n
         v = util.get_uploads(str(m), num_videos, offset)
         videos = videos + v
 
-    return sorted(videos, key=lambda v: v['uploaded'])[offset:num_videos]
+    return sorted(videos, key=lambda v: v['uploaded'], reverse=True)[offset:num_videos]
 
 
 def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_videos=1, offset=0):
