@@ -57,56 +57,72 @@ def get_HMS(time):
         return hms
 
 
-def get_uploads(feed_id, number_videos=1, offset=0):
-    keys = [str(x) for x in xrange(offset, offset + number_videos, CACHE_SLICE_SIZE) if x < number_videos]
-    cached = mc.get_multi(keys, key_prefix=feed_id)
+def mindcrackers():
+    return MINDCRACKERS
 
+
+def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0):
+    videos = []
+
+    for m in mindcrackers:
+        v = get_uploads(str(m), num_videos+offset, 0)
+        videos = videos + v
+
+    return sorted(videos, key=lambda v: v['uploaded'], reverse=True)[offset:num_videos + offset]
+
+
+def get_uploads(username, num_videos=1, offset=0):
+    max_index = num_videos + offset
+    keys = [str(x) for x in xrange(offset, max_index, CACHE_SLICE_SIZE)]
+    
+    print('Getting videos for ' + username + ' from ' + str(offset) + ' to ' + str(max_index))
+
+    cached = mc.get_multi(keys, key_prefix=username)
     videos = []
 
     for i in keys:
         try:
             videos = videos + cached[i]
         except KeyError:
-            vs = []
-            for v in youtube_feed(feed_id, CACHE_SLICE_SIZE, int(i) + 1):
-                vs.append(v)
-
+            vs = youtube_feed(username, CACHE_SLICE_SIZE, int(i))
             videos = videos + vs
 
-            mc.set(feed_id + i, vs, time=300)
+            mc.set(username + i, vs, time=300)
 
-    return videos[offset:number_videos + offset]
+    return videos[offset:max_index]
 
 
-def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
+def youtube_feed(feed_id, num_videos=1, offset=0, feed_type='upload'):
     if feed_type == 'show':
-        feed_url = 'https://gdata.youtube.com/feeds/api/seasons/{feed_id}/episodes?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}'.format(
-            feed_id=feed_id, offset=offset, number_videos=number_videos)
+        feed_url = 'https://gdata.youtube.com/feeds/api/seasons/{feed_id}/episodes?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
+            feed_id=feed_id, offset=offset+1, num_videos=num_videos)
     elif feed_type == 'playlist':
-        feed_url = 'http://gdata.youtube.com/feeds/api/playlists/{feed_id}?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}'.format(
-            feed_id=feed_id, offset=offset, number_videos=number_videos)
+        feed_url = 'http://gdata.youtube.com/feeds/api/playlists/{feed_id}?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
+            feed_id=feed_id, offset=offset+1, num_videos=num_videos)
     elif feed_type == 'upload':
-        feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={number_videos}'.format(
-            username=feed_id, offset=offset, number_videos=number_videos)
+        feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
+            username=feed_id, offset=offset+1, num_videos=num_videos)
     else:
         raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <"upload">, <"playlist"> or <"show">.')
 
-    if number_videos > 50:
+    if num_videos > 50:
         raise ValueError('Only allowed to get a maximum of 50 videos per request from YouTube')
 
     feed = json.loads(requests.get(feed_url).text)
 
+    items = []
     if feed['data']['totalItems'] > 0 and feed['data']['totalItems'] > feed['data']['startIndex']:
         for item in feed['data']['items']:
             if type == 'playlist':
                 item = item['video']
 
-            yield _process_video_data(item)
+            items.append(_process_video_data(item))
+
+    return items
 
 
 def youtube_video_data(video_id, raw=False):
     raw_video = json.loads(requests.get('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).text)
-    print raw_video
 
     if 'error' in raw_video:
         raise IOError('No such video')
@@ -127,31 +143,3 @@ def _process_video_data(video_data):
         description=video_data['description'],
         thumbnail=video_data['thumbnail']['hqDefault']
     )
-
-
-def mindcrackers():
-    return MINDCRACKERS
-
-
-def cached_videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_videos=1, offset=0):
-    videos = []
-
-    for m in mindcrackers:
-        v = get_uploads(str(m), num_videos, offset)
-        videos = videos + v
-
-    return sorted(videos, key=lambda v: v['uploaded'], reverse=True)[offset:num_videos]
-
-
-def videos(mindcrackers=tuple([m['username'] for m in mindcrackers()]), num_videos=1, offset=0):
-    return cached_videos(mindcrackers, num_videos, offset)
-
-
-def main():
-    with open('m.txt', 'w') as f:
-        for m in mindcrackers():
-            f.write(m['username'] + ',' + m['name'] + '\n')
-
-
-if __name__ == '__main__':
-    main()

@@ -76,7 +76,7 @@ class VideosHandler(BaseHandler):
         num_videos = int(self.get_argument('num-videos'))
         offset = int(self.get_argument('offset'))
 
-        videos = self.mindcrack.videos(mindcrackers=tuple(mindcrackers), num_videos=num_videos, offset=offset)
+        videos = self.mindcrack.videos(mindcrackers=mindcrackers, num_videos=num_videos, offset=offset)
 
         dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
 
