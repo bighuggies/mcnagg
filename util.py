@@ -1,11 +1,19 @@
 from datetime import datetime, timedelta
-
-import pylibmc
-import requests
+import os
 import json
 import math
 
+import pylibmc
+import requests
+
 CACHE_SLICE_SIZE = 30
+
+mc = pylibmc.Client(
+    servers=[os.environ.get('MEMCACHIER_SERVERS', '')],
+    username=os.environ.get('MEMCACHIER_USERNAME', ''),
+    password=os.environ.get('MEMCACHIER_PASSWORD', ''),
+    binary=True
+)
 
 
 def get_fancy_time(date):
@@ -46,13 +54,8 @@ def get_HMS(time):
 
 
 def get_uploads(feed_id, number_videos=1, offset=0):
-    print("Getting " + str(number_videos) + " videos for " + feed_id)
-
-    mc = pylibmc.Client(['127.0.0.1'])
-
     keys = [str(x) for x in xrange(0, number_videos, CACHE_SLICE_SIZE) if x < number_videos]
     cached = mc.get_multi(keys, key_prefix=feed_id)
-
 
     videos = []
 
@@ -67,7 +70,7 @@ def get_uploads(feed_id, number_videos=1, offset=0):
             videos = videos + vs
 
             mc.set(feed_id + i, vs, time=300)
-    
+
     return videos[offset:number_videos]
 
 
