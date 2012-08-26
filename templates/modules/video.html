@@ -1,4 +1,4 @@
-{% import util %}
+{% import mindcrack %}
 <div class="video row" data-video-id="{{ video['video_id'] }}">
     <div class="video-thumbnail span1">
         <a href="http://www.youtube.com/watch?v={{ video['video_id'] }}">
@@ -9,13 +9,13 @@
             <span class="video-title">
                 <a href="http://www.youtube.com/watch?v={{ video['video_id'] }}">{{ video['title'] }}</a>
             </span>
-            <span class="video-duration">({{ util.get_HMS(video['duration']) }})</span>
+            <span class="video-duration">({{ mindcrack.get_HMS(video['duration']) }})</span>
         </h2>
         <p class="video-uploader-uploaded">
             <span class="video-uploader">
                 <a href="http://www.youtube.com/{{ video['uploader'] }}">{{ video['uploader'] }}</a>
             </span>
-            <span class="video-uploaded">uploaded {{ util.get_fancy_time(video['uploaded']) }}</span>
+            <span class="video-uploaded">uploaded {{ mindcrack.get_fancy_time(video['uploaded']) }}</span>
         </p>
     </div>
     <div class="video-controls span1">
