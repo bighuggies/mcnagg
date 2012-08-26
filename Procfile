@@ -1,1 +1,1 @@
-web: python mindcrackfeed.py
+web: python mcnagg.py
