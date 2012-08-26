@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import database
+import mindcrack
 
 import os.path
 import json
@@ -13,8 +13,8 @@ import tornado.options
 import tornado.web
 
 
-videos_per_page = 30
-index = ''
+VIDEOS_PER_PAGE = 30
+INDEX = ''
 
 
 class Application(tornado.web.Application):
@@ -40,28 +40,28 @@ class Application(tornado.web.Application):
 
         tornado.web.Application.__init__(self, handlers, **settings)
 
-        self.db = database
+        self.mindcrack = mindcrack
 
 
 class BaseHandler(tornado.web.RequestHandler):
     @property
-    def db(self):
-        return self.application.db
+    def mindcrack(self):
+        return self.application.mindcrack
 
 
 class HomeHandler(BaseHandler):
     def get(self):
         if self.settings['debug'] == True:
-            videos = self.db.videos(num_videos=videos_per_page)
-            mindcrackers = self.db.mindcrackers()
+            videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
+            mindcrackers = self.mindcrack.mindcrackers()
 
             self.render("body.html", videos=videos, mindcrackers=mindcrackers)
         else:
-            if index == "":
+            if INDEX == "":
                 self.write('Down for maintenance, please check back in 5 minutes')
                 self.finish()
             else:
-                self.write(index)
+                self.write(INDEX)
                 self.finish()
 
 
@@ -76,7 +76,7 @@ class VideosHandler(BaseHandler):
         num_videos = int(self.get_argument('num-videos'))
         offset = int(self.get_argument('offset'))
 
-        videos = self.db.videos(mindcrackers=tuple(mindcrackers), num_videos=num_videos, offset=offset)
+        videos = self.mindcrack.videos(mindcrackers=tuple(mindcrackers), num_videos=num_videos, offset=offset)
 
         dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
 
