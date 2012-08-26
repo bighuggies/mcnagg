@@ -46,6 +46,8 @@ def get_HMS(time):
 
 
 def get_uploads(feed_id, number_videos=1, offset=0):
+    print("Getting " + str(number_videos) + " videos for " + feed_id)
+
     mc = pylibmc.Client(['127.0.0.1'])
 
     keys = [str(x) for x in xrange(0, number_videos, CACHE_SLICE_SIZE) if x < number_videos]
@@ -66,7 +68,7 @@ def get_uploads(feed_id, number_videos=1, offset=0):
 
             mc.set(feed_id + i, vs, time=300)
     
-    return len(videos[offset:number_videos])
+    return videos[offset:number_videos]
 
 
 def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
@@ -82,9 +84,12 @@ def youtube_feed(feed_id, number_videos=1, offset=1, feed_type='upload'):
     else:
         raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <"upload">, <"playlist"> or <"show">.')
 
+    if number_videos > 50:
+        raise ValueError('Only allowed to get a maximum of 50 videos per request from YouTube')
+
     feed = json.loads(requests.get(feed_url).text)
 
-    if feed['data']['totalItems'] > 0:
+    if feed['data']['totalItems'] > 0 and feed['data']['totalItems'] > feed['data']['startIndex']:
         for item in feed['data']['items']:
             if type == 'playlist':
                 item = item['video']
