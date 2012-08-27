@@ -66,7 +66,7 @@ def get_HMS(time):
 
 
 def mindcrackers():
-    return MINDCRACKERS
+    return sorted(MINDCRACKERS, key=lambda m: m['username'])
 
 
 def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0):
