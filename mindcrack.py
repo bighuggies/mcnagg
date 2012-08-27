@@ -2,9 +2,16 @@ from datetime import datetime, timedelta
 import os
 import json
 import math
+import urllib2
 
 import pylibmc
-import requests
+
+import gevent
+
+from gevent import monkey
+monkey.patch_socket()
+monkey.patch_ssl()
+
 
 CACHE_SLICE_SIZE = 30
 MINDCRACKERS = [{'username': u'adlingtont', 'url': u'http://www.youtube.com/adlingtont', 'name': u'Adlington'}, {'username': u'bdoubleo100', 'url': u'http://www.youtube.com/bdoubleo100', 'name': u'BdoubleO'}, {'username': u'arkasmc', 'url': u'http://www.youtube.com/arkasmc', 'name': u'Arkas'}, {'username': u'ethoslab', 'url': u'http://www.youtube.com/ethoslab', 'name': u'EthosLab'}, {'username': u'jsano19', 'url': u'http://www.youtube.com/jsano19', 'name': u'Jsano'}, {'username': u'kurtjmac', 'url': u'http://www.youtube.com/kurtjmac', 'name': u'Kurtjmac'}, {'username': u'millbeeful', 'url': u'http://www.youtube.com/millbeeful', 'name': u'MillBee'}, {'username': u'nebris88', 'url': u'http://www.youtube.com/nebris88', 'name': u'Nebris'}, {'username': u'pauseunpause', 'url': u'http://www.youtube.com/pauseunpause', 'name': u'PauseUnpause'}, {'username': u'vintagebeef', 'url': u'http://www.youtube.com/vintagebeef', 'name': u'VintageBeef'}, {'username': u'shreeyamnet', 'url': u'http://www.youtube.com/shreeyamnet', 'name': u'Shreeyam'}, {'username': u'imanderzel', 'url': u'http://www.youtube.com/imanderzel', 'name': u'AnderZEL'}, {'username': u'w92baj', 'url': u'http://www.youtube.com/w92baj', 'name': u'Baj'}, {'username': u'docm77', 'url': u'http://www.youtube.com/docm77', 'name': u'DocM'}, {'username': u'guudeboulderfist', 'url': u'http://www.youtube.com/guudeboulderfist', 'name': u'Guude'}, {'username': u'justd3fy', 'url': u'http://www.youtube.com/justd3fy', 'name': u'JustDefy'}, {'username': u'supermcgamer', 'url': u'http://www.youtube.com/supermcgamer', 'name': u'MCGamer'}, {'username': u'mhykol', 'url': u'http://www.youtube.com/mhykol', 'name': u'Mhykol'}, {'username': u'pakratt13', 'url': u'http://www.youtube.com/pakratt13', 'name': u'Pakratt'}, {'username': u'pyropuncher', 'url': u'http://www.youtube.com/pyropuncher', 'name': u'PyroPuncher'}, {'username': u'thejims', 'url': u'http://www.youtube.com/thejims', 'name': u'TheJims'}, {'username': u'zisteau', 'url': u'http://www.youtube.com/zisteau', 'name': u'Zisteau'}, {'username': u'mindcracknetwork', 'url': u'http://www.youtube.com/mindcracknetwork', 'name': u'MindCrackNetwork'}, {'username': u'generikb', 'url': u'http://www.youtube.com/generikb', 'name': u'GenerikB'}]
@@ -65,9 +72,12 @@ def mindcrackers():
 def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0):
     videos = []
 
-    for m in mindcrackers:
-        v = get_uploads(str(m), num_videos+offset, 0)
-        videos = videos + v
+    jobs = [gevent.spawn(get_uploads, str(username), num_videos=num_videos+offset)
+            for username in mindcrackers]
+    gevent.joinall(jobs)
+
+    for job in jobs:
+        videos = videos + job.value
 
     return sorted(videos, key=lambda v: v['uploaded'], reverse=True)[offset:num_videos + offset]
 
@@ -83,8 +93,10 @@ def get_uploads(username, num_videos=1, offset=0):
 
     for i in keys:
         try:
+            print('Getting cached videos for ' + username)
             videos = videos + cached[i]
         except KeyError:
+            print('Cache missed. Getting videos from YouTube.')
             vs = youtube_feed(username, CACHE_SLICE_SIZE, int(i))
             videos = videos + vs
 
@@ -109,7 +121,7 @@ def youtube_feed(feed_id, num_videos=1, offset=0, feed_type='upload'):
     if num_videos > 50:
         raise ValueError('Only allowed to get a maximum of 50 videos per request from YouTube')
 
-    feed = json.loads(requests.get(feed_url).text)
+    feed = json.loads(urllib2.urlopen(feed_url).read())
 
     items = []
     if feed['data']['totalItems'] > 0 and feed['data']['totalItems'] > feed['data']['startIndex']:
@@ -123,7 +135,7 @@ def youtube_feed(feed_id, num_videos=1, offset=0, feed_type='upload'):
 
 
 def youtube_video_data(video_id, raw=False):
-    raw_video = json.loads(requests.get('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).text)
+    raw_video = json.loads(urllib2.urlopen('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).read())
 
     if 'error' in raw_video:
         raise IOError('No such video')
