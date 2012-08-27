@@ -21,7 +21,6 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", HomeHandler),
-            (r"/about", AboutHandler),
             (r"/videos", VideosHandler)
         ]
         settings = dict(
@@ -55,11 +54,6 @@ class HomeHandler(BaseHandler):
         mindcrackers = self.mindcrack.mindcrackers()
 
         self.render("body.html", videos=videos, mindcrackers=mindcrackers)
-
-
-class AboutHandler(BaseHandler):
-    def get(self):
-        self.render("about.html")
 
 
 class VideosHandler(BaseHandler):
