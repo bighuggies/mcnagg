@@ -86,17 +86,13 @@ def get_uploads(username, num_videos=1, offset=0):
     max_index = num_videos + offset
     keys = [str(x) for x in xrange(offset, max_index, CACHE_SLICE_SIZE)]
     
-    print('Getting videos for ' + username + ' from ' + str(offset) + ' to ' + str(max_index))
-
     cached = mc.get_multi(keys, key_prefix=username)
     videos = []
 
     for i in keys:
         try:
-            print('Getting cached videos for ' + username)
             videos = videos + cached[i]
         except KeyError:
-            print('Cache missed. Getting videos from YouTube.')
             vs = youtube_feed(username, CACHE_SLICE_SIZE, int(i))
             videos = videos + vs
 
