@@ -51,18 +51,10 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
-        if self.settings['debug'] == True:
-            videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
-            mindcrackers = self.mindcrack.mindcrackers()
+        videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
+        mindcrackers = self.mindcrack.mindcrackers()
 
-            self.render("body.html", videos=videos, mindcrackers=mindcrackers)
-        else:
-            if INDEX == "":
-                self.write('Down for maintenance, please check back in 5 minutes')
-                self.finish()
-            else:
-                self.write(INDEX)
-                self.finish()
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers)
 
 
 class AboutHandler(BaseHandler):
