@@ -17,9 +17,7 @@
 }
 
 .options-mindcrackers input {
-	-moz-appearance:none;
-	-webkit-appearance:none;
-	-o-appearance:none;
+	display: none;
 }
 
 i {
