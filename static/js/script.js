@@ -174,10 +174,10 @@ $(document).ready(function() {
     });
 
     $('#feed-options :checkbox').on('change', function() {
-        if ($(this).parent().hasClass("badge-success")) {
-            $(this).parent().removeClass("badge-success");
-        } else {
+        if ($(this).attr('checked')) {
             $(this).parent().addClass("badge-success");
+        } else {
+            $(this).parent().removeClass("badge-success");
         }
     });
 });
