@@ -163,32 +163,21 @@ $(document).ready(function() {
     $('#select-all').on('click', select_all_mindcrackers);
     $('#deselect-all').on('click', deselect_all_mindcrackers);
 
+    $('#feed-options').on('shown', function () {
+        $("#feed-options-icon").removeClass("icon-chevron-down");
+        $("#feed-options-icon").addClass("icon-chevron-up");
+    });
+
+    $('#feed-options').on('hidden', function () {
+        $("#feed-options-icon").removeClass("icon-chevron-up");
+        $("#feed-options-icon").addClass("icon-chevron-down");
+    });
+
     $('#feed-options :checkbox').on('change', function() {
         if ($(this).parent().hasClass("badge-success")) {
             $(this).parent().removeClass("badge-success");
         } else {
             $(this).parent().addClass("badge-success");
         }
-    });
-
-    // $('.options-mindcrackers').on('click', function (e) {
-    //     console.log(e.target.tagName);
-    //     console.log($(this).hasClass("badge-success"));
-    //     if ($(this).hasClass("badge-success")) {
-    //         $(this).removeClass("badge-success");
-    //     } else {
-    //         $(this).addClass("badge-success");
-    //     }
-    // });
-
-    $('#feed-options').on('shown', function () {
-        $("#feed-options-icon").removeClass("icon-chevron-down");
-        $("#feed-options-icon").addClass("icon-chevron-up");
-    });
-
-
-    $('#feed-options').on('hidden', function () {
-        $("#feed-options-icon").removeClass("icon-chevron-up");
-        $("#feed-options-icon").addClass("icon-chevron-down");
     });
 });
