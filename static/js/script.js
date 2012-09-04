@@ -55,6 +55,7 @@ function remove_video(e) {
 }
 
 
+
 function append_videos(videos) {
     $('.loading.row').remove();
 
@@ -140,6 +141,7 @@ function select_all_mindcrackers(e) {
 
     $('input[name="mindcrackers-select"]').each(function(index, element) {
         $(element).attr('checked', true);
+        $(element).trigger('change');
     });
 }
 
@@ -149,6 +151,7 @@ function deselect_all_mindcrackers(e) {
 
     $('input[name="mindcrackers-select"]:checked').each(function(index, element) {
         $(element).attr('checked', false);
+        $(element).trigger('change');
     });
 }
 
@@ -159,6 +162,24 @@ $(document).ready(function() {
     $('#show-more').on('click', show_more_videos);
     $('#select-all').on('click', select_all_mindcrackers);
     $('#deselect-all').on('click', deselect_all_mindcrackers);
+
+    $('#feed-options :checkbox').on('change', function() {
+        if ($(this).parent().hasClass("badge-success")) {
+            $(this).parent().removeClass("badge-success");
+        } else {
+            $(this).parent().addClass("badge-success");
+        }
+    });
+
+    // $('.options-mindcrackers').on('click', function (e) {
+    //     console.log(e.target.tagName);
+    //     console.log($(this).hasClass("badge-success"));
+    //     if ($(this).hasClass("badge-success")) {
+    //         $(this).removeClass("badge-success");
+    //     } else {
+    //         $(this).addClass("badge-success");
+    //     }
+    // });
 
     $('#feed-options').on('shown', function () {
         $("#feed-options-icon").removeClass("icon-chevron-down");

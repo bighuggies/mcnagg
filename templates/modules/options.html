@@ -4,8 +4,8 @@
             <label class="control-label" for="inlineCheckboxes">MindCrackers</label>
             <div class="controls">
                 {% for m in mindcrackers %}
-                <label class="inline checkbox">
-                    <input type="checkbox" name="mindcrackers-select" id="{{ m['username'] }}-checkbox" value="{{ m['username'] }}" checked="true">{{ m['name'] }}</label>
+                    <label class="inline checkbox badge badge-success options-mindcrackers">
+                        <input type="checkbox" name="mindcrackers-select" id="{{ m['username'] }}-checkbox" value="{{ m['username'] }}" checked="true">{{ m['name'] }}</label>
                 {% end %}
             </div>
         </div>
