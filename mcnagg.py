@@ -4,6 +4,8 @@ import mindcrack
 
 import os.path
 import json
+import urllib
+import urlparse
 
 from datetime import datetime
 
@@ -50,10 +52,16 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
-        videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
+        checked = {'mindcrackers[]': []}
         mindcrackers = self.mindcrack.mindcrackers()
 
-        self.render("body.html", videos=videos, mindcrackers=mindcrackers)
+        if self.get_cookie('checked-mindcrackers'):
+            checked = urlparse.parse_qs(self.get_cookie('checked-mindcrackers'))
+            videos = self.mindcrack.videos(mindcrackers=checked['mindcrackers[]'], num_videos=VIDEOS_PER_PAGE)
+        else:
+            videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
+        
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=checked['mindcrackers[]'])
 
 
 class VideosHandler(BaseHandler):
@@ -66,6 +74,7 @@ class VideosHandler(BaseHandler):
 
         dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
 
+        self.set_cookie('checked-mindcrackers', urllib.urlencode({'mindcrackers[]': mindcrackers}, True))
         self.write(json.dumps(videos, default=dthandler))
         self.finish()
 
@@ -76,8 +85,8 @@ class VideoModule(tornado.web.UIModule):
 
 
 class OptionsModule(tornado.web.UIModule):
-    def render(self, mindcrackers):
-        return self.render_string("modules/options.html", mindcrackers=mindcrackers)
+    def render(self, mindcrackers, checked):
+        return self.render_string("modules/options.html", mindcrackers=mindcrackers, checked=checked)
 
 
 class TwitterModule(tornado.web.UIModule):
