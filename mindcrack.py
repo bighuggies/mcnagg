@@ -14,7 +14,33 @@ monkey.patch_ssl()
 
 
 CACHE_SLICE_SIZE = 30
-MINDCRACKERS = [{'username': u'adlingtont', 'url': u'http://www.youtube.com/adlingtont', 'name': u'Adlington'}, {'username': u'bdoubleo100', 'url': u'http://www.youtube.com/bdoubleo100', 'name': u'BdoubleO'}, {'username': u'arkasmc', 'url': u'http://www.youtube.com/arkasmc', 'name': u'Arkas'}, {'username': u'ethoslab', 'url': u'http://www.youtube.com/ethoslab', 'name': u'EthosLab'}, {'username': u'jsano19', 'url': u'http://www.youtube.com/jsano19', 'name': u'Jsano'}, {'username': u'kurtjmac', 'url': u'http://www.youtube.com/kurtjmac', 'name': u'Kurtjmac'}, {'username': u'millbeeful', 'url': u'http://www.youtube.com/millbeeful', 'name': u'MillBee'}, {'username': u'nebris88', 'url': u'http://www.youtube.com/nebris88', 'name': u'Nebris'}, {'username': u'pauseunpause', 'url': u'http://www.youtube.com/pauseunpause', 'name': u'PauseUnpause'}, {'username': u'vintagebeef', 'url': u'http://www.youtube.com/vintagebeef', 'name': u'VintageBeef'}, {'username': u'shreeyamnet', 'url': u'http://www.youtube.com/shreeyamnet', 'name': u'Shreeyam'}, {'username': u'imanderzel', 'url': u'http://www.youtube.com/imanderzel', 'name': u'AnderZEL'}, {'username': u'w92baj', 'url': u'http://www.youtube.com/w92baj', 'name': u'Baj'}, {'username': u'docm77', 'url': u'http://www.youtube.com/docm77', 'name': u'DocM'}, {'username': u'guudeboulderfist', 'url': u'http://www.youtube.com/guudeboulderfist', 'name': u'Guude'}, {'username': u'blamethecontroller', 'url': u'http://www.youtube.com/BlameTheController', 'name': u'BlameTheController'}, {'username': u'supermcgamer', 'url': u'http://www.youtube.com/supermcgamer', 'name': u'MCGamer'}, {'username': u'mhykol', 'url': u'http://www.youtube.com/mhykol', 'name': u'Mhykol'}, {'username': u'pakratt13', 'url': u'http://www.youtube.com/pakratt13', 'name': u'Pakratt'}, {'username': u'pyropuncher', 'url': u'http://www.youtube.com/pyropuncher', 'name': u'PyroPuncher'}, {'username': u'thejims', 'url': u'http://www.youtube.com/thejims', 'name': u'TheJims'}, {'username': u'zisteau', 'url': u'http://www.youtube.com/zisteau', 'name': u'Zisteau'}, {'username': u'mindcracknetwork', 'url': u'http://www.youtube.com/mindcracknetwork', 'name': u'MindCrackNetwork'}, {'username': u'generikb', 'url': u'http://www.youtube.com/generikb', 'name': u'GenerikB'}]
+MINDCRACKERS = [
+    {'username': u'adlingtont', 'url': u'http://www.youtube.com/adlingtont', 'name': u'Adlington'},
+    {'username': u'bdoubleo100', 'url': u'http://www.youtube.com/bdoubleo100', 'name': u'BdoubleO'},
+    {'username': u'arkasmc', 'url': u'http://www.youtube.com/arkasmc', 'name': u'Arkas'},
+    {'username': u'ethoslab', 'url': u'http://www.youtube.com/ethoslab', 'name': u'EthosLab'},
+    {'username': u'jsano19', 'url': u'http://www.youtube.com/jsano19', 'name': u'Jsano'},
+    {'username': u'kurtjmac', 'url': u'http://www.youtube.com/kurtjmac', 'name': u'Kurtjmac'},
+    {'username': u'millbeeful', 'url': u'http://www.youtube.com/millbeeful', 'name': u'MillBee'},
+    {'username': u'nebris88', 'url': u'http://www.youtube.com/nebris88', 'name': u'Nebris'},
+    {'username': u'pauseunpause', 'url': u'http://www.youtube.com/pauseunpause', 'name': u'PauseUnpause'},
+    {'username': u'vintagebeef', 'url': u'http://www.youtube.com/vintagebeef', 'name': u'VintageBeef'},
+    {'username': u'shreeyamnet', 'url': u'http://www.youtube.com/shreeyamnet', 'name': u'Shreeyam'},
+    {'username': u'imanderzel', 'url': u'http://www.youtube.com/imanderzel', 'name': u'AnderZEL'},
+    {'username': u'w92baj', 'url': u'http://www.youtube.com/w92baj', 'name': u'Baj'},
+    {'username': u'docm77', 'url': u'http://www.youtube.com/docm77', 'name': u'DocM'},
+    {'username': u'guudeboulderfist', 'url': u'http://www.youtube.com/guudeboulderfist', 'name': u'Guude'},
+    {'username': u'blamethecontroller', 'url': u'http://www.youtube.com/BlameTheController', 'name': u'BlameTheController'},
+    {'username': u'supermcgamer', 'url': u'http://www.youtube.com/supermcgamer', 'name': u'MCGamer'},
+    {'username': u'mhykol', 'url': u'http://www.youtube.com/mhykol', 'name': u'Mhykol'},
+    {'username': u'pakratt13', 'url': u'http://www.youtube.com/pakratt13', 'name': u'Pakratt'},
+    {'username': u'pyropuncher', 'url': u'http://www.youtube.com/pyropuncher', 'name': u'PyroPuncher'},
+    {'username': u'thejims', 'url': u'http://www.youtube.com/thejims', 'name': u'TheJims'},
+    {'username': u'zisteau', 'url': u'http://www.youtube.com/zisteau', 'name': u'Zisteau'},
+    {'username': u'mindcracknetwork', 'url': u'http://www.youtube.com/mindcracknetwork', 'name': u'MindCrackNetwork'},
+    {'username': u'generikb', 'url': u'http://www.youtube.com/generikb', 'name': u'GenerikB'},
+    {'username': u'paulsoaresjr', 'url': u'http://www.youtube.com/paulsoaresjr', 'name': u'PaulSoaresJR'}
+]
 
 
 if os.environ.get('ENVIRONMENT') == 'heroku':
@@ -72,7 +98,7 @@ def mindcrackers():
 def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0):
     videos = []
 
-    jobs = [gevent.spawn(get_uploads, str(username), num_videos=num_videos+offset)
+    jobs = [gevent.spawn(get_uploads, str(username), num_videos=num_videos + offset)
             for username in mindcrackers]
     gevent.joinall(jobs)
 
@@ -85,7 +111,7 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
 def get_uploads(username, num_videos=1, offset=0):
     max_index = num_videos + offset
     keys = [str(x) for x in xrange(offset, max_index, CACHE_SLICE_SIZE)]
-    
+
     cached = mc.get_multi(keys, key_prefix=username)
     videos = []
 
@@ -104,13 +130,13 @@ def get_uploads(username, num_videos=1, offset=0):
 def youtube_feed(feed_id, num_videos=1, offset=0, feed_type='upload'):
     if feed_type == 'show':
         feed_url = 'https://gdata.youtube.com/feeds/api/seasons/{feed_id}/episodes?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
-            feed_id=feed_id, offset=offset+1, num_videos=num_videos)
+            feed_id=feed_id, offset=offset + 1, num_videos=num_videos)
     elif feed_type == 'playlist':
         feed_url = 'http://gdata.youtube.com/feeds/api/playlists/{feed_id}?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
-            feed_id=feed_id, offset=offset+1, num_videos=num_videos)
+            feed_id=feed_id, offset=offset + 1, num_videos=num_videos)
     elif feed_type == 'upload':
         feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
-            username=feed_id, offset=offset+1, num_videos=num_videos)
+            username=feed_id, offset=offset + 1, num_videos=num_videos)
     else:
         raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <"upload">, <"playlist"> or <"show">.')
 
