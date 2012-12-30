@@ -16,6 +16,7 @@ monkey.patch_ssl()
 CACHE_SLICE_SIZE = 30
 MINDCRACKERS = [
     {'username': u'adlingtont', 'url': u'http://www.youtube.com/adlingtont', 'name': u'Adlington'},
+    {'username': u'avidyazen', 'url': u'http://www.youtube.com/avidyazen', 'name': u'Avidya'},
     {'username': u'bdoubleo100', 'url': u'http://www.youtube.com/bdoubleo100', 'name': u'BdoubleO'},
     {'username': u'arkasmc', 'url': u'http://www.youtube.com/arkasmc', 'name': u'Arkas'},
     {'username': u'ethoslab', 'url': u'http://www.youtube.com/ethoslab', 'name': u'EthosLab'},
