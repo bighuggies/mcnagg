@@ -1,22 +1,22 @@
 <form class="form-horizontal">
     <fieldset>
-        <div class="control-group">
+        <div id="select-user-controls" class="control-group">
             <label class="control-label" for="inlineCheckboxes">MindCrackers</label>
             <div class="controls">
                 {% for m in mindcrackers %}
-                    <label class="inline checkbox badge {% if m['username'] in checked or not checked %}badge-success{% end %} options-mindcrackers">
+                    <label class="inline checkbox {% if m['username'] in checked or not checked %}selected-mindcracker{% end %}">
                         <input type="checkbox" name="mindcrackers-select" id="{{ m['username'] }}-checkbox" value="{{ m['username'] }}" {% if m['username'] in checked or not checked %}checked="true"{% end %}>{{ m['name'] }}
                     </label>
                 {% end %}
             </div>
         </div>
-        <div class="control-group">
+        <div id="multiselect-controls" class="control-group">
             <div class="controls">
-                <button id="select-all" class="btn">Select all</button>
-                <button id="deselect-all" class="btn">Deselect all</button>
+                <button id="select-all">Select all</button>
+                <button id="deselect-all">Deselect all</button>
             </div>
         </div>
-        <div class="control-group">
+        <div id="pagination-controls" class="control-group">
             <label class="control-label" for="number-videos">Videos per page</label>
             <div class="controls">
                 <select id="number-videos">

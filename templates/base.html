@@ -9,11 +9,6 @@
 
     <!-- Le styles -->
     <link href="{{ static_url("css/bootstrap.min.css") }}" rel="stylesheet">
-    <style>
-        body {
-            padding-top: 60px;
-        }
-    </style>
     <link href="{{ static_url("css/bootstrap-responsive.min.css") }}" rel="stylesheet">
     <link href="{{ static_url("css/style.css") }}" rel="stylesheet">
 
@@ -46,37 +41,13 @@
 
 </head>
 <body>
-
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="/"><span class="mcn">mcn</span>agg</a>
-                <div class="nav-collapse">
-                    <ul class="nav pull-right">
-                        <li>
-                            <a href="http://www.mindcrack.reddit.com">MindCrack Reddit</a>
-                        </li>
-                        <li>
-                            <a href="http://twitter.com/#!/bighuggies/mindcrack">MindCrack Twitter</a>
-                        </li>
-                        <li>
-                            <a href="http://www.guudelp.com">GuudeLP</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--/.nav-collapse --> </div>
-        </div>
-    </div>
-
     <div class="container">
+        <header>
+            <h1>mcnagg
+        </header>
 
         {% block body %}{% end %}
-        
+
         <footer class="navbar">
             <hr class="footer-line">
             <ul class="footer-list">

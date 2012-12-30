@@ -2,3 +2,4 @@ ENV
 *.pyc
 *.sublime-project
 *.sublime-workspace
+.sass-cache

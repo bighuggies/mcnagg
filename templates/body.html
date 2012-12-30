@@ -2,22 +2,16 @@
 
 {% block body %}
 <div class="row">
-    <div class="header span12">
-        <h1>
-            <span class="options">
-                <a href="#" data-toggle="collapse" data-target="#feed-options">
-                    Video Filters <i id="feed-options-icon" class="icon-chevron-down"></i>
-                </a>
-            </span>
-        </h1>
+    <div class="span12">
+        <button id="filter-options-btn" data-toggle="collapse" data-target="#feed-options">
+            Video Filters <i id="feed-options-icon" class="icon-chevron-down"></i>
+        </button>
     </div>
 </div>
 
 <div class="row">
-    <div class="span12">
-        <div id="feed-options" class=" collapse">
-            <div class="accordion-inner">{{ modules.Options(mindcrackers, checked) }}</div>
-        </div>
+    <div id="feed-options" class="span12 collapse">
+        <div class="accordion-inner">{{ modules.Options(mindcrackers, checked) }}</div>
     </div>
 </div>
 

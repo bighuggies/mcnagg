@@ -100,7 +100,7 @@ function options_submit(e) {
         'offset': 0,
         'mindcrackers[]': get_mindcrackers()
     };
-    
+
     remove_videos();
 
     fetch_videos(query, append_videos);
@@ -118,7 +118,7 @@ function show_more_videos(e) {
         'offset': offset,
         'mindcrackers[]': get_mindcrackers()
     };
-    
+
     fetch_videos(query, append_videos);
 }
 
@@ -175,9 +175,9 @@ $(document).ready(function() {
 
     $('#feed-options :checkbox').on('change', function() {
         if ($(this).attr('checked')) {
-            $(this).parent().addClass("badge-success");
+            $(this).parent().addClass("selected-mindcracker");
         } else {
-            $(this).parent().removeClass("badge-success");
+            $(this).parent().removeClass("selected-mindcracker");
         }
     });
 });

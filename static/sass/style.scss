@@ -1,0 +1,218 @@
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+@import "compass/css3/border-radius";
+@import "compass/css3/transition";
+
+@mixin btn($color: #f5f5f5, $font-color: #333333) {
+	display: inline-block;
+	padding: 4px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	color: $font-color;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
+	cursor: pointer;
+	background-color: $color;
+	border: 1px solid darken($color, 20%);
+
+	&:hover,
+	&:active, {
+		color: $font-color;
+		background-color: darken($color, 5%);
+	}
+
+	&:hover {
+		color: $font-color;
+		text-decoration: none;
+		background-position: 0 -15px;
+		@include transition(background-position 0.1s linear);
+	}
+
+	&:focus {
+		outline: thin dotted #333;
+		outline: 5px auto -webkit-focus-ring-color;
+		outline-offset: -2px;
+	}
+
+	&:active {
+		background-color: #cccccc \9;
+		background-image: none;
+		outline: 0;
+		@include box-shadow(inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05));
+	}
+}
+
+.btn {
+	@include border-radius(0);
+}
+
+i {
+	font-size: 16pt;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+body {
+	background-image: url(../../static/img/gray_jean.png);
+}
+
+header {
+	margin-top: 40px;
+	margin-bottom: 50px;
+}
+
+.container {
+	padding-left: 30px;
+	padding-right: 30px;
+	@include box-shadow(0 0 10px 0 black);
+	background-image: url(../../static/img/brillant.png);
+}
+
+#filter-options-btn {
+	font-size: 18px;
+	font-weight: bold;
+	@include btn($font-color: #2FA4E7);
+	margin-bottom: 10px;
+}
+
+#feed-options {
+	#select-user-controls .controls {
+		label {
+			@include btn(lightGray);
+
+			font-size: 8pt;
+			font-weight: bold;
+			margin-bottom: 10px;
+			margin-left: 0;
+
+			&.selected-mindcracker {
+				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+				background-color: #669533;
+				color: white;
+				font-weight: bold;
+			}
+		}
+
+		input {
+			display: none;
+		}
+	}
+
+	#multiselect-controls {
+		button {
+			@include btn;
+		}
+	}
+}
+
+.video {
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+	.video-thumbnail {
+		padding-top: 7px;
+
+		img {
+			border: 1px solid black;
+		}
+	}
+
+	.video-title {
+		font-size: 14pt;
+
+		@media (max-width: 767px) {
+			font-size: 12pt;
+		}
+	}
+
+	.video-title-duration {
+		margin: 0;
+		/*margin-top: 5px;
+		margin-bottom: 5px;*/
+	}
+
+	.video-controls {
+		padding-top: 7px;
+	}
+
+	.video-duration {
+		font-size: 13px;
+		font-weight: normal;
+	}
+
+	.video-uploader {
+		font-size: 12pt;
+		font-weight: bold;
+
+		@media (max-width: 767px) {
+			font-size: 10pt;
+		}
+	}
+
+	.video-uploaded {
+		@media (max-width: 767px) {
+			font-size: 8pt;
+		}
+	}
+
+	.video-controls a:hover {
+		text-decoration: none;
+	}
+}
+
+.video-divider {
+	margin: 1px;
+	padding: 1px;
+	border-top: none;
+	border-bottom: 1px solid darken(#ffffff, 10%);
+}
+
+.twitter, .reddit {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.twitter {
+	.twtr-timeline {
+		@include border-radius(0);
+		border-bottom: 1px solid #369CD7;
+	}
+
+	.twtr-doc {
+		@include border-radius(0);
+	}
+
+	.twtr-ft {
+		display: none;
+	}
+}
+
+.reddit {
+	.rembeddit {
+		border: 1px solid #369CD7 !important;
+	}
+
+	.reddit-header {
+		background-color: #369CD7 !important;
+
+		h4 {
+			color: white;
+		}
+	}
+}
+
+#show-more {
+	text-align: center;
+}
+
+.footer-list {
+    text-align: center;
+}
+
+.footer-list li {
+    display: inline-block;
+    list-style: none;
+    padding: 10px;
+}
