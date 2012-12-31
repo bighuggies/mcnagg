@@ -96,10 +96,10 @@ def mindcrackers():
     return sorted(MINDCRACKERS, key=lambda m: m['username'])
 
 
-def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0):
+def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0, filter=''):
     videos = []
 
-    jobs = [gevent.spawn(get_uploads, str(username), num_videos=num_videos + offset)
+    jobs = [gevent.spawn(get_uploads, str(username), num_videos=num_videos + offset, filter=filter)
             for username in mindcrackers]
     gevent.joinall(jobs)
 
@@ -109,7 +109,7 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
     return sorted(videos, key=lambda v: v['uploaded'], reverse=True)[offset:num_videos + offset]
 
 
-def get_uploads(username, num_videos=1, offset=0):
+def get_uploads(username, num_videos=1, offset=0, filter=''):
     max_index = num_videos + offset
     keys = [str(x) for x in xrange(offset, max_index, CACHE_SLICE_SIZE)]
 
@@ -124,6 +124,9 @@ def get_uploads(username, num_videos=1, offset=0):
             videos = videos + vs
 
             mc.set(username + i, vs, time=300)
+
+    if filter:
+        videos = [video for video in videos if filter.lower() in video['title'].lower()]
 
     return videos[offset:max_index]
 

@@ -1,5 +1,6 @@
 <form class="form-horizontal">
     <fieldset>
+
         <div id="select-user-controls" class="control-group">
             <label class="control-label" for="inlineCheckboxes">MindCrackers</label>
             <div class="controls">
@@ -10,12 +11,21 @@
                 {% end %}
             </div>
         </div>
+
         <div id="multiselect-controls" class="control-group">
             <div class="controls">
                 <button id="select-all">Select all</button>
                 <button id="deselect-all">Deselect all</button>
             </div>
         </div>
+
+        <div id="show-controls" class="control-group">
+            <label class="control-label" for="title-filter">With text in title</label>
+            <div class="controls">
+                <input id="title-filter" type="text" placeholder="e.g. Mindcrack" value="{{ filter }}">
+            </div>
+        </div>
+
         <div id="pagination-controls" class="control-group">
             <label class="control-label" for="number-videos">Videos per page</label>
             <div class="controls">
@@ -32,5 +42,6 @@
         <div class="form-actions">
             <a data-toggle="collapse" data-target="#feed-options" id="options-submit" class="btn btn-primary">Done</a>
         </div>
+
     </fieldset>
 </form>

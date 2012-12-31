@@ -94,12 +94,17 @@ function options_submit(e) {
     e.preventDefault();
 
     var num_videos = $('#number-videos').val();
+    var title_filter = $('#title-filter').val();
 
     var query = {
         'num-videos': num_videos,
         'offset': 0,
         'mindcrackers[]': get_mindcrackers()
     };
+
+    if (title_filter) {
+        query['title-filter'] = title_filter;
+    }
 
     remove_videos();
 
@@ -111,6 +116,7 @@ function show_more_videos(e) {
     e.preventDefault();
 
     var num_videos = $('#number-videos').val();
+    var title_filter = $('#title-filter').val();
     var offset = $('.video.row').length;
 
     var query = {
@@ -118,6 +124,10 @@ function show_more_videos(e) {
         'offset': offset,
         'mindcrackers[]': get_mindcrackers()
     };
+
+    if (title_filter) {
+        query['title-filter'] = title_filter;
+    }
 
     fetch_videos(query, append_videos);
 }

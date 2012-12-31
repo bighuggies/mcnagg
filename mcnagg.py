@@ -19,6 +19,21 @@ VIDEOS_PER_PAGE = 30
 INDEX = ''
 
 
+def get_options(options):
+    options = urlparse.parse_qs(options)
+
+    if 'offset' in options:
+        options['offset'] = int(options['offset'][0])
+
+    if 'num_videos' in options:
+        options['num_videos'] = int(options['num_videos'][0])
+
+    if 'filter' in options:
+        options['filter'] = options['filter'][0].lower()
+
+    return options
+
+
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
@@ -52,29 +67,32 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomeHandler(BaseHandler):
     def get(self):
-        checked = {'mindcrackers[]': []}
         mindcrackers = self.mindcrack.mindcrackers()
 
-        if self.get_cookie('checked-mindcrackers'):
-            checked = urlparse.parse_qs(self.get_cookie('checked-mindcrackers'))
-            videos = self.mindcrack.videos(mindcrackers=checked['mindcrackers[]'], num_videos=VIDEOS_PER_PAGE)
+        if self.get_cookie('mcnagg-options'):
+            options = get_options(self.get_cookie('mcnagg-options'))
+            videos = self.mindcrack.videos(**options)
         else:
+            options = {'mindcrackers': [], 'filter': ''}
             videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
-        
-        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=checked['mindcrackers[]'])
+
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=options['mindcrackers'], filter=options['filter'])
 
 
 class VideosHandler(BaseHandler):
     def get(self):
-        mindcrackers = self.get_arguments('mindcrackers[]')
-        num_videos = int(self.get_argument('num-videos'))
-        offset = int(self.get_argument('offset'))
+        options = dict(
+            mindcrackers=self.get_arguments('mindcrackers[]'),
+            num_videos=int(self.get_argument('num-videos')),
+            offset=int(self.get_argument('offset')),
+            filter=self.get_argument('title-filter', default='')
+        )
 
-        videos = self.mindcrack.videos(mindcrackers=mindcrackers, num_videos=num_videos, offset=offset)
+        videos = self.mindcrack.videos(**options)
 
         dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
 
-        self.set_cookie('checked-mindcrackers', urllib.urlencode({'mindcrackers[]': mindcrackers}, True))
+        self.set_cookie('mcnagg-options', urllib.urlencode(options, True))
         self.write(json.dumps(videos, default=dthandler))
         self.finish()
 
@@ -85,8 +103,8 @@ class VideoModule(tornado.web.UIModule):
 
 
 class OptionsModule(tornado.web.UIModule):
-    def render(self, mindcrackers, checked):
-        return self.render_string("modules/options.html", mindcrackers=mindcrackers, checked=checked)
+    def render(self, mindcrackers, checked, filter):
+        return self.render_string("modules/options.html", mindcrackers=mindcrackers, checked=checked, filter=filter)
 
 
 class TwitterModule(tornado.web.UIModule):
