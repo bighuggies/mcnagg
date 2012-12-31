@@ -94,11 +94,7 @@ header h2 {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* line 90, ../sass/style.scss */
-#select-user-controls {
-  margin-bottom: 5px;
-}
-/* line 94, ../sass/style.scss */
+/* line 92, ../sass/style.scss */
 #select-user-controls .controls label {
   display: inline-block;
   padding: 4px 12px;
@@ -147,20 +143,20 @@ header h2 {
   -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-/* line 102, ../sass/style.scss */
+/* line 100, ../sass/style.scss */
 #select-user-controls .controls label.selected-mindcracker {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #669533;
   color: white;
   font-weight: bold;
 }
-/* line 110, ../sass/style.scss */
+/* line 108, ../sass/style.scss */
 #select-user-controls .controls input {
   display: none;
 }
 
-/* line 117, ../sass/style.scss */
-#multiselect-controls button {
+/* line 114, ../sass/style.scss */
+#select-all, #deselect-all {
   display: inline-block;
   padding: 4px 12px;
   margin-bottom: 0;
@@ -175,12 +171,12 @@ header h2 {
   border: 1px solid #c2c2c2;
 }
 /* line 21, ../sass/style.scss */
-#multiselect-controls button:hover, #multiselect-controls button:active {
+#select-all:hover, #select-all:active, #deselect-all:hover, #deselect-all:active {
   color: #333333;
   background-color: #e8e8e8;
 }
 /* line 26, ../sass/style.scss */
-#multiselect-controls button:hover {
+#select-all:hover, #deselect-all:hover {
   color: #333333;
   text-decoration: none;
   background-position: 0 -15px;
@@ -190,13 +186,13 @@ header h2 {
   transition: background-position 0.1s linear;
 }
 /* line 33, ../sass/style.scss */
-#multiselect-controls button:focus {
+#select-all:focus, #deselect-all:focus {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 /* line 39, ../sass/style.scss */
-#multiselect-controls button:active {
+#select-all:active, #deselect-all:active {
   background-color: #cccccc \9;
   background-image: none;
   outline: 0;
@@ -205,67 +201,67 @@ header h2 {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* line 122, ../sass/style.scss */
+/* line 119, ../sass/style.scss */
 .video {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 126, ../sass/style.scss */
+/* line 123, ../sass/style.scss */
 .video .video-thumbnail {
   padding-top: 7px;
 }
-/* line 129, ../sass/style.scss */
+/* line 126, ../sass/style.scss */
 .video .video-thumbnail img {
   border: 1px solid black;
 }
-/* line 134, ../sass/style.scss */
+/* line 131, ../sass/style.scss */
 .video .video-title {
   font-size: 14pt;
 }
 @media (max-width: 767px) {
-  /* line 134, ../sass/style.scss */
+  /* line 131, ../sass/style.scss */
   .video .video-title {
     font-size: 12pt;
   }
 }
-/* line 142, ../sass/style.scss */
+/* line 139, ../sass/style.scss */
 .video .video-title-duration {
   margin: 0;
   /*margin-top: 5px;
   margin-bottom: 5px;*/
 }
-/* line 148, ../sass/style.scss */
+/* line 145, ../sass/style.scss */
 .video .video-controls {
   padding-top: 7px;
 }
-/* line 152, ../sass/style.scss */
+/* line 149, ../sass/style.scss */
 .video .video-duration {
   font-size: 13px;
   font-weight: normal;
 }
-/* line 157, ../sass/style.scss */
+/* line 154, ../sass/style.scss */
 .video .video-uploader {
   font-size: 12pt;
   font-weight: bold;
 }
 @media (max-width: 767px) {
-  /* line 157, ../sass/style.scss */
+  /* line 154, ../sass/style.scss */
   .video .video-uploader {
     font-size: 10pt;
   }
 }
 @media (max-width: 767px) {
-  /* line 166, ../sass/style.scss */
+  /* line 163, ../sass/style.scss */
   .video .video-uploaded {
     font-size: 8pt;
   }
 }
-/* line 172, ../sass/style.scss */
+/* line 169, ../sass/style.scss */
 .video .video-controls a:hover {
   text-decoration: none;
 }
 
-/* line 177, ../sass/style.scss */
+/* line 174, ../sass/style.scss */
 .video-divider {
   margin: 1px;
   padding: 1px;
@@ -273,13 +269,13 @@ header h2 {
   border-bottom: 1px solid #e6e6e6;
 }
 
-/* line 184, ../sass/style.scss */
+/* line 181, ../sass/style.scss */
 .twitter, .reddit {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* line 190, ../sass/style.scss */
+/* line 187, ../sass/style.scss */
 .twitter .twtr-timeline {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -288,7 +284,7 @@ header h2 {
   border-radius: 0;
   border-bottom: 1px solid #369CD7;
 }
-/* line 195, ../sass/style.scss */
+/* line 192, ../sass/style.scss */
 .twitter .twtr-doc {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -296,35 +292,35 @@ header h2 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 199, ../sass/style.scss */
+/* line 196, ../sass/style.scss */
 .twitter .twtr-ft {
   display: none;
 }
 
-/* line 205, ../sass/style.scss */
+/* line 202, ../sass/style.scss */
 .reddit .rembeddit {
   border: 1px solid #369CD7 !important;
 }
-/* line 209, ../sass/style.scss */
+/* line 206, ../sass/style.scss */
 .reddit .reddit-header {
   background-color: #369CD7 !important;
 }
-/* line 212, ../sass/style.scss */
+/* line 209, ../sass/style.scss */
 .reddit .reddit-header h4 {
   color: white;
 }
 
-/* line 218, ../sass/style.scss */
+/* line 215, ../sass/style.scss */
 #show-more {
   text-align: center;
 }
 
-/* line 222, ../sass/style.scss */
+/* line 219, ../sass/style.scss */
 .footer-list {
   text-align: center;
 }
 
-/* line 226, ../sass/style.scss */
+/* line 223, ../sass/style.scss */
 .footer-list li {
   display: inline-block;
   list-style: none;

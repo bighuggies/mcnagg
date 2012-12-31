@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form action="submit" method="get" id="options-form" class="form-horizontal">
     <fieldset>
 
         <div id="select-user-controls" class="control-group">
@@ -10,12 +10,10 @@
                     </label>
                 {% end %}
             </div>
-        </div>
 
-        <div id="multiselect-controls" class="control-group">
             <div class="controls">
-                <button id="select-all">Select all</button>
-                <button id="deselect-all">Deselect all</button>
+                <a id="select-all">Select all</a>
+                <a id="deselect-all">Deselect all</a>
             </div>
         </div>
 
@@ -40,7 +38,7 @@
         </div>
 
         <div class="form-actions">
-            <a data-toggle="collapse" data-target="#feed-options" id="options-submit" class="btn btn-primary">Done</a>
+            <button type="submit" data-toggle="collapse" data-target="#feed-options" id="options-submit" class="btn btn-primary">Done</button>
         </div>
 
     </fieldset>

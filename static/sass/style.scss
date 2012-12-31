@@ -88,8 +88,6 @@ header {
 }
 
 #select-user-controls {
-	margin-bottom: 5px;
-
 	.controls {
 		label {
 			@include btn(lightGray);
@@ -113,11 +111,10 @@ header {
 	}
 }
 
-#multiselect-controls {
-	button {
-		@include btn;
-	}
+#select-all, #deselect-all {
+	@include btn;
 }
+
 
 .video {
 	margin-top: 5px;

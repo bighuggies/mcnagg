@@ -168,7 +168,7 @@ function deselect_all_mindcrackers(e) {
 
 $(document).ready(function() {
     $('.video-remove-control').on('click', remove_video);
-    $('#options-submit').on('click', options_submit);
+    $('#options-form').on('submit', options_submit);
     $('#show-more').on('click', show_more_videos);
     $('#select-all').on('click', select_all_mindcrackers);
     $('#deselect-all').on('click', deselect_all_mindcrackers);

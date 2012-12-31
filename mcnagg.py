@@ -28,8 +28,11 @@ def get_options(options):
     if 'num_videos' in options:
         options['num_videos'] = int(options['num_videos'][0])
 
+    # Filter is a non-optional option
     if 'filter' in options:
         options['filter'] = options['filter'][0].lower()
+    else:
+        options['filter'] = ''
 
     return options
 
