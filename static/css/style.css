@@ -100,7 +100,7 @@ header h2 {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* line 97, ../sass/style.scss */
+/* line 99, ../sass/style.scss */
 #select-user-controls .controls label {
   display: inline-block;
   padding: 4px 12px;
@@ -117,7 +117,6 @@ header h2 {
   overflow: hidden;
   white-space: nowrap;
   font-size: 8pt;
-  font-weight: lighter;
   margin-bottom: 10px;
   margin-left: 0;
   padding: 5;
@@ -152,19 +151,19 @@ header h2 {
   -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-/* line 108, ../sass/style.scss */
+/* line 109, ../sass/style.scss */
 #select-user-controls .controls label.selected-mindcracker {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #669533;
   color: white;
   font-weight: bold;
 }
-/* line 116, ../sass/style.scss */
+/* line 117, ../sass/style.scss */
 #select-user-controls .controls input {
   display: none;
 }
 
-/* line 122, ../sass/style.scss */
+/* line 123, ../sass/style.scss */
 #select-all, #deselect-all {
   display: inline-block;
   padding: 4px 12px;
@@ -210,67 +209,67 @@ header h2 {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* line 127, ../sass/style.scss */
+/* line 128, ../sass/style.scss */
 .video {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 131, ../sass/style.scss */
+/* line 132, ../sass/style.scss */
 .video .video-thumbnail {
   padding-top: 7px;
 }
-/* line 134, ../sass/style.scss */
+/* line 135, ../sass/style.scss */
 .video .video-thumbnail img {
   border: 1px solid black;
 }
-/* line 139, ../sass/style.scss */
+/* line 140, ../sass/style.scss */
 .video .video-title {
   font-size: 14pt;
 }
 @media (max-width: 767px) {
-  /* line 139, ../sass/style.scss */
+  /* line 140, ../sass/style.scss */
   .video .video-title {
     font-size: 12pt;
   }
 }
-/* line 147, ../sass/style.scss */
+/* line 148, ../sass/style.scss */
 .video .video-title-duration {
   margin: 0;
   /*margin-top: 5px;
   margin-bottom: 5px;*/
 }
-/* line 153, ../sass/style.scss */
+/* line 154, ../sass/style.scss */
 .video .video-controls {
   padding-top: 7px;
 }
-/* line 157, ../sass/style.scss */
+/* line 158, ../sass/style.scss */
 .video .video-duration {
   font-size: 13px;
   font-weight: normal;
 }
-/* line 162, ../sass/style.scss */
+/* line 163, ../sass/style.scss */
 .video .video-uploader {
   font-size: 12pt;
   font-weight: bold;
 }
 @media (max-width: 767px) {
-  /* line 162, ../sass/style.scss */
+  /* line 163, ../sass/style.scss */
   .video .video-uploader {
     font-size: 10pt;
   }
 }
 @media (max-width: 767px) {
-  /* line 171, ../sass/style.scss */
+  /* line 172, ../sass/style.scss */
   .video .video-uploaded {
     font-size: 8pt;
   }
 }
-/* line 177, ../sass/style.scss */
+/* line 178, ../sass/style.scss */
 .video .video-controls a:hover {
   text-decoration: none;
 }
 
-/* line 182, ../sass/style.scss */
+/* line 183, ../sass/style.scss */
 .video-divider {
   margin: 1px;
   padding: 1px;
@@ -278,13 +277,13 @@ header h2 {
   border-bottom: 1px solid #e6e6e6;
 }
 
-/* line 189, ../sass/style.scss */
+/* line 190, ../sass/style.scss */
 .twitter, .reddit {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* line 195, ../sass/style.scss */
+/* line 196, ../sass/style.scss */
 .twitter .twtr-timeline {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -293,7 +292,7 @@ header h2 {
   border-radius: 0;
   border-bottom: 1px solid #369CD7;
 }
-/* line 200, ../sass/style.scss */
+/* line 201, ../sass/style.scss */
 .twitter .twtr-doc {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -301,35 +300,35 @@ header h2 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 204, ../sass/style.scss */
+/* line 205, ../sass/style.scss */
 .twitter .twtr-ft {
   display: none;
 }
 
-/* line 210, ../sass/style.scss */
+/* line 211, ../sass/style.scss */
 .reddit .rembeddit {
   border: 1px solid #369CD7 !important;
 }
-/* line 214, ../sass/style.scss */
+/* line 215, ../sass/style.scss */
 .reddit .reddit-header {
   background-color: #369CD7 !important;
 }
-/* line 217, ../sass/style.scss */
+/* line 218, ../sass/style.scss */
 .reddit .reddit-header h4 {
   color: white;
 }
 
-/* line 223, ../sass/style.scss */
+/* line 224, ../sass/style.scss */
 #show-more {
   text-align: center;
 }
 
-/* line 227, ../sass/style.scss */
+/* line 228, ../sass/style.scss */
 .footer-list {
   text-align: center;
 }
 
-/* line 231, ../sass/style.scss */
+/* line 232, ../sass/style.scss */
 .footer-list li {
   display: inline-block;
   list-style: none;
