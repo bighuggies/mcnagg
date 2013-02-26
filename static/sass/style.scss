@@ -80,6 +80,12 @@ header {
 	background-image: url(../../static/img/brillant.png);
 }
 
+@media (max-width: 767px) {
+	body {
+		padding: 0;
+	}
+}
+
 #filter-options-btn {
 	font-size: 18px;
 	font-weight: bold;
