@@ -18,24 +18,30 @@ i {
 body {
   background-image: url(../../static/img/gray_jean.png);
 }
+@media (max-width: 767px) {
+  /* line 57, ../sass/style.scss */
+  body {
+    padding: 0;
+  }
+}
 
-/* line 61, ../sass/style.scss */
+/* line 65, ../sass/style.scss */
 header {
   margin-top: 40px;
   margin-bottom: 40px;
 }
-/* line 65, ../sass/style.scss */
+/* line 69, ../sass/style.scss */
 header h1 {
   color: #2FA4E7;
 }
-/* line 69, ../sass/style.scss */
+/* line 73, ../sass/style.scss */
 header h2 {
   font-weight: normal;
   font-size: 14pt;
   color: #317EAC;
 }
 
-/* line 76, ../sass/style.scss */
+/* line 80, ../sass/style.scss */
 .container {
   padding-left: 30px;
   padding-right: 30px;
@@ -45,13 +51,7 @@ header h2 {
   background-image: url(../../static/img/brillant.png);
 }
 
-@media (max-width: 767px) {
-  /* line 84, ../sass/style.scss */
-  body {
-    padding: 0;
-  }
-}
-/* line 89, ../sass/style.scss */
+/* line 88, ../sass/style.scss */
 #filter-options-btn {
   font-size: 18px;
   font-weight: bold;
@@ -100,7 +100,7 @@ header h2 {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* line 98, ../sass/style.scss */
+/* line 97, ../sass/style.scss */
 #select-user-controls .controls label {
   display: inline-block;
   padding: 4px 12px;
@@ -114,7 +114,6 @@ header h2 {
   cursor: pointer;
   background-color: lightgrey;
   border: 1px solid #a0a0a0;
-  width: 15%;
   overflow: hidden;
   white-space: nowrap;
   font-size: 8pt;
@@ -153,19 +152,19 @@ header h2 {
   -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-/* line 110, ../sass/style.scss */
+/* line 108, ../sass/style.scss */
 #select-user-controls .controls label.selected-mindcracker {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #669533;
   color: white;
   font-weight: bold;
 }
-/* line 118, ../sass/style.scss */
+/* line 116, ../sass/style.scss */
 #select-user-controls .controls input {
   display: none;
 }
 
-/* line 124, ../sass/style.scss */
+/* line 122, ../sass/style.scss */
 #select-all, #deselect-all {
   display: inline-block;
   padding: 4px 12px;
@@ -211,67 +210,67 @@ header h2 {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* line 129, ../sass/style.scss */
+/* line 127, ../sass/style.scss */
 .video {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 133, ../sass/style.scss */
+/* line 131, ../sass/style.scss */
 .video .video-thumbnail {
   padding-top: 7px;
 }
-/* line 136, ../sass/style.scss */
+/* line 134, ../sass/style.scss */
 .video .video-thumbnail img {
   border: 1px solid black;
 }
-/* line 141, ../sass/style.scss */
+/* line 139, ../sass/style.scss */
 .video .video-title {
   font-size: 14pt;
 }
 @media (max-width: 767px) {
-  /* line 141, ../sass/style.scss */
+  /* line 139, ../sass/style.scss */
   .video .video-title {
     font-size: 12pt;
   }
 }
-/* line 149, ../sass/style.scss */
+/* line 147, ../sass/style.scss */
 .video .video-title-duration {
   margin: 0;
   /*margin-top: 5px;
   margin-bottom: 5px;*/
 }
-/* line 155, ../sass/style.scss */
+/* line 153, ../sass/style.scss */
 .video .video-controls {
   padding-top: 7px;
 }
-/* line 159, ../sass/style.scss */
+/* line 157, ../sass/style.scss */
 .video .video-duration {
   font-size: 13px;
   font-weight: normal;
 }
-/* line 164, ../sass/style.scss */
+/* line 162, ../sass/style.scss */
 .video .video-uploader {
   font-size: 12pt;
   font-weight: bold;
 }
 @media (max-width: 767px) {
-  /* line 164, ../sass/style.scss */
+  /* line 162, ../sass/style.scss */
   .video .video-uploader {
     font-size: 10pt;
   }
 }
 @media (max-width: 767px) {
-  /* line 173, ../sass/style.scss */
+  /* line 171, ../sass/style.scss */
   .video .video-uploaded {
     font-size: 8pt;
   }
 }
-/* line 179, ../sass/style.scss */
+/* line 177, ../sass/style.scss */
 .video .video-controls a:hover {
   text-decoration: none;
 }
 
-/* line 184, ../sass/style.scss */
+/* line 182, ../sass/style.scss */
 .video-divider {
   margin: 1px;
   padding: 1px;
@@ -279,13 +278,13 @@ header h2 {
   border-bottom: 1px solid #e6e6e6;
 }
 
-/* line 191, ../sass/style.scss */
+/* line 189, ../sass/style.scss */
 .twitter, .reddit {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* line 197, ../sass/style.scss */
+/* line 195, ../sass/style.scss */
 .twitter .twtr-timeline {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -294,7 +293,7 @@ header h2 {
   border-radius: 0;
   border-bottom: 1px solid #369CD7;
 }
-/* line 202, ../sass/style.scss */
+/* line 200, ../sass/style.scss */
 .twitter .twtr-doc {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -302,35 +301,35 @@ header h2 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 206, ../sass/style.scss */
+/* line 204, ../sass/style.scss */
 .twitter .twtr-ft {
   display: none;
 }
 
-/* line 212, ../sass/style.scss */
+/* line 210, ../sass/style.scss */
 .reddit .rembeddit {
   border: 1px solid #369CD7 !important;
 }
-/* line 216, ../sass/style.scss */
+/* line 214, ../sass/style.scss */
 .reddit .reddit-header {
   background-color: #369CD7 !important;
 }
-/* line 219, ../sass/style.scss */
+/* line 217, ../sass/style.scss */
 .reddit .reddit-header h4 {
   color: white;
 }
 
-/* line 225, ../sass/style.scss */
+/* line 223, ../sass/style.scss */
 #show-more {
   text-align: center;
 }
 
-/* line 229, ../sass/style.scss */
+/* line 227, ../sass/style.scss */
 .footer-list {
   text-align: center;
 }
 
-/* line 233, ../sass/style.scss */
+/* line 231, ../sass/style.scss */
 .footer-list li {
   display: inline-block;
   list-style: none;

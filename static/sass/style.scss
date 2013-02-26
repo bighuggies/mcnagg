@@ -56,6 +56,10 @@ i {
 
 body {
 	background-image: url(../../static/img/gray_jean.png);
+
+	@media (max-width: 767px) {
+		padding: 0;
+	}
 }
 
 header {
@@ -80,11 +84,6 @@ header {
 	background-image: url(../../static/img/brillant.png);
 }
 
-@media (max-width: 767px) {
-	body {
-		padding: 0;
-	}
-}
 
 #filter-options-btn {
 	font-size: 18px;
@@ -98,7 +97,6 @@ header {
 		label {
 			@include btn(lightGray);
 
-			width: 15%;
 			overflow: hidden;
 			white-space: nowrap;
 			font-size: 8pt;
