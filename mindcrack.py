@@ -1,19 +1,12 @@
-from datetime import datetime, timedelta
-import os
 import json
-import math
 import urllib2
+import time
+import datetime
 
-import pylibmc
+from collections import deque
+from multiprocessing.pool import ThreadPool
+from functools import wraps
 
-import gevent
-
-from gevent import monkey
-monkey.patch_socket()
-monkey.patch_ssl()
-
-
-CACHE_SLICE_SIZE = 30
 MINDCRACKERS = [
     {'username': u'adlingtont', 'url': u'http://www.youtube.com/adlingtont', 'name': u'Adlington'},
     {'username': u'avidyazen', 'url': u'http://www.youtube.com/avidyazen', 'name': u'Avidya'},
@@ -44,133 +37,65 @@ MINDCRACKERS = [
     {'username': u'vechz', 'url': u'http://www.youtube.com/vechz', 'name': u'Vechs'}
 ]
 
+def memoize(timeout=60):
+    def memoized(func):
+        cache = {}
 
-if os.environ.get('ENVIRONMENT') == 'heroku':
-    mc = pylibmc.Client(
-        servers=[os.environ.get('MEMCACHIER_SERVERS', '')],
-        username=os.environ.get('MEMCACHIER_USERNAME', ''),
-        password=os.environ.get('MEMCACHIER_PASSWORD', ''),
-        binary=True
-    )
-else:
-    mc = pylibmc.Client(['127.0.0.1'])
+        @wraps(func)
+        def memoizer(*args, **kwargs):
+            curtime = time.time()
+            key = str(args) + str(kwargs)
 
+            if key not in cache:
+                cache[key] = {'value': func(*args, **kwargs), 'timestamp': curtime}
+            elif curtime - cache[key]['timestamp'] > timeout:
+                del cache[key]
+                cache[key] = {'value': func(*args, **kwargs), 'timestamp': curtime}
 
-def get_fancy_time(date):
-    seconds = (datetime.utcnow() - date).total_seconds()
+            return cache[key]['value']
 
-    if seconds < 0:
-        return 'Some time in the future'
-
-    seconds = seconds
-    minutes = seconds / 60
-    hours = seconds / 60 / 60
-    days = seconds / 60 / 60 / 24
-    months = days / 30
-
-    deltas = [('second', seconds), ('minute', minutes), ('hour', hours), ('day', days), ('month', months)]
-
-    fuzzy_delta = ('second', 0)
-    plural = False
-
-    for unit, delta in deltas:
-        if math.floor(delta) > 0:
-            fuzzy_delta = (unit, int(math.floor(delta)))
-
-    if fuzzy_delta[1] > 1:
-        plural = True
-
-    return '{delta} {unit}{plural} ago'.format(delta=fuzzy_delta[1], unit=fuzzy_delta[0], plural='s' if plural else '')
-
-
-def get_HMS(time):
-    hms = str(timedelta(seconds=time))
-    parts = hms.split(':')
-
-    if parts[0] == '0':
-        return ':'.join(parts[1:])
-    else:
-        return hms
+        return memoizer
+    return memoized
 
 
 def mindcrackers():
     return sorted(MINDCRACKERS, key=lambda m: m['username'])
 
 
+@memoize(timeout=300)
 def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0, filter=''):
-    videos = []
+    pool = ThreadPool(processes=len(mindcrackers))
+    q = deque()
 
-    jobs = [gevent.spawn(get_uploads, str(username), num_videos=num_videos + offset, filter=filter)
-            for username in mindcrackers]
-    gevent.joinall(jobs)
+    for mcer in mindcrackers:
+        pool.apply_async(_get_uploads, args=(mcer, num_videos, offset), callback=lambda r: q.extend(r))
 
-    for job in jobs:
-        videos = videos + job.value
+    pool.close()
+    pool.join()
 
-    return sorted(videos, key=lambda v: v['uploaded'], reverse=True)[offset:num_videos + offset]
+    return sorted(list(q), key=lambda v: v['uploaded'], reverse=True)[offset:num_videos + offset]
 
-
-def get_uploads(username, num_videos=1, offset=0, filter=''):
-    max_index = num_videos + offset
-    keys = [str(x) for x in xrange(offset, max_index, CACHE_SLICE_SIZE)]
-
-    cached = mc.get_multi(keys, key_prefix=username)
-    videos = []
-
-    for i in keys:
-        try:
-            videos = videos + cached[i]
-        except KeyError:
-            vs = youtube_feed(username, CACHE_SLICE_SIZE, int(i))
-            videos = videos + vs
-
-            mc.set(username + i, vs, time=300)
+def _get_uploads(username, num_videos=1, offset=0, filter=''):
+    videos = _youtube_feed(username, num_videos, offset)
 
     if filter:
         videos = [video for video in videos if filter.lower() in video['title'].lower()]
 
-    return videos[offset:max_index]
+    return videos[offset:num_videos + offset]
 
 
-def youtube_feed(feed_id, num_videos=1, offset=0, feed_type='upload'):
-    if feed_type == 'show':
-        feed_url = 'https://gdata.youtube.com/feeds/api/seasons/{feed_id}/episodes?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
-            feed_id=feed_id, offset=offset + 1, num_videos=num_videos)
-    elif feed_type == 'playlist':
-        feed_url = 'http://gdata.youtube.com/feeds/api/playlists/{feed_id}?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
-            feed_id=feed_id, offset=offset + 1, num_videos=num_videos)
-    elif feed_type == 'upload':
-        feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}'.format(
-            username=feed_id, offset=offset + 1, num_videos=num_videos)
-    else:
-        raise ValueError('Type <' + feed_type + '> is not a valid feed type. Valid types are <"upload">, <"playlist"> or <"show">.')
+def _youtube_feed(feed_id, num_videos=1, offset=0):
+    num_videos = 50 if num_videos > 50 else num_videos
 
-    if num_videos > 50:
-        raise ValueError('Only allowed to get a maximum of 50 videos per request from YouTube')
+    feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}' \
+        .format(username=feed_id, offset=offset + 1, num_videos=num_videos)
 
     feed = json.loads(urllib2.urlopen(feed_url).read())
 
-    items = []
-    if feed['data']['totalItems'] > 0 and feed['data']['totalItems'] > feed['data']['startIndex']:
-        for item in feed['data']['items']:
-            if type == 'playlist':
-                item = item['video']
+    if feed['data']['totalItems'] <= 0:
+        return []
 
-            items.append(_process_video_data(item))
-
-    return items
-
-
-def youtube_video_data(video_id, raw=False):
-    raw_video = json.loads(urllib2.urlopen('https://gdata.youtube.com/feeds/api/videos/{0}?v=2&alt=jsonc'.format(video_id)).read())
-
-    if 'error' in raw_video:
-        raise IOError('No such video')
-
-    if raw:
-        return raw_video
-    else:
-        return _process_video_data(raw_video['data'])
+    return [_process_video_data(item) for item in feed['data']['items']]
 
 
 def _process_video_data(video_data):
@@ -179,7 +104,7 @@ def _process_video_data(video_data):
         title=video_data['title'],
         duration=video_data['duration'],
         uploader=video_data['uploader'],
-        uploaded=datetime.strptime(video_data['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ"),
+        uploaded=datetime.datetime.strptime(video_data['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ"),
         description=video_data['description'],
         thumbnail=video_data['thumbnail']['hqDefault']
     )
