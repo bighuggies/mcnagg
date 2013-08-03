@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import mindcrack
+import util
 
 import os.path
 import json
