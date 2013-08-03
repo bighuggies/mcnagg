@@ -47,17 +47,15 @@ function remove_videos() {
 }
 
 
-function remove_video(e) {
-    e.preventDefault();
-
-    video_id = $(e.target).attr('data-video-id');
+function remove_video(video_id) {
     $('div[data-video-id="' + video_id + '"]').hide(100);
 }
 
 
-
 function append_videos(videos) {
     $('.loading.row').remove();
+
+    console.log(videos);
 
     var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span1"><a href="http://www.youtube.com/watch?v={{video_id}}"><img src="{{thumbnail}}" alt="{{title}} thumbnail"></a></div><div class="span7"><h2 class="video-title-duration"><span class="video-title"><a href="http://www.youtube.com/watch?v={{video_id}}">{{title}}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{uploader}}">{{uploader}}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls span1"><div class="pull-right"><a href="#"> <i data-video-id="{{video_id}}" class="icon-remove video-remove-control"></i></a></div></div></div><div class="divider row" data-video-id="{{video_id}}"><div class="span9"><hr class="video-divider"></div></div>{{/videos}}';
 
@@ -77,15 +75,14 @@ function append_videos(videos) {
 
     $('#show-more').before($.mustache(video_template, video_view));
     $('#show-more').show();
-
-    $('.video-remove-control').on('click', remove_video);
 }
 
 
 function fetch_videos(query_data, callback) {
     $('.video-list').append('<div class="loading row"><div class="span9" style="text-align:center;padding-top:10px"><img class="loading-gif" src="static/img/loading.gif" /></div></div>');
     $('#show-more').hide('fast', function() {
-            $.getJSON('/videos', query_data, callback);
+        console.log(query_data);
+        $.getJSON('/videos', query_data, callback);
     });
 }
 
@@ -95,16 +92,14 @@ function options_submit(e) {
 
     var num_videos = $('#number-videos').val();
     var title_filter = $('#title-filter').val();
+    var offset = $('.video.row').length;
 
     var query = {
         'num-videos': num_videos,
-        'offset': 0,
-        'mindcrackers[]': get_mindcrackers()
+        'offset': offset,
+        'mindcrackers[]': get_mindcrackers(),
+        'title-filter': title_filter ? title_filter : ''
     };
-
-    if (title_filter) {
-        query['title-filter'] = title_filter;
-    }
 
     remove_videos();
 
@@ -122,27 +117,18 @@ function show_more_videos(e) {
     var query = {
         'num-videos': num_videos,
         'offset': offset,
-        'mindcrackers[]': get_mindcrackers()
+        'mindcrackers[]': get_mindcrackers(),
+        'title-filter': title_filter ? title_filter : ''
     };
-
-    if (title_filter) {
-        query['title-filter'] = title_filter;
-    }
 
     fetch_videos(query, append_videos);
 }
 
 
 function get_mindcrackers() {
-    var checkboxes = $('input[name="mindcrackers-select"]:checked');
-
-    var mindcrackers = [];
-
-    checkboxes.each(function(index, checkbox) {
-        mindcrackers.push($(checkbox).val());
-    });
-
-    return mindcrackers;
+    return $('input[name="mindcrackers-select"]:checked').map(function(i, e){
+        return $(e).val();
+    }).get();
 }
 
 
@@ -150,8 +136,7 @@ function select_all_mindcrackers(e) {
     e.preventDefault();
 
     $('input[name="mindcrackers-select"]').each(function(index, element) {
-        $(element).attr('checked', true);
-        $(element).trigger('change');
+        $(element).prop('checked', true);
     });
 }
 
@@ -160,14 +145,12 @@ function deselect_all_mindcrackers(e) {
     e.preventDefault();
 
     $('input[name="mindcrackers-select"]:checked').each(function(index, element) {
-        $(element).attr('checked', false);
-        $(element).trigger('change');
+        $(element).prop('checked', false);
     });
 }
 
 
 $(document).ready(function() {
-    $('.video-remove-control').on('click', remove_video);
     $('#options-form').on('submit', options_submit);
     $('#show-more').on('click', show_more_videos);
     $('#select-all').on('click', select_all_mindcrackers);
@@ -183,11 +166,9 @@ $(document).ready(function() {
         $("#feed-options-icon").addClass("icon-chevron-down");
     });
 
-    $('#feed-options :checkbox').on('change', function() {
-        if ($(this).attr('checked')) {
-            $(this).parent().addClass("selected-mindcracker");
-        } else {
-            $(this).parent().removeClass("selected-mindcracker");
+    $(".video-list").on('click', function(e) {
+        if ($(e.target).hasClass('video-remove-control')) {
+            remove_video($(e.target).data('video-id'));
         }
     });
 });

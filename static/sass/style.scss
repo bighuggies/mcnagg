@@ -98,8 +98,10 @@ header {
 
 
 #select-user-controls {
-	.controls {
-		label {
+	input[type="checkbox"] {
+		display: none;
+
+		+ label {
 			@include btn(lightGray);
 
 			overflow: hidden;
@@ -109,17 +111,13 @@ header {
 			margin-left: 0;
 			padding: 5;
 			font-weight: bold;
-
-			&.selected-mindcracker {
-				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-				background-color: #669533;
-				color: white;
-				font-weight: bold;
-			}
 		}
 
-		input {
-			display: none;
+		&:checked + label {
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+			background-color: #669533;
+			color: white;
+			font-weight: bold;
 		}
 	}
 }

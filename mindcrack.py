@@ -3,11 +3,10 @@ import urllib2
 import time
 import datetime
 
-from collections import deque
 from multiprocessing.pool import ThreadPool
 from functools import wraps
 
-MINDCRACKERS = [
+_mindcrackers = sorted([
     {'username': u'adlingtont', 'url': u'http://www.youtube.com/adlingtont', 'name': u'Adlington'},
     {'username': u'avidyazen', 'url': u'http://www.youtube.com/avidyazen', 'name': u'Avidya'},
     {'username': u'bdoubleo100', 'url': u'http://www.youtube.com/bdoubleo100', 'name': u'BdoubleO'},
@@ -35,7 +34,7 @@ MINDCRACKERS = [
     {'username': u'generikb', 'url': u'http://www.youtube.com/generikb', 'name': u'GenerikB'},
     {'username': u'paulsoaresjr', 'url': u'http://www.youtube.com/paulsoaresjr', 'name': u'PaulSoaresJR'},
     {'username': u'vechz', 'url': u'http://www.youtube.com/vechz', 'name': u'Vechs'}
-]
+], key=lambda m: m['username'])
 
 def memoize(timeout=60):
     def memoized(func):
@@ -59,43 +58,61 @@ def memoize(timeout=60):
 
 
 def mindcrackers():
-    return sorted(MINDCRACKERS, key=lambda m: m['username'])
+    return _mindcrackers
 
 
 @memoize(timeout=300)
 def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0, filter=''):
     pool = ThreadPool(processes=len(mindcrackers))
-    q = deque()
+    pages = {mcer: 1 for mcer in mindcrackers}
+    videos = {}
 
     for mcer in mindcrackers:
-        pool.apply_async(_get_uploads, args=(mcer, num_videos, offset), callback=lambda r: q.extend(r))
+        pool.apply_async(_get_uploads, args=(mcer, pages[mcer]), callback=lambda r: videos.update(r))
 
     pool.close()
     pool.join()
 
-    return sorted(list(q), key=lambda v: v['uploaded'], reverse=True)[offset:num_videos + offset]
+    sorted_videos = []
+    videos = {u: list(v) for u, v in videos.iteritems()}
 
-def _get_uploads(username, num_videos=1, offset=0, filter=''):
-    videos = _youtube_feed(username, num_videos, offset)
+    while len(sorted_videos) <= offset + num_videos:
+        newest_mcer = "guudeboulderfist"
+        newest_vid = datetime.datetime(1,1,1)
+
+        for mcer in videos.iterkeys():
+            if not videos[mcer]:
+                pages[mcer] += 1
+                videos[mcer] = _get_uploads(mcer, pages[mcer])
+
+            if not videos[mcer]:
+                continue
+
+            if videos[mcer][-1]['uploaded'] > newest_vid:
+                newest_vid = videos[mcer][-1]['uploaded']
+                newest_mcer = mcer
+
+        sorted_videos.append(videos[newest_mcer].pop())
+
+    return sorted_videos[offset:offset + num_videos]
+
+
+@memoize(timeout=300)
+def _get_uploads(username, page=1, filter=''):
+    feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results=50' \
+        .format(username=username, offset=(50 * (page - 1)) + 1)
+
+    feed = json.loads(urllib2.urlopen(feed_url).read())
+
+    if feed['data']['totalItems'] <= 0 or feed['data']['totalItems'] < feed['data']['startIndex']:
+        return {username: []}
+
+    videos = [_process_video_data(item) for item in feed['data']['items']]
 
     if filter:
         videos = [video for video in videos if filter.lower() in video['title'].lower()]
 
-    return videos[offset:num_videos + offset]
-
-
-def _youtube_feed(feed_id, num_videos=1, offset=0):
-    num_videos = 50 if num_videos > 50 else num_videos
-
-    feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results={num_videos}' \
-        .format(username=feed_id, offset=offset + 1, num_videos=num_videos)
-
-    feed = json.loads(urllib2.urlopen(feed_url).read())
-
-    if feed['data']['totalItems'] <= 0:
-        return []
-
-    return [_process_video_data(item) for item in feed['data']['items']]
+    return {username: sorted(videos, key=lambda v: v['uploaded'])}
 
 
 def _process_video_data(video_data):
