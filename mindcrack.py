@@ -40,7 +40,8 @@ MINDCRACKERS = [
     {'username': u'zisteau', 'url': u'http://www.youtube.com/zisteau', 'name': u'Zisteau'},
     {'username': u'mindcracknetwork', 'url': u'http://www.youtube.com/mindcracknetwork', 'name': u'MindCrack Network'},
     {'username': u'generikb', 'url': u'http://www.youtube.com/generikb', 'name': u'GenerikB'},
-    {'username': u'paulsoaresjr', 'url': u'http://www.youtube.com/paulsoaresjr', 'name': u'PaulSoaresJR'}
+    {'username': u'paulsoaresjr', 'url': u'http://www.youtube.com/paulsoaresjr', 'name': u'PaulSoaresJR'},
+    {'username': u'vechz', 'url': u'http://www.youtube.com/vechz', 'name': u'Vechs'}
 ]
 
 
