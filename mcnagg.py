@@ -75,6 +75,8 @@ class HomeHandler(BaseHandler):
 
         if self.get_cookie('mcnagg-options'):
             options = get_options(self.get_cookie('mcnagg-options'))
+            options['offset'] = 0
+
             videos = self.mindcrack.videos(**options)
         else:
             options = {'mindcrackers': [], 'filter': ''}

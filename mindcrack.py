@@ -74,25 +74,28 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
     pool.join()
 
     sorted_videos = []
-    videos = {u: list(v) for u, v in videos.iteritems()}
+    videos = {u: list(v) for u, v in videos.iteritems()}  # don't want to modify cache
+
+    newest_mcer = mindcrackers[0]
+    newest_vid = datetime.datetime(1,1,1)
 
     while len(sorted_videos) <= offset + num_videos:
-        newest_mcer = "guudeboulderfist"
-        newest_vid = datetime.datetime(1,1,1)
-
-        for mcer in videos.iterkeys():
-            if not videos[mcer]:
-                pages[mcer] += 1
-                videos[mcer] = _get_uploads(mcer, pages[mcer])
-
-            if not videos[mcer]:
+        for mcer, uploads in videos.iteritems():
+            if not uploads:
                 continue
 
-            if videos[mcer][-1]['uploaded'] > newest_vid:
-                newest_vid = videos[mcer][-1]['uploaded']
+            if uploads[-1]['uploaded'] > newest_vid:
+                newest_vid = uploads[-1]['uploaded']
                 newest_mcer = mcer
 
         sorted_videos.append(videos[newest_mcer].pop())
+
+        if not videos[newest_mcer]:
+            pages[newest_mcer] += 1
+            videos.update(_get_uploads(mcer, pages[mcer]))
+
+        if not any(videos.values()):
+            break
 
     return sorted_videos[offset:offset + num_videos]
 

@@ -96,7 +96,7 @@ function options_submit(e) {
 
     var query = {
         'num-videos': num_videos,
-        'offset': offset,
+        'offset': 0,
         'mindcrackers[]': get_mindcrackers(),
         'title-filter': title_filter ? title_filter : ''
     };
