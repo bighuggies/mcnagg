@@ -55,8 +55,6 @@ function remove_video(video_id) {
 function append_videos(videos) {
     $('.loading.row').remove();
 
-    console.log(videos);
-
     var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span1"><a href="http://www.youtube.com/watch?v={{video_id}}"><img src="{{thumbnail}}" alt="{{title}} thumbnail"></a></div><div class="span7"><h2 class="video-title-duration"><span class="video-title"><a href="http://www.youtube.com/watch?v={{video_id}}">{{title}}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{uploader}}">{{uploader}}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls span1"><div class="pull-right"><a href="#"> <i data-video-id="{{video_id}}" class="icon-remove video-remove-control"></i></a></div></div></div><div class="divider row" data-video-id="{{video_id}}"><div class="span9"><hr class="video-divider"></div></div>{{/videos}}';
 
     var video_view = {
@@ -81,7 +79,6 @@ function append_videos(videos) {
 function fetch_videos(query_data, callback) {
     $('.video-list').append('<div class="loading row"><div class="span9" style="text-align:center;padding-top:10px"><img class="loading-gif" src="static/img/loading.gif" /></div></div>');
     $('#show-more').hide('fast', function() {
-        console.log(query_data);
         $.getJSON('/videos', query_data, callback);
     });
 }

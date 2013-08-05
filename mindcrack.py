@@ -86,7 +86,7 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
 
         if not mcer_uploads:
             pages[most_recent_uploader] += 1
-            mcer_uploads.append(_get_uploads(most_recent_uploader, pages[most_recent_uploader]))
+            mcer_uploads.extend(_get_uploads(most_recent_uploader, pages[most_recent_uploader]))
 
         if not mcer_uploads:
             del videos[most_recent_uploader]
@@ -102,9 +102,9 @@ def _get_uploads(username, page=1, filter=''):
     feed = json.loads(urllib2.urlopen(feed_url).read())
 
     if feed['data']['totalItems'] <= 0 or feed['data']['totalItems'] < feed['data']['startIndex']:
-        return {username: []}
-
-    videos = [_process_video_data(item) for item in feed['data']['items']]
+        videos = []
+    else:
+        videos = [_process_video_data(item) for item in feed['data']['items']]
 
     if filter:
         videos = [video for video in videos if filter.lower() in video['title'].lower()]
