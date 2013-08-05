@@ -4,6 +4,7 @@ import time
 import datetime
 
 from multiprocessing.pool import ThreadPool
+from collections import deque
 from functools import wraps
 
 _mindcrackers = sorted([
@@ -65,37 +66,30 @@ def mindcrackers():
 def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0, filter=''):
     pool = ThreadPool(processes=len(mindcrackers))
     pages = {mcer: 1 for mcer in mindcrackers}
-    videos = {}
+    uploads = deque()
 
     for mcer in mindcrackers:
-        pool.apply_async(_get_uploads, args=(mcer, pages[mcer]), callback=lambda r: videos.update(r))
+        pool.apply_async(_get_uploads, args=(mcer, pages[mcer]), callback=lambda r: uploads.append(r))
 
     pool.close()
     pool.join()
 
+    videos = {u[0]['uploader']: list(u) for u in uploads}
     sorted_videos = []
-    videos = {u: list(v) for u, v in videos.iteritems()}  # don't want to modify cache
 
-    newest_mcer = mindcrackers[0]
-    newest_vid = datetime.datetime(1,1,1)
+    while any(videos.values()) and len(sorted_videos) <= offset + num_videos:
+        most_recent_uploads = [u[-1] for u in videos.itervalues()]
+        most_recent_uploader = max(most_recent_uploads, key=lambda u: u['uploaded'])['uploader']
 
-    while len(sorted_videos) <= offset + num_videos:
-        for mcer, uploads in videos.iteritems():
-            if not uploads:
-                continue
+        mcer_uploads = videos[most_recent_uploader]
+        sorted_videos.append(mcer_uploads.pop())
 
-            if uploads[-1]['uploaded'] > newest_vid:
-                newest_vid = uploads[-1]['uploaded']
-                newest_mcer = mcer
+        if not mcer_uploads:
+            pages[most_recent_uploader] += 1
+            mcer_uploads.append(_get_uploads(most_recent_uploader, pages[most_recent_uploader]))
 
-        sorted_videos.append(videos[newest_mcer].pop())
-
-        if not videos[newest_mcer]:
-            pages[newest_mcer] += 1
-            videos.update(_get_uploads(mcer, pages[mcer]))
-
-        if not any(videos.values()):
-            break
+        if not mcer_uploads:
+            del videos[most_recent_uploader]
 
     return sorted_videos[offset:offset + num_videos]
 
@@ -115,7 +109,7 @@ def _get_uploads(username, page=1, filter=''):
     if filter:
         videos = [video for video in videos if filter.lower() in video['title'].lower()]
 
-    return {username: sorted(videos, key=lambda v: v['uploaded'])}
+    return sorted(videos, key=lambda v: v['uploaded'])
 
 
 def _process_video_data(video_data):
