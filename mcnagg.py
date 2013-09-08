@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import mindcrack
-import util
 
 import os.path
 import json
@@ -22,6 +21,7 @@ INDEX = ''
 
 def get_options(options):
     options = urlparse.parse_qs(options)
+    print(options)
 
     if 'offset' in options:
         options['offset'] = int(options['offset'][0])
@@ -30,10 +30,10 @@ def get_options(options):
         options['num_videos'] = int(options['num_videos'][0])
 
     # Filter is a non-optional option
-    if 'filter' in options:
-        options['filter'] = options['filter'][0].lower()
+    if 'title-filter' in options:
+        options['title-filter'] = options['title-filter'][0].lower()
     else:
-        options['filter'] = ''
+        options['title-filter'] = ''
 
     return options
 
@@ -79,10 +79,10 @@ class HomeHandler(BaseHandler):
 
             videos = self.mindcrack.videos(**options)
         else:
-            options = {'mindcrackers': [], 'filter': ''}
+            options = {'mindcrackers': [], 'title-filter': ''}
             videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
 
-        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=options['mindcrackers'], filter=options['filter'])
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=options['mindcrackers'], title_filter=options['title-filter'])
 
 
 class VideosHandler(BaseHandler):
@@ -91,7 +91,7 @@ class VideosHandler(BaseHandler):
             mindcrackers=self.get_arguments('mindcrackers[]'),
             num_videos=int(self.get_argument('num-videos')),
             offset=int(self.get_argument('offset')),
-            filter=self.get_argument('title-filter', default='')
+            title_filter=self.get_argument('title-filter', default='')
         )
 
         videos = self.mindcrack.videos(**options)
@@ -109,8 +109,8 @@ class VideoModule(tornado.web.UIModule):
 
 
 class OptionsModule(tornado.web.UIModule):
-    def render(self, mindcrackers, checked, filter):
-        return self.render_string("modules/options.html", mindcrackers=mindcrackers, checked=checked, filter=filter)
+    def render(self, mindcrackers, checked, title_filter):
+        return self.render_string("modules/options.html", mindcrackers=mindcrackers, checked=checked, title_filter=title_filter)
 
 
 class TwitterModule(tornado.web.UIModule):

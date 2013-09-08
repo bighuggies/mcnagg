@@ -1,6 +1,8 @@
 import math
 
 from datetime import datetime, timedelta
+from functools import wraps
+
 
 def get_fancy_time(date):
     seconds = (datetime.utcnow() - date).total_seconds()
@@ -37,3 +39,26 @@ def get_HMS(time):
         return ':'.join(parts[1:])
     else:
         return hms
+
+
+def memoize(timeout=60):
+    def memoized(func):
+        cache = {}
+
+        @wraps(func)
+        def memoizer(*args, **kwargs):
+            curtime = time.time()
+            key = str(args) + str(kwargs)
+
+            if key not in cache:
+                cache[key] = {
+                    'value': func(*args, **kwargs), 'timestamp': curtime}
+            elif curtime - cache[key]['timestamp'] > timeout:
+                del cache[key]
+                cache[key] = {
+                    'value': func(*args, **kwargs), 'timestamp': curtime}
+
+            return cache[key]['value']
+
+        return memoizer
+    return memoized

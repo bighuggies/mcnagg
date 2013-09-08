@@ -38,7 +38,7 @@ nosetests.xml
 .pydevproject
 
 # Virtualenv
-VENV
+venv
 
 # Compass
 .sass-cache
