@@ -4,8 +4,6 @@ import datetime
 import heapq
 import itertools
 
-import util
-
 from multiprocessing.pool import ThreadPool
 from collections import deque
 
@@ -166,12 +164,3 @@ class Video(object):
 
     def __repr__(self):
         return self.__str__()
-
-def test():
-    print("Hello")
-    i = 0
-
-    while True:
-        print("Returning next i")
-        yield i
-        i += 0
