@@ -7,8 +7,6 @@ import json
 import urllib
 import urlparse
 
-from datetime import datetime
-
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
