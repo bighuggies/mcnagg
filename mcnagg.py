@@ -21,7 +21,6 @@ INDEX = ''
 
 def get_options(options):
     options = urlparse.parse_qs(options)
-    print(options)
 
     if 'offset' in options:
         options['offset'] = int(options['offset'][0])
@@ -30,10 +29,10 @@ def get_options(options):
         options['num_videos'] = int(options['num_videos'][0])
 
     # Filter is a non-optional option
-    if 'title-filter' in options:
-        options['title-filter'] = options['title-filter'][0].lower()
+    if 'title_filter' in options:
+        options['title_filter'] = options['title_filter'][0].lower()
     else:
-        options['title-filter'] = ''
+        options['title_filter'] = ''
 
     return options
 
@@ -79,10 +78,10 @@ class HomeHandler(BaseHandler):
 
             videos = self.mindcrack.videos(**options)
         else:
-            options = {'mindcrackers': [], 'title-filter': ''}
+            options = {'mindcrackers': [], 'title_filter': ''}
             videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
 
-        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=options['mindcrackers'], title_filter=options['title-filter'])
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=options['mindcrackers'], title_filter=options['title_filter'])
 
 
 class VideosHandler(BaseHandler):
@@ -91,15 +90,13 @@ class VideosHandler(BaseHandler):
             mindcrackers=self.get_arguments('mindcrackers[]'),
             num_videos=int(self.get_argument('num-videos')),
             offset=int(self.get_argument('offset')),
-            title_filter=self.get_argument('title-filter', default='')
+            title_filter=self.get_argument('title_filter', default='')
         )
 
         videos = self.mindcrack.videos(**options)
 
-        dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
-
         self.set_cookie('mcnagg-options', urllib.urlencode(options, True))
-        self.write(json.dumps(videos, default=dthandler))
+        self.write(json.dumps([v.serialize() for v in videos]))
         self.finish()
 
 

@@ -4,10 +4,12 @@ import datetime
 import heapq
 import itertools
 
+import util
+
 from multiprocessing.pool import ThreadPool
 from collections import deque
 
-_mindcrackers = [
+_mindcrackers = sorted([
     {'username': u'adlingtont', 'url':
         u'http://www.youtube.com/adlingtont', 'name': u'Adlington'},
     {'username': u'avidyazen', 'url':
@@ -62,11 +64,11 @@ _mindcrackers = [
         u'http://www.youtube.com/paulsoaresjr', 'name': u'PaulSoaresJR'},
     {'username': u'vechz', 'url':
         u'http://www.youtube.com/vechz', 'name': u'Vechs'}
-]
+], key=lambda m: m['username'])
 
 
 def mindcrackers():
-    return sorted(_mindcrackers, key=lambda m: m['username'])
+    return _mindcrackers
 
 
 def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0, title_filter=''):
@@ -79,21 +81,29 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
     pool.close()
     pool.join()
 
+    videos = list(itertools.islice(heapq.merge(*uploads), offset, offset + num_videos))
+    print(len(videos))
+    return videos
+
     return list(itertools.islice(heapq.merge(*uploads), offset, offset + num_videos))
 
 
 def video_generator(username, title_filter=''):
-    page = 1
-    videos = None
+    page = [1]
+    videos = _get_uploads(username, page[0], title_filter)
 
-    while True:
-        if not videos:
-            videos = _get_uploads(username, page, title_filter)
-            page += 1
+    def _next_video(username, title_filter):
+        while True:
+            if not videos:
+                videos.extend(_get_uploads(username, page[0], title_filter))
+                page[0] += 1
 
-        yield videos.pop()
+            yield videos.pop()
+
+    return _next_video(username, title_filter)
 
 
+# @util.memoize(timeout=60)
 def _get_uploads(username, page, title_filter=''):
     feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results=50' \
         .format(username=username, offset=(50 * (page - 1)) + 1)
@@ -104,6 +114,9 @@ def _get_uploads(username, page, title_filter=''):
         raise StopIteration("No videos")
     else:
         videos = [Video(item) for item in feed['data']['items'] if title_filter.lower() in item['title'].lower()]
+
+    if not videos:
+        raise StopIteration("No matching videos")
 
     return list(reversed(videos))
 
@@ -121,14 +134,25 @@ class Video(object):
         super(Video, self).__init__()
         self.process_raw_video(raw_data)
 
-    def process_raw_video(self, raw_video):
-        self.video_id = raw_video['id'],
-        self.title = raw_video['title'],
-        self.duration = raw_video['duration'],
-        self.uploader = raw_video['uploader'],
-        self.uploaded = datetime.datetime.strptime(raw_video['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ"),
-        self.description = raw_video['description'],
-        self.thumbnail = raw_video['thumbnail']['hqDefault']
+    def process_raw_video(self, raw_data):
+        self.video_id = raw_data['id']
+        self.title = raw_data['title']
+        self.duration = raw_data['duration']
+        self.uploader = raw_data['uploader']
+        self.uploaded = datetime.datetime.strptime(raw_data['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ")
+        self.description = raw_data['description']
+        self.thumbnail = raw_data['thumbnail']['hqDefault']
+
+    def serialize(self):
+        return {
+            "video_id": self.video_id,
+            "title": self.title,
+            "duration": self.duration,
+            "uploader": self.uploader,
+            "uploaded": self.uploaded.isoformat(),
+            "description": self.description,
+            "thumbnail": self.thumbnail
+        }
 
     def __eq__(self, other):
         return self.uploaded == other.uploaded
@@ -142,3 +166,12 @@ class Video(object):
 
     def __repr__(self):
         return self.__str__()
+
+def test():
+    print("Hello")
+    i = 0
+
+    while True:
+        print("Returning next i")
+        yield i
+        i += 0

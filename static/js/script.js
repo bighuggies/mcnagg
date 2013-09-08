@@ -95,7 +95,7 @@ function options_submit(e) {
         'num-videos': num_videos,
         'offset': 0,
         'mindcrackers[]': get_mindcrackers(),
-        'title-filter': title_filter ? title_filter : ''
+        'title_filter': title_filter ? title_filter : ''
     };
 
     remove_videos();
@@ -115,7 +115,7 @@ function show_more_videos(e) {
         'num-videos': num_videos,
         'offset': offset,
         'mindcrackers[]': get_mindcrackers(),
-        'title-filter': title_filter ? title_filter : ''
+        'title_filter': title_filter ? title_filter : ''
     };
 
     fetch_videos(query, append_videos);
