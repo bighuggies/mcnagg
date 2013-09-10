@@ -76,7 +76,7 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
     uploads = deque()
 
     for mcer in mindcrackers:
-        pool.apply_async(video_generator, args=(mcer, title_filter), callback=lambda r: uploads.append(r))
+        pool.apply_async(_video_generator, args=(mcer, title_filter), callback=lambda r: uploads.append(r))
 
     pool.close()
     pool.join()
@@ -88,7 +88,7 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
     return list(itertools.islice(heapq.merge(*uploads), offset, offset + num_videos))
 
 
-def video_generator(username, title_filter=''):
+def _video_generator(username, title_filter=''):
     page = [1]
     videos = _get_uploads(username, page[0], title_filter)
 
