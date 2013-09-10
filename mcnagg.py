@@ -13,18 +13,11 @@ import tornado.options
 import tornado.web
 
 
-VIDEOS_PER_PAGE = 30
-INDEX = ''
-
-
 def get_options(options):
     options = urlparse.parse_qs(options)
 
     if 'offset' in options:
         options['offset'] = int(options['offset'][0])
-
-    if 'num_videos' in options:
-        options['num_videos'] = int(options['num_videos'][0])
 
     # Filter is a non-optional option
     if 'title_filter' in options:
@@ -44,7 +37,8 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            ui_modules={"Video": VideoModule, "Options": OptionsModule, "Twitter": TwitterModule, "Reddit": RedditModule},
+            ui_modules={"Video": VideoModule, "Options": OptionsModule,
+                        "Twitter": TwitterModule, "Reddit": RedditModule},
             # xsrf_cookies=True,
             # cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             # login_url="/auth/login",
@@ -77,16 +71,16 @@ class HomeHandler(BaseHandler):
             videos = self.mindcrack.videos(**options)
         else:
             options = {'mindcrackers': [], 'title_filter': ''}
-            videos = self.mindcrack.videos(num_videos=VIDEOS_PER_PAGE)
+            videos = self.mindcrack.videos()
 
-        self.render("body.html", videos=videos, mindcrackers=mindcrackers, checked=options['mindcrackers'], title_filter=options['title_filter'])
+        self.render("body.html", videos=videos, mindcrackers=mindcrackers,
+                    checked=options['mindcrackers'], title_filter=options['title_filter'])
 
 
 class VideosHandler(BaseHandler):
     def get(self):
         options = dict(
             mindcrackers=self.get_arguments('mindcrackers[]'),
-            num_videos=int(self.get_argument('num-videos')),
             offset=int(self.get_argument('offset')),
             title_filter=self.get_argument('title_filter', default='')
         )

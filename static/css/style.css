@@ -1,41 +1,37 @@
-/* line 47, ../sass/style.scss */
-.btn {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-}
-
-/* line 51, ../sass/style.scss */
+/* line 6, ../sass/style.scss */
 i {
   font-size: 16pt;
   margin-left: 5px;
   margin-right: 5px;
 }
 
-/* line 57, ../sass/style.scss */
+/* line 12, ../sass/style.scss */
 body {
   background-image: url(../../static/img/gray_jean.png);
 }
 @media (max-width: 767px) {
-  /* line 57, ../sass/style.scss */
+  /* line 12, ../sass/style.scss */
   body {
     padding: 0;
   }
 }
 
-/* line 65, ../sass/style.scss */
+/* line 21, ../sass/style.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Telex", "sans-serif";
+}
+
+/* line 26, ../sass/style.scss */
 header {
   margin-bottom: 40px;
   border-bottom: 1px solid #e6e6e6;
 }
-/* line 69, ../sass/style.scss */
+/* line 30, ../sass/style.scss */
 header h1 {
   display: inline-block;
   color: #2FA4E7;
 }
-/* line 74, ../sass/style.scss */
+/* line 35, ../sass/style.scss */
 header h2 {
   display: inline-block;
   float: right;
@@ -44,7 +40,7 @@ header h2 {
   color: #317EAC;
 }
 
-/* line 83, ../sass/style.scss */
+/* line 44, ../sass/style.scss */
 .container {
   padding-left: 30px;
   padding-right: 30px;
@@ -54,226 +50,99 @@ header h2 {
   background-image: url(../../static/img/brillant.png);
 }
 
-/* line 91, ../sass/style.scss */
+/* line 52, ../sass/style.scss */
 #filter-options-btn {
   font-size: 18px;
   font-weight: bold;
-  display: inline-block;
-  padding: 4px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 20px;
-  color: #2fa4e7;
-  text-align: center;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  vertical-align: middle;
-  cursor: pointer;
-  background-color: whitesmoke;
-  border: 1px solid #c2c2c2;
   margin-bottom: 10px;
 }
-/* line 21, ../sass/style.scss */
-#filter-options-btn:hover, #filter-options-btn:active {
-  color: #2fa4e7;
-  background-color: #e8e8e8;
-}
-/* line 26, ../sass/style.scss */
-#filter-options-btn:hover {
-  color: #2fa4e7;
-  text-decoration: none;
-  background-position: 0 -15px;
-  -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
-  transition: background-position 0.1s linear;
-}
-/* line 33, ../sass/style.scss */
-#filter-options-btn:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-/* line 39, ../sass/style.scss */
-#filter-options-btn:active {
-  background-color: #cccccc \9;
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-}
 
-/* line 101, ../sass/style.scss */
+/* line 60, ../sass/style.scss */
 #select-user-controls input[type="checkbox"] {
   display: none;
 }
-/* line 104, ../sass/style.scss */
+/* line 63, ../sass/style.scss */
 #select-user-controls input[type="checkbox"] + label {
-  display: inline-block;
-  padding: 4px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 20px;
-  color: #333333;
-  text-align: center;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  vertical-align: middle;
-  cursor: pointer;
-  background-color: lightgrey;
-  border: 1px solid #a0a0a0;
-  overflow: hidden;
-  white-space: nowrap;
   font-size: 8pt;
-  margin-bottom: 10px;
-  margin-left: 0;
-  padding: 5;
   font-weight: bold;
+  margin: 0 2px 5px 0;
 }
-/* line 21, ../sass/style.scss */
-#select-user-controls input[type="checkbox"] + label:hover, #select-user-controls input[type="checkbox"] + label:active {
-  color: #333333;
-  background-color: #c6c6c6;
-}
-/* line 26, ../sass/style.scss */
-#select-user-controls input[type="checkbox"] + label:hover {
-  color: #333333;
-  text-decoration: none;
-  background-position: 0 -15px;
-  -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
-  transition: background-position 0.1s linear;
-}
-/* line 33, ../sass/style.scss */
-#select-user-controls input[type="checkbox"] + label:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-/* line 39, ../sass/style.scss */
-#select-user-controls input[type="checkbox"] + label:active {
-  background-color: #cccccc \9;
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-/* line 116, ../sass/style.scss */
+/* line 69, ../sass/style.scss */
 #select-user-controls input[type="checkbox"]:checked + label {
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #669533;
   color: white;
-  font-weight: bold;
 }
 
-/* line 125, ../sass/style.scss */
+/* line 76, ../sass/style.scss */
 #select-all, #deselect-all {
-  display: inline-block;
-  padding: 4px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 20px;
-  color: #333333;
-  text-align: center;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  vertical-align: middle;
-  cursor: pointer;
-  background-color: whitesmoke;
-  border: 1px solid #c2c2c2;
-}
-/* line 21, ../sass/style.scss */
-#select-all:hover, #select-all:active, #deselect-all:hover, #deselect-all:active {
-  color: #333333;
-  background-color: #e8e8e8;
-}
-/* line 26, ../sass/style.scss */
-#select-all:hover, #deselect-all:hover {
-  color: #333333;
-  text-decoration: none;
-  background-position: 0 -15px;
-  -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
-  transition: background-position 0.1s linear;
-}
-/* line 33, ../sass/style.scss */
-#select-all:focus, #deselect-all:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-/* line 39, ../sass/style.scss */
-#select-all:active, #deselect-all:active {
-  background-color: #cccccc \9;
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-top: 5px;
 }
 
-/* line 130, ../sass/style.scss */
+/* line 81, ../sass/style.scss */
 .video {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 134, ../sass/style.scss */
+/* line 85, ../sass/style.scss */
 .video .video-thumbnail {
   padding-top: 7px;
 }
-/* line 137, ../sass/style.scss */
+/* line 88, ../sass/style.scss */
 .video .video-thumbnail img {
   border: 1px solid black;
 }
-/* line 142, ../sass/style.scss */
+/* line 93, ../sass/style.scss */
 .video .video-title {
   font-size: 14pt;
 }
 @media (max-width: 767px) {
-  /* line 142, ../sass/style.scss */
+  /* line 93, ../sass/style.scss */
   .video .video-title {
     font-size: 12pt;
   }
 }
-/* line 150, ../sass/style.scss */
+/* line 101, ../sass/style.scss */
 .video .video-title-duration {
   margin: 0;
   /*margin-top: 5px;
   margin-bottom: 5px;*/
 }
-/* line 156, ../sass/style.scss */
+/* line 107, ../sass/style.scss */
 .video .video-controls {
   padding-top: 7px;
 }
-/* line 160, ../sass/style.scss */
+/* line 110, ../sass/style.scss */
+.video .video-controls a {
+  padding: 6px;
+}
+/* line 115, ../sass/style.scss */
 .video .video-duration {
   font-size: 13px;
   font-weight: normal;
 }
-/* line 165, ../sass/style.scss */
+/* line 120, ../sass/style.scss */
 .video .video-uploader {
   font-size: 12pt;
   font-weight: bold;
 }
 @media (max-width: 767px) {
-  /* line 165, ../sass/style.scss */
+  /* line 120, ../sass/style.scss */
   .video .video-uploader {
     font-size: 10pt;
   }
 }
 @media (max-width: 767px) {
-  /* line 174, ../sass/style.scss */
+  /* line 129, ../sass/style.scss */
   .video .video-uploaded {
     font-size: 8pt;
   }
 }
-/* line 180, ../sass/style.scss */
+/* line 135, ../sass/style.scss */
 .video .video-controls a:hover {
   text-decoration: none;
 }
 
-/* line 185, ../sass/style.scss */
+/* line 140, ../sass/style.scss */
 .video-divider {
   margin: 1px;
   padding: 1px;
@@ -281,13 +150,13 @@ header h2 {
   border-bottom: 1px solid #e6e6e6;
 }
 
-/* line 192, ../sass/style.scss */
+/* line 147, ../sass/style.scss */
 .twitter, .reddit {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* line 198, ../sass/style.scss */
+/* line 153, ../sass/style.scss */
 .twitter .twtr-timeline {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -296,7 +165,7 @@ header h2 {
   border-radius: 0;
   border-bottom: 1px solid #369CD7;
 }
-/* line 203, ../sass/style.scss */
+/* line 158, ../sass/style.scss */
 .twitter .twtr-doc {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -304,35 +173,35 @@ header h2 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 207, ../sass/style.scss */
+/* line 162, ../sass/style.scss */
 .twitter .twtr-ft {
   display: none;
 }
 
-/* line 213, ../sass/style.scss */
+/* line 168, ../sass/style.scss */
 .reddit .rembeddit {
   border: 1px solid #369CD7 !important;
 }
-/* line 217, ../sass/style.scss */
+/* line 172, ../sass/style.scss */
 .reddit .reddit-header {
   background-color: #369CD7 !important;
 }
-/* line 220, ../sass/style.scss */
+/* line 175, ../sass/style.scss */
 .reddit .reddit-header h4 {
   color: white;
 }
 
-/* line 226, ../sass/style.scss */
+/* line 181, ../sass/style.scss */
 #show-more {
   text-align: center;
 }
 
-/* line 230, ../sass/style.scss */
+/* line 185, ../sass/style.scss */
 .footer-list {
   text-align: center;
 }
 
-/* line 234, ../sass/style.scss */
+/* line 189, ../sass/style.scss */
 .footer-list li {
   display: inline-block;
   list-style: none;

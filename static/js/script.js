@@ -55,7 +55,7 @@ function remove_video(video_id) {
 function append_videos(videos) {
     $('.loading.row').remove();
 
-    var video_template = '{{#videos}}<div class="video row" data-video-id="{{video_id}}"><div class="video-thumbnail span1"><a href="http://www.youtube.com/watch?v={{video_id}}"><img src="{{thumbnail}}" alt="{{title}} thumbnail"></a></div><div class="span7"><h2 class="video-title-duration"><span class="video-title"><a href="http://www.youtube.com/watch?v={{video_id}}">{{title}}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{uploader}}">{{uploader}}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls span1"><div class="pull-right"><a href="#"> <i data-video-id="{{video_id}}" class="icon-remove video-remove-control"></i></a></div></div></div><div class="divider row" data-video-id="{{video_id}}"><div class="span9"><hr class="video-divider"></div></div>{{/videos}}';
+    var video_template = '{{#videos}}<div class="video row" data-video-id="{{ video_id }}"><div class="video-thumbnail col-md-2"><a href="http://www.youtube.com/watch?v={{ video_id }}"><img width="120px" src="{{ thumbnail }}" alt="{{ title }} thumbnail"></a></div><div class="col-md-9"><h2 class="video-title-duration"><span class="video-title"><a href="http://www.youtube.com/watch?v={{ video_id }}">{{ title }}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{ uploader }}">{{ uploader }}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls col-md-1"><div class="pull-right"><a href="#"> <i data-video-id="{{ video_id }}" class="icon-remove video-remove-control"></i></a></div></div></div><div class="divider row" data-video-id="{{ video_id }}"><div class="col-md-12"><hr class="video-divider"></div></div>{{/videos}}';
 
     var video_view = {
         videos: videos,
@@ -87,12 +87,10 @@ function fetch_videos(query_data, callback) {
 function options_submit(e) {
     e.preventDefault();
 
-    var num_videos = $('#number-videos').val();
     var title_filter = $('#title-filter').val();
     var offset = $('.video.row').length;
 
     var query = {
-        'num-videos': num_videos,
         'offset': 0,
         'mindcrackers[]': get_mindcrackers(),
         'title_filter': title_filter ? title_filter : ''
@@ -107,12 +105,10 @@ function options_submit(e) {
 function show_more_videos(e) {
     e.preventDefault();
 
-    var num_videos = $('#number-videos').val();
     var title_filter = $('#title-filter').val();
     var offset = $('.video.row').length;
 
     var query = {
-        'num-videos': num_videos,
         'offset': offset,
         'mindcrackers[]': get_mindcrackers(),
         'title_filter': title_filter ? title_filter : ''

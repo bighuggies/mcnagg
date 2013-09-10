@@ -73,7 +73,7 @@ def mindcrackers():
     return _mindcrackers
 
 
-def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0, title_filter=''):
+def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=30, offset=0, title_filter=''):
     pool = ThreadPool(processes=len(mindcrackers))
     uploads = deque()
 
