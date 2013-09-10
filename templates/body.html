@@ -2,37 +2,41 @@
 
 {% block body %}
 <div class="row">
-    <div class="span12">
-        <button id="filter-options-btn" data-toggle="collapse" data-target="#feed-options">
+    <div class="col-md-12">
+        <button id="filter-options-btn" class="btn btn-primary" data-toggle="collapse" data-target="#feed-options">
             Video Filters <i id="feed-options-icon" class="icon-chevron-down"></i>
         </button>
     </div>
 </div>
 
-<div class="row">
-    <div id="feed-options" class="span12 collapse">
+<div class="row feed-options-container">
+    <div id="feed-options" class="col-md-12 collapse">
         <div class="accordion-inner">{{ modules.Options(mindcrackers, checked, title_filter) }}</div>
+    </div>
+    <div class="col-md-12">
+        <hr class="video-divider">
     </div>
 </div>
 
 <div class="row">
-    <div class="video-list span9">
+    <div class="video-list col-md-9">
         {% for video in videos %}
         {{ modules.Video(video) }}
         <div class="divider row" data-video-id="{{ video.video_id }}">
-            <div class="span9">
-                <hr class="video-divider"></div>
+            <div class="col-md-12">
+                <hr class="video-divider">
+            </div>
         </div>
         {% end %}
         <div id="show-more" class="row">
-            <div class="span9">
+            <div class="col-md-12">
                 <a href="#">
                     <h2>Show more</h2> <i id="show-more-icon" class="icon-chevron-down"></i>
                 </a>
             </div>
         </div>
     </div>
-    <div class="span3">
+    <div class="col-md-3">
         <div class="twitter">{{modules.Twitter()}}</div>
         <div class="reddit">{{modules.Reddit()}}</div>
     </div>

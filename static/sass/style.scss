@@ -3,51 +3,6 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/transition";
 
-@mixin btn($color: #f5f5f5, $font-color: #333333) {
-	display: inline-block;
-	padding: 4px 12px;
-	margin-bottom: 0;
-	font-size: 14px;
-	line-height: 20px;
-	color: $font-color;
-	text-align: center;
-	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-	vertical-align: middle;
-	cursor: pointer;
-	background-color: $color;
-	border: 1px solid darken($color, 20%);
-
-	&:hover,
-	&:active, {
-		color: $font-color;
-		background-color: darken($color, 5%);
-	}
-
-	&:hover {
-		color: $font-color;
-		text-decoration: none;
-		background-position: 0 -15px;
-		@include transition(background-position 0.1s linear);
-	}
-
-	&:focus {
-		outline: thin dotted #333;
-		outline: 5px auto -webkit-focus-ring-color;
-		outline-offset: -2px;
-	}
-
-	&:active {
-		background-color: #cccccc \9;
-		background-image: none;
-		outline: 0;
-		@include box-shadow(inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05));
-	}
-}
-
-.btn {
-	@include border-radius(0);
-}
-
 i {
 	font-size: 16pt;
 	margin-left: 5px;
@@ -55,12 +10,18 @@ i {
 }
 
 body {
+	// font-family: "Telex", "sans-serif";
 	background-image: url(../../static/img/gray_jean.png);
 
 	@media (max-width: 767px) {
 		padding: 0;
 	}
 }
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: "Telex", "sans-serif";
+}
+
 
 header {
 	margin-bottom: 40px;
@@ -91,39 +52,29 @@ header {
 #filter-options-btn {
 	font-size: 18px;
 	font-weight: bold;
-	@include btn($font-color: #2FA4E7);
+	// @include btn($font-color: #2FA4E7);
 	margin-bottom: 10px;
 }
-
-
 
 #select-user-controls {
 	input[type="checkbox"] {
 		display: none;
 
 		+ label {
-			@include btn(lightGray);
-
-			overflow: hidden;
-			white-space: nowrap;
 			font-size: 8pt;
-			margin-bottom: 10px;
-			margin-left: 0;
-			padding: 5;
 			font-weight: bold;
+			margin: 0 2px 5px 0;
 		}
 
 		&:checked + label {
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 			background-color: #669533;
 			color: white;
-			font-weight: bold;
 		}
 	}
 }
 
 #select-all, #deselect-all {
-	@include btn;
+	margin-top: 5px;
 }
 
 
@@ -155,6 +106,10 @@ header {
 
 	.video-controls {
 		padding-top: 7px;
+
+		a {
+			padding: 6px;
+		}
 	}
 
 	.video-duration {

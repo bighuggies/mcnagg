@@ -4,6 +4,8 @@ import datetime
 import heapq
 import itertools
 
+import util
+
 from multiprocessing.pool import ThreadPool
 from collections import deque
 
@@ -69,7 +71,7 @@ def mindcrackers():
     return _mindcrackers
 
 
-def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, offset=0, title_filter=''):
+def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=30, offset=0, title_filter=''):
     pool = ThreadPool(processes=len(mindcrackers))
     uploads = deque()
 
@@ -88,7 +90,7 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
 
 def _video_generator(username, title_filter=''):
     page = [1]
-    videos = _get_uploads(username, page[0], title_filter)
+    videos = list(_get_uploads(username, page[0], title_filter))
 
     def _next_video(username, title_filter):
         while True:
@@ -101,7 +103,7 @@ def _video_generator(username, title_filter=''):
     return _next_video(username, title_filter)
 
 
-# @util.memoize(timeout=60)
+@util.memoize(timeout=60)
 def _get_uploads(username, page, title_filter=''):
     feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results=50' \
         .format(username=username, offset=(50 * (page - 1)) + 1)
