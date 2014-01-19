@@ -165,6 +165,7 @@ $(document).ready(function() {
 
     $(".video-list").on('click', function(e) {
         if ($(e.target).hasClass('video-remove-control')) {
+            e.preventDefault();
             remove_video($(e.target).data('video-id'));
         }
     });
