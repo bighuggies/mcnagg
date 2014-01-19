@@ -81,10 +81,6 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
     pool.close()
     pool.join()
 
-    videos = list(itertools.islice(heapq.merge(*uploads), offset, offset + num_videos))
-    print(len(videos))
-    return videos
-
     return list(itertools.islice(heapq.merge(*uploads), offset, offset + num_videos))
 
 
@@ -139,7 +135,8 @@ class Video(object):
         self.title = raw_data['title']
         self.duration = raw_data['duration']
         self.uploader = raw_data['uploader']
-        self.uploaded = datetime.datetime.strptime(raw_data['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ")
+        self.uploaded = datetime.datetime.strptime(
+            raw_data['uploaded'], "%Y-%m-%dT%H:%M:%S.%fZ")
         self.description = raw_data['description']
         self.thumbnail = raw_data['thumbnail']['hqDefault']
 
@@ -158,7 +155,8 @@ class Video(object):
         return self.uploaded == other.uploaded
 
     def __gt__(self, other):
-        # This is reversed because heapq.merge expects iterators to be ascending
+        # This is reversed because heapq.merge expects iterators to be
+        # ascending
         return self.uploaded < other.uploaded
 
     def __str__(self):
