@@ -39,6 +39,7 @@ nosetests.xml
 
 # Virtualenv
 venv
+winenv
 
 # Compass
 .sass-cache
