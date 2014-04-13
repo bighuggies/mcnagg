@@ -87,15 +87,18 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=1, o
 
 
 def _video_generator(username, title_filter=''):
-    page = 1
-    videos = []
+    page = [1]
+    videos = list(_get_uploads(username, page[0], title_filter))
 
-    while True:
-        if not videos:
-            videos.extend(_get_uploads(username, page, title_filter))
-            page += 1
+    def _next_video(username, title_filter):
+        while True:
+            if not videos:
+                page[0] += 1
+                videos.extend(_get_uploads(username, page[0], title_filter))
 
-        yield videos.pop()
+            yield videos.pop()
+
+    return _next_video(username, title_filter)
 
 
 @util.memoize(timeout=300)
