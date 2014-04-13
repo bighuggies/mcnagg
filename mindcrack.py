@@ -4,6 +4,8 @@ import datetime
 import heapq
 import itertools
 
+import util
+
 from multiprocessing.pool import ThreadPool
 from collections import deque
 
@@ -96,7 +98,7 @@ def _video_generator(username, title_filter=''):
         yield videos.pop()
 
 
-# @util.memoize(timeout=60)
+@util.memoize(timeout=300)
 def _get_uploads(username, page, title_filter=''):
     feed_url = 'https://gdata.youtube.com/feeds/api/users/{username}/uploads?v=2&alt=jsonc&start-index={offset}&max-results=50' \
         .format(username=username, offset=(50 * (page - 1)) + 1)
