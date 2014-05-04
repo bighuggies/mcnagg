@@ -7,7 +7,7 @@ i {
 
 /* line 12, ../sass/style.scss */
 body {
-  font-family: "Helvetica", "Arial", "sans-serif";
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* line 16, ../sass/style.scss */
@@ -15,19 +15,29 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Noto Sans', sans-serif;
 }
 
-/* line 21, ../sass/style.scss */
+/* line 20, ../sass/style.scss */
+h2 > a {
+  color: #428bca;
+}
+
+/* line 24, ../sass/style.scss */
+a {
+  color: #2fa4e7;
+}
+
+/* line 28, ../sass/style.scss */
 header {
   margin-bottom: 50px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
-/* line 26, ../sass/style.scss */
+/* line 33, ../sass/style.scss */
 header h1 {
   display: inline-block;
   color: #2FA4E7;
   margin-right: 20px;
 }
-/* line 32, ../sass/style.scss */
+/* line 39, ../sass/style.scss */
 header h2 {
   display: inline-block;
   font-weight: normal;
@@ -35,102 +45,100 @@ header h2 {
   color: #999;
 }
 
-/* line 40, ../sass/style.scss */
+/* line 47, ../sass/style.scss */
 .container {
   padding-left: 30px;
   padding-right: 30px;
 }
 
-/* line 46, ../sass/style.scss */
+/* line 53, ../sass/style.scss */
 #filter-options-btn {
   font-size: 18px;
-  font-weight: bold;
   margin-bottom: 30px;
 }
 
-/* line 52, ../sass/style.scss */
+/* line 58, ../sass/style.scss */
 #feed-options {
   margin-bottom: 40px;
 }
 
-/* line 57, ../sass/style.scss */
+/* line 63, ../sass/style.scss */
 #select-user-controls input[type="checkbox"] {
   display: none;
 }
-/* line 60, ../sass/style.scss */
+/* line 66, ../sass/style.scss */
 #select-user-controls input[type="checkbox"] + label {
   font-size: 8pt;
-  font-weight: bold;
   margin: 0 2px 5px 0;
 }
-/* line 66, ../sass/style.scss */
+/* line 71, ../sass/style.scss */
 #select-user-controls input[type="checkbox"]:checked + label {
   background-color: #669533;
   color: white;
 }
 
-/* line 73, ../sass/style.scss */
+/* line 78, ../sass/style.scss */
 #select-all, #deselect-all {
   margin-top: 5px;
 }
 
-/* line 78, ../sass/style.scss */
+/* line 83, ../sass/style.scss */
 .video {
   padding-top: 25px;
   padding-bottom: 25px;
   border-bottom: 1px solid #eee;
 }
-/* line 83, ../sass/style.scss */
+/* line 88, ../sass/style.scss */
 .video:first-child {
   padding-top: 0;
 }
-/* line 88, ../sass/style.scss */
+/* line 93, ../sass/style.scss */
 .video .video-thumbnail img {
   border: 1px solid black;
 }
-/* line 93, ../sass/style.scss */
+/* line 98, ../sass/style.scss */
 .video .video-title {
   font-size: 16px;
   font-weight: 700;
 }
-/* line 98, ../sass/style.scss */
+/* line 103, ../sass/style.scss */
 .video .video-title-duration {
   margin: 0;
   margin-top: -6px;
   margin-bottom: 8px;
   line-height: 0.5em;
 }
-/* line 105, ../sass/style.scss */
+/* line 110, ../sass/style.scss */
 .video .video-controls {
   opacity: 0;
 }
-/* line 108, ../sass/style.scss */
-.video .video-controls a {
-  padding: 6px;
+/* line 114, ../sass/style.scss */
+.video .video-remove-control {
+  padding: 2px;
 }
-/* line 113, ../sass/style.scss */
+/* line 118, ../sass/style.scss */
 .video:hover .video-controls {
   opacity: 1;
 }
-/* line 117, ../sass/style.scss */
+/* line 122, ../sass/style.scss */
 .video .video-uploader-uploaded {
   margin-bottom: 16px;
 }
-/* line 121, ../sass/style.scss */
+/* line 126, ../sass/style.scss */
 .video .video-duration {
   font-size: 12px;
   font-weight: 200;
 }
-/* line 126, ../sass/style.scss */
+/* line 131, ../sass/style.scss */
 .video .video-uploader {
   font-size: px;
   font-weight: 200;
 }
-/* line 131, ../sass/style.scss */
+/* line 136, ../sass/style.scss */
 .video .video-controls a:hover {
   text-decoration: none;
 }
-/* line 135, ../sass/style.scss */
+/* line 140, ../sass/style.scss */
 .video .video-description {
   -webkit-transition: 0.125s height ease;
   -moz-transition: 0.125s height ease;
@@ -141,25 +149,26 @@ header h2 {
   text-overflow: ellipsis;
   position: relative;
 }
-/* line 146, ../sass/style.scss */
+/* line 151, ../sass/style.scss */
 .video .description-control {
   position: absolute;
   bottom: 0;
   right: 0;
   opacity: 0;
   padding: 0;
+  border-radius: 100%;
 }
-/* line 154, ../sass/style.scss */
+/* line 160, ../sass/style.scss */
 .video:hover .description-control {
   opacity: 0.33;
 }
 
-/* line 159, ../sass/style.scss */
+/* line 165, ../sass/style.scss */
 .twitter, .reddit {
   margin-bottom: 20px;
 }
 
-/* line 164, ../sass/style.scss */
+/* line 170, ../sass/style.scss */
 .twitter .twtr-timeline {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -168,7 +177,7 @@ header h2 {
   border-radius: 0;
   border-bottom: 1px solid #369CD7;
 }
-/* line 169, ../sass/style.scss */
+/* line 175, ../sass/style.scss */
 .twitter .twtr-doc {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -176,42 +185,42 @@ header h2 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 173, ../sass/style.scss */
+/* line 179, ../sass/style.scss */
 .twitter .twtr-ft {
   display: none;
 }
 
-/* line 179, ../sass/style.scss */
+/* line 185, ../sass/style.scss */
 .reddit .rembeddit {
   border: 1px solid #369CD7 !important;
 }
-/* line 183, ../sass/style.scss */
+/* line 189, ../sass/style.scss */
 .reddit .reddit-header {
   background-color: #369CD7 !important;
 }
-/* line 186, ../sass/style.scss */
+/* line 192, ../sass/style.scss */
 .reddit .reddit-header h4 {
   color: white;
 }
 
-/* line 192, ../sass/style.scss */
+/* line 198, ../sass/style.scss */
 .loader {
   text-align: center;
   margin-bottom: 50px;
 }
 
-/* line 197, ../sass/style.scss */
+/* line 203, ../sass/style.scss */
 .footer-nav {
   border-top: 1px solid #eee;
 }
 
-/* line 201, ../sass/style.scss */
+/* line 207, ../sass/style.scss */
 .footer-list {
   text-align: center;
   margin: 0;
 }
 
-/* line 206, ../sass/style.scss */
+/* line 212, ../sass/style.scss */
 .footer-list li {
   display: inline-block;
   list-style: none;
@@ -219,7 +228,7 @@ header h2 {
 }
 
 @media (max-width: 767px) {
-  /* line 213, ../sass/style.scss */
+  /* line 219, ../sass/style.scss */
   .video .video-title-duration {
     overflow: visible;
     margin-bottom: 4px;
@@ -227,12 +236,12 @@ header h2 {
     line-height: 18px;
   }
 
-  /* line 220, ../sass/style.scss */
+  /* line 226, ../sass/style.scss */
   .video .video-title {
     white-space: normal;
   }
 
-  /* line 224, ../sass/style.scss */
+  /* line 230, ../sass/style.scss */
   .video .video-uploader-uploaded {
     margin-bottom: 0;
   }
