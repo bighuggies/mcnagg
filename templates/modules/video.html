@@ -9,14 +9,16 @@
         </div>
         <div class="col-md-8">
             <h2 class="video-title-duration">
-                <a class="video-title" href="http://www.youtube.com/watch?v={{ video.video_id }}" title="{{ video.title }} ({{ util.get_HMS(video.duration) }})">{{ video.title }}</a>
+                <a class="video-title" href="http://www.youtube.com/watch?v={{ video.video_id }}" title="{{ video.title }} ({{ util.get_HMS(video.duration) }})">{{ video.title }} ({{ util.get_HMS(video.duration) }})</a>
             </h2>
             <p class="video-uploader-uploaded">
                 <a class="video-uploader" href="http://www.youtube.com/{{ video.uploader }}">{{ video.uploader }}</a>
                 <span class="video-uploaded">uploaded <time datetime="{{ video.uploaded }}">{{ util.get_fancy_time(video.uploaded) }}</time></span>
-                <span class="video-duration">({{ util.get_HMS(video.duration) }})</span>
             </p>
-            <p class="video-description">{{ escape(video.description[:200]) }} ...</p>
+            <p class="video-description hidden-xs">
+                {{ linkify(video.description) }}
+                <a href="#" class="btn btn-default description-control show-description"><i class="fa fa-caret-down"></i></a>
+            </p>
         </div>
         <div class="video-controls col-md-1">
             <div class="pull-right hidden-xs">

@@ -76,51 +76,90 @@ header h2 {
 
 /* line 78, ../sass/style.scss */
 .video {
-  margin-bottom: 25px;
+  padding-top: 25px;
   padding-bottom: 25px;
   border-bottom: 1px solid #eee;
 }
-/* line 85, ../sass/style.scss */
+/* line 83, ../sass/style.scss */
+.video:first-child {
+  padding-top: 0;
+}
+/* line 88, ../sass/style.scss */
 .video .video-thumbnail img {
   border: 1px solid black;
 }
-/* line 90, ../sass/style.scss */
+/* line 93, ../sass/style.scss */
 .video .video-title {
   font-size: 16px;
   font-weight: 700;
-  white-space: nowrap;
 }
-/* line 96, ../sass/style.scss */
+/* line 98, ../sass/style.scss */
 .video .video-title-duration {
   margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-top: -6px;
+  margin-bottom: 8px;
+  line-height: 0.5em;
 }
-/* line 103, ../sass/style.scss */
+/* line 105, ../sass/style.scss */
+.video .video-controls {
+  opacity: 0;
+}
+/* line 108, ../sass/style.scss */
 .video .video-controls a {
   padding: 6px;
 }
-/* line 108, ../sass/style.scss */
+/* line 113, ../sass/style.scss */
+.video:hover .video-controls {
+  opacity: 1;
+}
+/* line 117, ../sass/style.scss */
+.video .video-uploader-uploaded {
+  margin-bottom: 16px;
+}
+/* line 121, ../sass/style.scss */
 .video .video-duration {
   font-size: 12px;
   font-weight: 200;
 }
-/* line 113, ../sass/style.scss */
+/* line 126, ../sass/style.scss */
 .video .video-uploader {
   font-size: px;
   font-weight: 200;
 }
-/* line 118, ../sass/style.scss */
+/* line 131, ../sass/style.scss */
 .video .video-controls a:hover {
   text-decoration: none;
 }
+/* line 135, ../sass/style.scss */
+.video .video-description {
+  -webkit-transition: 0.125s height ease;
+  -moz-transition: 0.125s height ease;
+  -ms-transition: 0.125s height ease;
+  transition: 0.125s height ease;
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+/* line 146, ../sass/style.scss */
+.video .description-control {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  padding: 0;
+}
+/* line 154, ../sass/style.scss */
+.video:hover .description-control {
+  opacity: 0.33;
+}
 
-/* line 123, ../sass/style.scss */
+/* line 159, ../sass/style.scss */
 .twitter, .reddit {
   margin-bottom: 20px;
 }
 
-/* line 128, ../sass/style.scss */
+/* line 164, ../sass/style.scss */
 .twitter .twtr-timeline {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -129,7 +168,7 @@ header h2 {
   border-radius: 0;
   border-bottom: 1px solid #369CD7;
 }
-/* line 133, ../sass/style.scss */
+/* line 169, ../sass/style.scss */
 .twitter .twtr-doc {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -137,44 +176,64 @@ header h2 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 137, ../sass/style.scss */
+/* line 173, ../sass/style.scss */
 .twitter .twtr-ft {
   display: none;
 }
 
-/* line 143, ../sass/style.scss */
+/* line 179, ../sass/style.scss */
 .reddit .rembeddit {
   border: 1px solid #369CD7 !important;
 }
-/* line 147, ../sass/style.scss */
+/* line 183, ../sass/style.scss */
 .reddit .reddit-header {
   background-color: #369CD7 !important;
 }
-/* line 150, ../sass/style.scss */
+/* line 186, ../sass/style.scss */
 .reddit .reddit-header h4 {
   color: white;
 }
 
-/* line 156, ../sass/style.scss */
+/* line 192, ../sass/style.scss */
 .loader {
   text-align: center;
   margin-bottom: 50px;
 }
 
-/* line 161, ../sass/style.scss */
+/* line 197, ../sass/style.scss */
 .footer-nav {
   border-top: 1px solid #eee;
 }
 
-/* line 165, ../sass/style.scss */
+/* line 201, ../sass/style.scss */
 .footer-list {
   text-align: center;
   margin: 0;
 }
 
-/* line 170, ../sass/style.scss */
+/* line 206, ../sass/style.scss */
 .footer-list li {
   display: inline-block;
   list-style: none;
   padding: 10px;
+}
+
+@media (max-width: 767px) {
+  /* line 213, ../sass/style.scss */
+  .video .video-title-duration {
+    overflow: visible;
+    margin-bottom: 4px;
+    margin-top: 8px;
+    line-height: 18px;
+  }
+
+  /* line 220, ../sass/style.scss */
+  .video .video-title {
+    white-space: normal;
+  }
+
+  /* line 224, ../sass/style.scss */
+  .video .video-uploader-uploaded {
+    margin-bottom: 0;
+  }
 }

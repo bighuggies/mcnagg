@@ -76,10 +76,13 @@ header {
 
 
 .video {
-	margin-bottom: 25px;
+	padding-top: 25px;
 	padding-bottom: 25px;
 	border-bottom: 1px solid #eee;
 
+	&:first-child {
+		padding-top: 0;
+	}
 
 	.video-thumbnail {
 		img {
@@ -90,19 +93,29 @@ header {
 	.video-title {
 		font-size: 16px;
 		font-weight: 700;
-		white-space: nowrap;
 	}
 
 	.video-title-duration {
 		margin: 0;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		margin-top: -6px;
+		margin-bottom: 8px;
+		line-height: 0.5em;
 	}
 
 	.video-controls {
+		opacity: 0;
+
 		a {
 			padding: 6px;
 		}
+	}
+
+	&:hover .video-controls {
+		opacity: 1;
+	}
+
+	.video-uploader-uploaded {
+		margin-bottom: 16px
 	}
 
 	.video-duration {
@@ -117,6 +130,29 @@ header {
 
 	.video-controls a:hover {
 		text-decoration: none;
+	}
+
+	.video-description {
+		-webkit-transition: 0.125s height ease;
+		-moz-transition: 0.125s height ease;
+		-ms-transition: 0.125s height ease;
+		transition: 0.125s height ease;
+		height: 60px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		position: relative;
+	}
+
+	.description-control {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		opacity: 0;
+		padding: 0;
+	}
+
+	&:hover .description-control {
+		opacity: 0.33;
 	}
 }
 
@@ -171,4 +207,21 @@ header {
     display: inline-block;
     list-style: none;
     padding: 10px;
+}
+
+@media (max-width: 767px) {
+	.video .video-title-duration {
+		overflow: visible;
+		margin-bottom: 4px;
+		margin-top: 8px;
+		line-height: 18px;
+	}
+
+	.video .video-title {
+		white-space: normal;
+	}
+
+	.video .video-uploader-uploaded {
+		margin-bottom: 0;
+	}
 }

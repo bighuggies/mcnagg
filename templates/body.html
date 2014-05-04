@@ -4,7 +4,7 @@
     {{ modules.Options(mindcrackers, checked, title_filter) }}
 
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="video-list">
                 {% for video in videos %}
                     {{ modules.Video(video) }}
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="twitter">{{modules.Twitter()}}</div>
             <div class="reddit">{{modules.Reddit()}}</div>
         </div>

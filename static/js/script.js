@@ -146,4 +146,28 @@ $(document).ready(function() {
         remove_video($(e.currentTarget).data('video-id'));
         e.preventDefault();
     });
+
+    $(".video-list").on("click", ".show-description", function(e) {
+        var $target = $(e.currentTarget);
+        var $desc = $target.parent();
+
+        $desc.css({"height": $desc[0].scrollHeight});
+
+        $target.html('<i class="fa fa-caret-up"></i>');
+        $target.toggleClass("hide-description show-description");
+
+        e.preventDefault();
+    });
+
+    $(".video-list").on("click", ".hide-description", function(e) {
+        var $target = $(e.currentTarget);
+        var $desc = $target.parent();
+
+        $desc.css({"height": "60px"});
+
+        $target.html('<i class="fa fa-caret-down"></i>');
+        $target.toggleClass("hide-description show-description");
+
+        e.preventDefault();
+    });
 });
