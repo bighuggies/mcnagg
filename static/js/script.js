@@ -149,14 +149,14 @@ $(document).ready(function() {
     $('#select-all').on('click', select_all_mindcrackers);
     $('#deselect-all').on('click', deselect_all_mindcrackers);
 
-    $('#feed-options').on('shown', function () {
-        $("#feed-options-icon").removeClass("icon-chevron-down");
-        $("#feed-options-icon").addClass("icon-chevron-up");
+    $('#feed-options').on('show.bs.collapse', function () {
+        $("#feed-options-icon").removeClass("fa-chevron-down");
+        $("#feed-options-icon").addClass("fa-chevron-up");
     });
 
-    $('#feed-options').on('hidden', function () {
-        $("#feed-options-icon").removeClass("icon-chevron-up");
-        $("#feed-options-icon").addClass("icon-chevron-down");
+    $('#feed-options').on('hide.bs.collapse', function () {
+        $("#feed-options-icon").removeClass("fa-chevron-up");
+        $("#feed-options-icon").addClass("fa-chevron-down");
     });
 
     $(".video-list").on('click', function(e) {
