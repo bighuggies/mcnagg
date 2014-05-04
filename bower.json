@@ -1,0 +1,24 @@
+{
+  "name": "mcnagg",
+  "version": "0.0.0",
+  "homepage": "https://github.com/bighuggies/mcnagg",
+  "authors": [
+    "Andrew Hughson <andrew@hughson.me>"
+  ],
+  "description": "A MindCrack Network content aggregator",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "jquery": "~2.1.1",
+    "jquery-Mustache": "~0.2.7",
+    "fontawesome": "~4.0.3"
+  }
+}

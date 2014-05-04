@@ -40,6 +40,11 @@ nosetests.xml
 # Virtualenv
 venv
 winenv
+winenv2
+winbs3
 
 # Compass
 .sass-cache
+
+# Sublime
+*.sublime-*
