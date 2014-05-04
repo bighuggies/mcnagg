@@ -119,7 +119,7 @@ def _get_uploads(username, page, title_filter=''):
     if not videos:
         raise StopIteration("No matching videos")
 
-    return list(reversed(videos))
+    return reversed(videos)
 
 
 class Video(object):
