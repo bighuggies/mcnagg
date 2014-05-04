@@ -32,8 +32,6 @@ _mindcrackers = sorted([
         u'http://www.youtube.com/pauseunpause', 'name': u'PauseUnpause'},
     {'username': u'vintagebeef', 'url':
         u'http://www.youtube.com/vintagebeef', 'name': u'VintageBeef'},
-    {'username': u'shreeyamnet', 'url':
-        u'http://www.youtube.com/shreeyamnet', 'name': u'Shreeyam'},
     {'username': u'imanderzel', 'url':
         u'http://www.youtube.com/imanderzel', 'name': u'AnderZEL'},
     {'username': u'w92baj', 'url':
