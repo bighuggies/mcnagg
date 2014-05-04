@@ -71,7 +71,7 @@ function append_videos(videos) {
         }
     };
 
-    $('#show-more').before($.mustache(video_template, video_view));
+    $('#show-more').before(Mustache.render(video_template, video_view));
     $('#show-more').show();
 }
 
