@@ -1,32 +1,46 @@
-<form action="submit" method="get" id="options-form" class="form-horizontal">
-    <div id="select-user-controls" class="form-group">
-        <label class="col-lg-2 control-label" for="inlineCheckboxes">MindCrackers</label>
-        <div class="col-lg-10">
-            {% for m in mindcrackers %}
-                <input type="checkbox" class="form-control" name="mindcrackers-select" id="{{ m['username'] }}-checkbox" value="{{ m['username'] }}" {% if m['username'] in checked or not checked %}checked="true"{% end %}>
-                <label class="btn btn-default" for="{{ m['username'] }}-checkbox" class="inline checkbox {% if m['username'] in checked or not checked %}selected-mindcracker{% end %}">
-                   {{ m['name'] }}
-                </label>
+<div class="row">
+    <div class="col-md-12">
+        <button id="filter-options-btn" class="btn btn-primary" data-toggle="collapse" data-target="#feed-options">
+            Video Filters <i id="feed-options-icon" class="fa fa-chevron-down"></i>
+        </button>
+    </div>
+</div>
 
-            {% end %}
-        </div>
+<div class="row feed-options-container">
+    <div id="feed-options" class="col-md-12 collapse">
+        <div class="accordion-inner">
+            <form action="submit" method="get" id="options-form" class="form-horizontal">
+                <div id="select-user-controls" class="form-group">
+                    <label class="col-lg-2 control-label" for="inlineCheckboxes">MindCrackers</label>
+                    <div class="col-lg-10">
+                        {% for m in mindcrackers %}
+                        <input type="checkbox" class="form-control" name="mindcrackers-select" id="{{ m['username'] }}-checkbox" value="{{ m['username'] }}" {% if m[ 'username'] in checked or not checked %}checked="true" {% end %}>
+                        <label class="btn btn-default" for="{{ m['username'] }}-checkbox" class="inline checkbox {% if m['username'] in checked or not checked %}selected-mindcracker{% end %}">
+                            {{ m['name'] }}
+                        </label>
 
-        <div class="col-lg-10 col-lg-offset-2">
-            <a id="select-all" class="btn btn-default">Select all</a>
-            <a id="deselect-all" class="btn btn-default">Deselect all</a>
+                        {% end %}
+                    </div>
+
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <a id="select-all" class="btn btn-default">Select all</a>
+                        <a id="deselect-all" class="btn btn-default">Deselect all</a>
+                    </div>
+                </div>
+
+                <div id="show-controls" class="form-group">
+                    <label class="col-lg-2 control-label" for="title-filter">With text in title</label>
+                    <div class="col-lg-5">
+                        <input id="title-filter" class="form-control" type="text" placeholder="e.g. Mindcrack" value="{{ title_filter }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" data-toggle="collapse" data-target="#feed-options" id="options-submit" class="btn btn-primary">Done</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-    <div id="show-controls" class="form-group">
-        <label class="col-lg-2 control-label" for="title-filter">With text in title</label>
-        <div class="col-lg-5">
-            <input id="title-filter" class="form-control" type="text" placeholder="e.g. Mindcrack" value="{{ title_filter }}">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-            <button type="submit" data-toggle="collapse" data-target="#feed-options" id="options-submit" class="btn btn-primary">Done</button>
-        </div>
-    </div>
-</form>
+</div>

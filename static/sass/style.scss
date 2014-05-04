@@ -10,50 +10,49 @@ i {
 }
 
 body {
-	// font-family: "Telex", "sans-serif";
-	background-image: url(../../static/img/gray_jean.png);
-
 	@media (max-width: 767px) {
 		padding: 0;
 	}
 }
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: "Telex", "sans-serif";
+	font-family: 'Noto Sans', sans-serif;
 }
 
 
 header {
-	margin-bottom: 40px;
-	border-bottom: 1px solid #e6e6e6;
+	margin-bottom: 60px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
 
 	h1 {
-		display: inline-block;
+		display:inline-block;
 		color: #2FA4E7;
+		margin-right: 20px;
 	}
 
 	h2 {
 		display: inline-block;
-		float: right;
 		font-weight: normal;
 		font-size: 14pt;
-		color: #317EAC;
+		color: #999;
 	}
 }
 
 .container {
 	padding-left: 30px;
 	padding-right: 30px;
-	@include box-shadow(0 0 10px 0 black);
-	background-image: url(../../static/img/brillant.png);
 }
 
 
 #filter-options-btn {
 	font-size: 18px;
 	font-weight: bold;
-	// @include btn($font-color: #2FA4E7);
-	margin-bottom: 10px;
+	margin-bottom: 40px;
+}
+
+#feed-options {
+	margin-bottom: 40px;
 }
 
 #select-user-controls {
@@ -79,19 +78,21 @@ header {
 
 
 .video {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 25px;
+	padding-bottom: 25px;
+	border-bottom: 1px solid #eee;
+
 
 	.video-thumbnail {
-		padding-top: 7px;
-
 		img {
 			border: 1px solid black;
 		}
 	}
 
 	.video-title {
-		font-size: 14pt;
+		font-size: 16px;
+		font-weight: 700;
+		white-space: nowrap;
 
 		@media (max-width: 767px) {
 			font-size: 12pt;
@@ -100,26 +101,24 @@ header {
 
 	.video-title-duration {
 		margin: 0;
-		/*margin-top: 5px;
-		margin-bottom: 5px;*/
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.video-controls {
-		padding-top: 7px;
-
 		a {
 			padding: 6px;
 		}
 	}
 
 	.video-duration {
-		font-size: 13px;
-		font-weight: normal;
+		font-size: 12px;
+		font-weight: 200;
 	}
 
 	.video-uploader {
-		font-size: 12pt;
-		font-weight: bold;
+		font-size: px;
+		font-weight: 200;
 
 		@media (max-width: 767px) {
 			font-size: 10pt;
@@ -137,16 +136,8 @@ header {
 	}
 }
 
-.video-divider {
-	margin: 1px;
-	padding: 1px;
-	border-top: none;
-	border-bottom: 1px solid darken(#ffffff, 10%);
-}
-
 .twitter, .reddit {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .twitter {
@@ -178,12 +169,18 @@ header {
 	}
 }
 
-#show-more {
+.loader {
 	text-align: center;
+	margin-bottom: 50px;
+}
+
+.footer-nav {
+	border-top: 1px solid #eee;
 }
 
 .footer-list {
     text-align: center;
+    margin: 0;
 }
 
 .footer-list li {

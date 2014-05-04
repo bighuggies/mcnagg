@@ -1,44 +1,27 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block body %}
 
-{% block body %}
-<div class="row">
-    <div class="col-md-12">
-        <button id="filter-options-btn" class="btn btn-primary" data-toggle="collapse" data-target="#feed-options">
-            Video Filters <i id="feed-options-icon" class="fa fa-chevron-down"></i>
-        </button>
-    </div>
-</div>
+<main class="container">
+    {{ modules.Options(mindcrackers, checked, title_filter) }}
 
-<div class="row feed-options-container">
-    <div id="feed-options" class="col-md-12 collapse">
-        <div class="accordion-inner">{{ modules.Options(mindcrackers, checked, title_filter) }}</div>
-    </div>
-    <div class="col-md-12">
-        <hr class="video-divider">
-    </div>
-</div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="video-list">
+                {% for video in videos %}
+                    {{ modules.Video(video) }}
+                {% end %}
+            </div>
 
-<div class="row">
-    <div class="video-list col-md-9">
-        {% for video in videos %}
-        {{ modules.Video(video) }}
-        <div class="divider row" data-video-id="{{ video.video_id }}">
-            <div class="col-md-12">
-                <hr class="video-divider">
+            <div class="loader">
+                <h2 id="show-more"><a href="#">Show more<br><i id="show-more-icon" class="fa fa-chevron-down"></i></a></h2>
+                <img class="loading-gif" alt="Loading spinner" src="static/img/loading.gif" hidden/>
             </div>
         </div>
-        {% end %}
-        <div id="show-more" class="row">
-            <div class="col-md-12">
-                <a href="#">
-                    <h2>Show more</h2> <i id="show-more-icon" class="icon-chevron-down"></i>
-                </a>
-            </div>
+
+        <div class="col-md-3">
+            <div class="twitter">{{modules.Twitter()}}</div>
+            <div class="reddit">{{modules.Reddit()}}</div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="twitter">{{modules.Twitter()}}</div>
-        <div class="reddit">{{modules.Reddit()}}</div>
-    </div>
-</div>
+</main>
+
 {% end %}

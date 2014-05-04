@@ -18,7 +18,6 @@
   "dependencies": {
     "bootstrap": "~3.1.1",
     "jquery": "~2.1.1",
-    "fontawesome": "~4.0.3",
-    "mustache": "~0.8.1"
+    "fontawesome": "~4.0.3"
   }
 }

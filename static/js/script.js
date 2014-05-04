@@ -42,44 +42,28 @@ function get_fancy_time(date) {
 
 
 function remove_videos() {
-    $('.video.row').remove();
-    $('.divider.row').remove();
+    $('.video').remove();
 }
 
 
 function remove_video(video_id) {
-    $('div[data-video-id="' + video_id + '"]').hide(100);
+    $('.video[data-video-id="' + video_id + '"]').hide(100);
 }
 
 
 function append_videos(videos) {
-    $('.loading.row').remove();
+    $('.video-list').append(videos);
 
-    var video_template = '{{#videos}}<div class="video row" data-video-id="{{ video_id }}"><div class="video-thumbnail col-md-2"><a href="http://www.youtube.com/watch?v={{ video_id }}"><img width="120px" src="{{ thumbnail }}" alt="{{ title }} thumbnail"></a></div><div class="col-md-9"><h2 class="video-title-duration"><span class="video-title"><a href="http://www.youtube.com/watch?v={{ video_id }}">{{ title }}</a></span><span class="video-duration"> ({{#hms}}{{duration}}{{/hms}})</span></h2><p class="video-uploader-uploaded"><span class="video-uploader"><a href="http://www.youtube.com/{{ uploader }}">{{ uploader }}</a></span><span class="video-uploaded"> uploaded {{#fancy_time}}{{uploaded}}{{/fancy_time}}</span></p></div><div class="video-controls col-md-1"><div class="pull-right"><a href="#"> <i data-video-id="{{ video_id }}" class="icon-remove video-remove-control"></i></a></div></div></div><div class="divider row" data-video-id="{{ video_id }}"><div class="col-md-12"><hr class="video-divider"></div></div>{{/videos}}';
-
-    var video_view = {
-        videos: videos,
-        fancy_time: function() {
-            return function(text, render) {
-                return get_fancy_time(render(text));
-            };
-        },
-        hms: function() {
-            return function(text, render) {
-                return get_HMS(render(text));
-            };
-        }
-    };
-
-    $('#show-more').before(Mustache.render(video_template, video_view));
     $('#show-more').show();
+    $(".loading-gif").hide();
 }
 
 
 function fetch_videos(query_data, callback) {
-    $('.video-list').append('<div class="loading row"><div class="span9" style="text-align:center;padding-top:10px"><img class="loading-gif" src="static/img/loading.gif" /></div></div>');
+    $(".loading-gif").show();
+
     $('#show-more').hide('fast', function() {
-        $.getJSON('/videos', query_data, callback);
+        $.get('/videos', query_data, callback);
     });
 }
 
@@ -88,7 +72,6 @@ function options_submit(e) {
     e.preventDefault();
 
     var title_filter = $('#title-filter').val();
-    var offset = $('.video.row').length;
 
     var query = {
         'offset': 0,
@@ -106,7 +89,7 @@ function show_more_videos(e) {
     e.preventDefault();
 
     var title_filter = $('#title-filter').val();
-    var offset = $('.video.row').length;
+    var offset = $('.video').length;
 
     var query = {
         'offset': offset,
@@ -159,10 +142,8 @@ $(document).ready(function() {
         $("#feed-options-icon").addClass("fa-chevron-down");
     });
 
-    $(".video-list").on('click', function(e) {
-        if ($(e.target).hasClass('video-remove-control')) {
-            e.preventDefault();
-            remove_video($(e.target).data('video-id'));
-        }
+    $(".video-list").on('click', ".video-remove-control", function(e) {
+        remove_video($(e.currentTarget).data('video-id'));
+        e.preventDefault();
     });
 });

@@ -1,27 +1,28 @@
 {% import util %}
-<div class="video row" data-video-id="{{ video.video_id }}">
-    <div class="video-thumbnail col-md-2">
-        <a href="http://www.youtube.com/watch?v={{ video.video_id }}">
-            <img width="120px" src="{{ video.thumbnail }}" alt="{{ video.title }} thumbnail"></a>
-    </div>
-    <div class="col-md-9">
-        <h2 class="video-title-duration">
-            <span class="video-title">
-                <a href="http://www.youtube.com/watch?v={{ video.video_id }}">{{ video.title }}</a>
-            </span>
-            <span class="video-duration">({{ util.get_HMS(video.duration) }})</span>
-        </h2>
-        <p class="video-uploader-uploaded">
-            <span class="video-uploader">
-                <a href="http://www.youtube.com/{{ video.uploader }}">{{ video.uploader }}</a>
-            </span>
-            <span class="video-uploaded">uploaded {{ util.get_fancy_time(video.uploaded) }}</span>
-        </p>
-    </div>
-    <div class="video-controls col-md-1">
-        <div class="pull-right">
-            <a href="#" class="btn btn-primary"> <i data-video-id="{{ video.video_id }}" class="fa fa-times video-remove-control"></i>
+
+<section class="video" data-video-id="{{ video.video_id }}">
+    <div class="row">
+        <div class="video-thumbnail col-md-3">
+            <a href="http://www.youtube.com/watch?v={{ video.video_id }}">
+                <img width="100%" src="{{ video.thumbnail }}" alt="{{ video.title }} thumbnail">
             </a>
         </div>
+        <div class="col-md-8">
+            <h2 class="video-title-duration">
+                <a class="video-title" href="http://www.youtube.com/watch?v={{ video.video_id }}" title="{{ video.title }} ({{ util.get_HMS(video.duration) }})">{{ video.title }}</a>
+            </h2>
+            <p class="video-uploader-uploaded">
+                <a class="video-uploader" href="http://www.youtube.com/{{ video.uploader }}">{{ video.uploader }}</a>
+                <span class="video-uploaded">uploaded <time datetime="{{ video.uploaded }}">{{ util.get_fancy_time(video.uploaded) }}</time></span>
+                <span class="video-duration">({{ util.get_HMS(video.duration) }})</span>
+            </p>
+            <p class="video-description">{{ escape(video.description[:200]) }} ...</p>
+        </div>
+        <div class="video-controls col-md-1">
+            <div class="pull-right">
+                <a href="#" class="btn btn-primary video-remove-control" data-video-id="{{ video.video_id }}"><i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
     </div>
-</div>
+</section>
