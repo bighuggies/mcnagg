@@ -160,7 +160,7 @@ header h2 {
 }
 /* line 160, ../sass/style.scss */
 .video:hover .description-control {
-  opacity: 0.33;
+  opacity: 0.5;
 }
 
 /* line 165, ../sass/style.scss */
