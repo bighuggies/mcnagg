@@ -11,10 +11,6 @@ i {
 
 body {
 	font-family: "Helvetica", "Arial", "sans-serif";
-
-	@media (max-width: 767px) {
-		padding: 0;
-	}
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -95,10 +91,6 @@ header {
 		font-size: 16px;
 		font-weight: 700;
 		white-space: nowrap;
-
-		@media (max-width: 767px) {
-			font-size: 12pt;
-		}
 	}
 
 	.video-title-duration {
@@ -121,16 +113,6 @@ header {
 	.video-uploader {
 		font-size: px;
 		font-weight: 200;
-
-		@media (max-width: 767px) {
-			font-size: 10pt;
-		}
-	}
-
-	.video-uploaded {
-		@media (max-width: 767px) {
-			font-size: 8pt;
-		}
 	}
 
 	.video-controls a:hover {

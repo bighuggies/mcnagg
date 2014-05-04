@@ -87,11 +87,8 @@ class VideosHandler(BaseHandler):
 
         videos = self.mindcrack.videos(**options)
 
+        self.set_cookie('mcnagg-options', urllib.urlencode(options, True))
         self.render("videos.html", videos=videos)
-
-        # self.set_cookie('mcnagg-options', urllib.urlencode(options, True))
-        # self.write(json.dumps([v.serialize() for v in videos]))
-        # self.finish()
 
 
 class VideoModule(tornado.web.UIModule):

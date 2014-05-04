@@ -9,31 +9,25 @@ i {
 body {
   font-family: "Helvetica", "Arial", "sans-serif";
 }
-@media (max-width: 767px) {
-  /* line 12, ../sass/style.scss */
-  body {
-    padding: 0;
-  }
-}
 
-/* line 20, ../sass/style.scss */
+/* line 16, ../sass/style.scss */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Noto Sans', sans-serif;
 }
 
-/* line 25, ../sass/style.scss */
+/* line 21, ../sass/style.scss */
 header {
   margin-bottom: 50px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
-/* line 30, ../sass/style.scss */
+/* line 26, ../sass/style.scss */
 header h1 {
   display: inline-block;
   color: #2FA4E7;
   margin-right: 20px;
 }
-/* line 36, ../sass/style.scss */
+/* line 32, ../sass/style.scss */
 header h2 {
   display: inline-block;
   font-weight: normal;
@@ -41,110 +35,92 @@ header h2 {
   color: #999;
 }
 
-/* line 44, ../sass/style.scss */
+/* line 40, ../sass/style.scss */
 .container {
   padding-left: 30px;
   padding-right: 30px;
 }
 
-/* line 50, ../sass/style.scss */
+/* line 46, ../sass/style.scss */
 #filter-options-btn {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 30px;
 }
 
-/* line 56, ../sass/style.scss */
+/* line 52, ../sass/style.scss */
 #feed-options {
   margin-bottom: 40px;
 }
 
-/* line 61, ../sass/style.scss */
+/* line 57, ../sass/style.scss */
 #select-user-controls input[type="checkbox"] {
   display: none;
 }
-/* line 64, ../sass/style.scss */
+/* line 60, ../sass/style.scss */
 #select-user-controls input[type="checkbox"] + label {
   font-size: 8pt;
   font-weight: bold;
   margin: 0 2px 5px 0;
 }
-/* line 70, ../sass/style.scss */
+/* line 66, ../sass/style.scss */
 #select-user-controls input[type="checkbox"]:checked + label {
   background-color: #669533;
   color: white;
 }
 
-/* line 77, ../sass/style.scss */
+/* line 73, ../sass/style.scss */
 #select-all, #deselect-all {
   margin-top: 5px;
 }
 
-/* line 82, ../sass/style.scss */
+/* line 78, ../sass/style.scss */
 .video {
   margin-bottom: 25px;
   padding-bottom: 25px;
   border-bottom: 1px solid #eee;
 }
-/* line 89, ../sass/style.scss */
+/* line 85, ../sass/style.scss */
 .video .video-thumbnail img {
   border: 1px solid black;
 }
-/* line 94, ../sass/style.scss */
+/* line 90, ../sass/style.scss */
 .video .video-title {
   font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
 }
-@media (max-width: 767px) {
-  /* line 94, ../sass/style.scss */
-  .video .video-title {
-    font-size: 12pt;
-  }
-}
-/* line 104, ../sass/style.scss */
+/* line 96, ../sass/style.scss */
 .video .video-title-duration {
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* line 111, ../sass/style.scss */
+/* line 103, ../sass/style.scss */
 .video .video-controls a {
   padding: 6px;
 }
-/* line 116, ../sass/style.scss */
+/* line 108, ../sass/style.scss */
 .video .video-duration {
   font-size: 12px;
   font-weight: 200;
 }
-/* line 121, ../sass/style.scss */
+/* line 113, ../sass/style.scss */
 .video .video-uploader {
   font-size: px;
   font-weight: 200;
 }
-@media (max-width: 767px) {
-  /* line 121, ../sass/style.scss */
-  .video .video-uploader {
-    font-size: 10pt;
-  }
-}
-@media (max-width: 767px) {
-  /* line 130, ../sass/style.scss */
-  .video .video-uploaded {
-    font-size: 8pt;
-  }
-}
-/* line 136, ../sass/style.scss */
+/* line 118, ../sass/style.scss */
 .video .video-controls a:hover {
   text-decoration: none;
 }
 
-/* line 141, ../sass/style.scss */
+/* line 123, ../sass/style.scss */
 .twitter, .reddit {
   margin-bottom: 20px;
 }
 
-/* line 146, ../sass/style.scss */
+/* line 128, ../sass/style.scss */
 .twitter .twtr-timeline {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -153,7 +129,7 @@ header h2 {
   border-radius: 0;
   border-bottom: 1px solid #369CD7;
 }
-/* line 151, ../sass/style.scss */
+/* line 133, ../sass/style.scss */
 .twitter .twtr-doc {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -161,42 +137,42 @@ header h2 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 155, ../sass/style.scss */
+/* line 137, ../sass/style.scss */
 .twitter .twtr-ft {
   display: none;
 }
 
-/* line 161, ../sass/style.scss */
+/* line 143, ../sass/style.scss */
 .reddit .rembeddit {
   border: 1px solid #369CD7 !important;
 }
-/* line 165, ../sass/style.scss */
+/* line 147, ../sass/style.scss */
 .reddit .reddit-header {
   background-color: #369CD7 !important;
 }
-/* line 168, ../sass/style.scss */
+/* line 150, ../sass/style.scss */
 .reddit .reddit-header h4 {
   color: white;
 }
 
-/* line 174, ../sass/style.scss */
+/* line 156, ../sass/style.scss */
 .loader {
   text-align: center;
   margin-bottom: 50px;
 }
 
-/* line 179, ../sass/style.scss */
+/* line 161, ../sass/style.scss */
 .footer-nav {
   border-top: 1px solid #eee;
 }
 
-/* line 183, ../sass/style.scss */
+/* line 165, ../sass/style.scss */
 .footer-list {
   text-align: center;
   margin: 0;
 }
 
-/* line 188, ../sass/style.scss */
+/* line 170, ../sass/style.scss */
 .footer-list li {
   display: inline-block;
   list-style: none;

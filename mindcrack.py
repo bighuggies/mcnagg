@@ -97,7 +97,7 @@ def _video_generator(username, title_filter=''):
         while True:
             if not videos:
                 page[0] += 1
-                videos.extend(_get_uploads(username, page[0], title_filter))
+                videos.extend(list(_get_uploads(username, page[0], title_filter)))
 
             yield videos.pop()
 
@@ -119,7 +119,7 @@ def _get_uploads(username, page, title_filter=''):
     if not videos:
         raise StopIteration("No matching videos")
 
-    return reversed(videos)
+    return list(reversed(videos))
 
 
 class Video(object):
