@@ -14,6 +14,8 @@ _mindcrackers = sorted([
         u'http://www.youtube.com/adlingtont', 'name': u'Adlington'},
     {'username': u'avidyazen', 'url':
         u'http://www.youtube.com/avidyazen', 'name': u'Avidya'},
+    {'username': u'aureylian', 'url':
+        u'http://youtube.com/aureylian', 'name': u'Aureylian'},
     {'username': u'bdoubleo100', 'url':
         u'http://www.youtube.com/bdoubleo100', 'name': u'BdoubleO'},
     {'username': u'arkasmc', 'url':
@@ -64,7 +66,7 @@ _mindcrackers = sorted([
         u'http://www.youtube.com/vechz', 'name': u'Vechs'},
     {'username': u'sethbling', 'url':
         u'http://www.youtube.com/sethbling', 'name': u'SethBling'}
-], key=lambda m: m['username'])
+], key=lambda m: m['name'])
 
 
 def mindcrackers():
@@ -79,7 +81,8 @@ def videos(mindcrackers=[m['username'] for m in mindcrackers()], num_videos=30, 
     uploads = deque()
 
     for mcer in mindcrackers:
-        pool.apply_async(_video_generator, args=(mcer, title_filter), callback=lambda r: uploads.append(r))
+        pool.apply_async(_video_generator, args=(
+            mcer, title_filter), callback=lambda r: uploads.append(r))
 
     pool.close()
     pool.join()
@@ -95,7 +98,8 @@ def _video_generator(username, title_filter=''):
         while True:
             if not videos:
                 page[0] += 1
-                videos.extend(list(_get_uploads(username, page[0], title_filter)))
+                videos.extend(
+                    list(_get_uploads(username, page[0], title_filter)))
 
             yield videos.pop()
 
@@ -112,7 +116,8 @@ def _get_uploads(username, page, title_filter=''):
     if feed['data']['totalItems'] <= 0 or feed['data']['totalItems'] < feed['data']['startIndex']:
         raise StopIteration("No videos")
     else:
-        videos = [Video(item) for item in feed['data']['items'] if title_filter.lower() in item['title'].lower()]
+        videos = [Video(item)
+                  for item in feed['data']['items'] if title_filter.lower() in item['title'].lower()]
 
     if not videos:
         raise StopIteration("No matching videos")
