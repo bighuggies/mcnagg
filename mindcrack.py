@@ -69,7 +69,9 @@ _mindcrackers = sorted([
     {'username': u'sevadus', 'url':
         u'http://www.youtube.com/sevadus', 'name': u'Sevadus'},
     {'username': u'coestar', 'url':
-        u'http://www.youtube.com/coestar', 'name': u'Coestar'}
+        u'http://www.youtube.com/coestar', 'name': u'Coestar'},
+    {'username': u'omgchad', 'url':
+        u'http://www.youtube.com/omgchad', 'name': u'OMGchad'}
 ], key=lambda m: m['username'])
 
 
